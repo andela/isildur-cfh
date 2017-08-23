@@ -1,4 +1,4 @@
-(https://img.shields.io/badge/Protected%20by-Hound-green.svg)
+![hound status](https://img.shields.io/badge/Protected%20by-Hound-green.svg)
 
 Cards for Humanity - [http://cfh.io](http://cfh.io)
 ===========
