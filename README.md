@@ -1,4 +1,5 @@
 ![hound status](https://img.shields.io/badge/Protected%20by-Hound-green.svg)
+[![Build Status](https://travis-ci.org/andela/isildur-cfh.svg?branch=master)](https://travis-ci.org/andela/isildur-cfh)
 
 Cards for Humanity - [http://cfh.io](http://cfh.io)
 ===========
