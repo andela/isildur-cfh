@@ -8,4 +8,5 @@ dist/
 coverage/
 .coverdata/
 reports/
+.coverrun
 
