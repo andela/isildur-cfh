@@ -65,5 +65,9 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity
+<<<<<<< HEAD
   });
+=======
+  })
+>>>>>>> chore(karma.config) setup the unit testing for front end
 }
