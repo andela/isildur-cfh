@@ -9,11 +9,7 @@ gulp.task('lint', () => gulp.src(['gulpfile.babel.js', './config/**/*.js', '.app
 
 gulp.task('start', () => {
   plugins.nodemon({
-<<<<<<< HEAD
     script: 'dist/server.js',
-=======
-    script: 'server.js',
->>>>>>> chore(gulpfile): add and configuure gulpfile.babel.js
     ext: 'js html jade',
     env: { NODE_ENV: 'development' }
   });
@@ -28,23 +24,14 @@ gulp.task('jasmine', () => {
   gulp.src('./test/**/*.js')
     .pipe(plugins.jasmine());
 });
-
-<<<<<<< HEAD
-gulp.task('test', () => gulp.src(['./dist/test/game/game.js', './dist/test/user/model.js'], { read: false })
-=======
-gulp.task('test', () => gulp.src(['./test/game/game.js', './test/user/model.js'], { read: true })
->>>>>>> chore(gulpfile): add and configuure gulpfile.babel.js
+gulp.task('test', () => gulp.src(['./test/user/model.js', './test/game/game.js'], { read: false })
   .pipe(plugins.coverage.instrument({
     pattern: ['**/test*'],
     debugDirectory: 'debug'
   }))
-<<<<<<< HEAD
   .pipe(plugins.mocha({
     timeout: 15000
   }))
-=======
-  .pipe(plugins.mocha())
->>>>>>> chore(gulpfile): add and configuure gulpfile.babel.js
   .pipe(plugins.coverage.gather())
   .pipe(plugins.coverage.format())
   .pipe(gulp.dest('reports')));
