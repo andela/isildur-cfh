@@ -24,6 +24,7 @@ gulp.task('jasmine', () => {
   gulp.src('./test/**/*.js')
     .pipe(plugins.jasmine());
 });
+
 gulp.task('test', () => gulp.src(['./test/user/model.js', './test/game/game.js'], { read: false })
   .pipe(plugins.coverage.instrument({
     pattern: ['**/test*'],
@@ -68,9 +69,10 @@ gulp.task('coverage', (cb) => {
     .pipe(plugins.istanbul())
     .pipe(plugins.istanbul.hookRequire())
     .on('finish', () => {
-      gulp.src(['/test/user/model.js', 'test/game/game.js'])
-        .pipe(plugins.injectModules())
-        .pipe(plugins.mocha())
+      gulp.src(['/test/user/model.js', 'test/game/game.js'], { read: false })
+        .pipe(plugins.mocha({
+          timeout: 20000
+        }))
         .pipe(plugins.istanbul.writeReports())
         .pipe(plugins.istanbul.enforceThresholds({ thresholds: { global: 50 } }))
         .on('end', cb);
