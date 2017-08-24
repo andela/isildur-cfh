@@ -25,7 +25,7 @@ gulp.task('jasmine', () => {
     .pipe(plugins.jasmine());
 });
 
-gulp.task('test', () => gulp.src(['./test/game/game.js', './test/user/model.js'], { read: true })
+gulp.task('test', () => gulp.src(['./test/user/model.js', './test/game/game.js'], { read: false })
   .pipe(plugins.coverage.instrument({
     pattern: ['**/test*'],
     debugDirectory: 'debug'
@@ -40,7 +40,7 @@ gulp.task('sass:watch', () => {
   gulp.watch('./public/**/*.scss', ['sass']);
 });
 
-gulp.task('coveralls', ['est'], () => gulp.src('coverage/lcov.info')
+gulp.task('coveralls', ['test'], () => gulp.src('coverage/lcov.info')
   .pipe(plugins.coveralls())
   .pipe(plugins.exit()));
 
@@ -49,9 +49,10 @@ gulp.task('coverage', (cb) => {
     .pipe(plugins.istanbul())
     .pipe(plugins.istanbul.hookRequire())
     .on('finish', () => {
-      gulp.src(['test/game/game.js', '/test/user/model.js'])
-        .pipe(plugins.injectModules())
-        .pipe(plugins.jasmine())
+      gulp.src(['/test/user/model.js', 'test/game/game.js'], { read: false })
+        .pipe(plugins.mocha({
+          timeout: 20000
+        }))
         .pipe(plugins.istanbul.writeReports())
         .pipe(plugins.istanbul.enforceThresholds({ thresholds: { global: 50 } }))
         .on('end', cb);
