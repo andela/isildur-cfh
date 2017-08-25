@@ -25,7 +25,7 @@ gulp.task('jasmine', () => {
     .pipe(plugins.jasmine());
 });
 
-gulp.task('test', () => gulp.src(['./test/game/game.js', './test/user/model.js'], { read: false })
+gulp.task('test', () => gulp.src(['./test/user/model.js', './test/game/game.js'], { read: false })
   .pipe(plugins.coverage.instrument({
     pattern: ['**/test*'],
     debugDirectory: 'debug'
