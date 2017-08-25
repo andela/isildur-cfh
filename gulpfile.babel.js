@@ -42,7 +42,7 @@ gulp.task('sass:watch', () => {
   gulp.watch('./public/**/*.scss', ['sass']);
 });
 
-gulp.task('coveralls', ['test'], () => gulp.src('coverage/lcov.info')
+gulp.task('coveralls', ['est'], () => gulp.src('coverage/lcov.info')
   .pipe(plugins.coveralls())
   .pipe(plugins.exit()));
 
