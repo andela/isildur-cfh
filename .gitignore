@@ -4,8 +4,6 @@ public/lib
 .DS_store
 c4h_keys.txt
 .env
-dist/
-coverage/
 .coverdata/
 reports/
 .coverrun
