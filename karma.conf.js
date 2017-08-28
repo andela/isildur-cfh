@@ -33,11 +33,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-<<<<<<< HEAD
     reporters: ['spec'],
-=======
-    reporters: ['progress'],
->>>>>>> chore(karma.config) setup the unit testing for front end
 
 
     // web server port
@@ -69,9 +65,6 @@ module.exports = function(config) {
     // Concurrency level
     // how many browser should be started simultaneous
     concurrency: Infinity
-<<<<<<< HEAD
   });
-=======
-  })
->>>>>>> chore(karma.config) setup the unit testing for front end
-}
+};
+
