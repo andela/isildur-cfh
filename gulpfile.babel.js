@@ -25,7 +25,7 @@ gulp.task('jasmine', () => {
     .pipe(plugins.jasmine());
 });
 
-gulp.task('test', () => gulp.src(['./test/user/model.js', './test/game/game.js'], { read: false })
+gulp.task('test', () => gulp.src(['./dist/test/game/game.js', './dist/test/user/model.js'], { read: false })
   .pipe(plugins.coverage.instrument({
     pattern: ['**/test*'],
     debugDirectory: 'debug'
@@ -69,7 +69,7 @@ gulp.task('coverage', (cb) => {
     .pipe(plugins.istanbul())
     .pipe(plugins.istanbul.hookRequire())
     .on('finish', () => {
-      gulp.src(['test/game/game.js', '/test/user/model.js'])
+      gulp.src(['/test/user/model.js', 'test/game/game.js'])
         .pipe(plugins.injectModules())
         .pipe(plugins.mocha())
         .pipe(plugins.istanbul.writeReports())
