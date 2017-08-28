@@ -1,4 +1,4 @@
-var async = require('async');
+import async from 'async';
 
 module.exports = function(app, passport, auth) {
     //User Routes

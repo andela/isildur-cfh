@@ -7,4 +7,5 @@ c4h_keys.txt
 .coverdata/
 reports/
 .coverrun
+dist/
 

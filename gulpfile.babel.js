@@ -9,7 +9,7 @@ gulp.task('lint', () => gulp.src(['gulpfile.babel.js', './config/**/*.js', '.app
 
 gulp.task('start', () => {
   plugins.nodemon({
-    script: 'server.js',
+    script: 'dist/server.js',
     ext: 'js html jade',
     env: { NODE_ENV: 'development' }
   });
@@ -42,9 +42,27 @@ gulp.task('sass:watch', () => {
   gulp.watch('./public/**/*.scss', ['sass']);
 });
 
-gulp.task('coveralls', ['est'], () => gulp.src('coverage/lcov.info')
+gulp.task('coveralls', ['test'], () => gulp.src('coverage/lcov.info')
   .pipe(plugins.coveralls())
   .pipe(plugins.exit()));
+
+
+gulp.task('public', () => gulp.src([
+  './public/**/*',
+  './app/**/*',
+  './config/**/*',
+  './css/**/*',
+  'test/**/*'
+], {
+  base: './'
+})
+  .pipe(gulp.dest('dist')));
+
+gulp.task('transpile', ['public'], () => gulp.src(['./**/*.js', '!dist/**', '!node_modules/**', '!bower_components/**', '!public/lib/**'])
+  .pipe(plugins.babel({
+
+  }))
+  .pipe(gulp.dest('dist')));
 
 gulp.task('coverage', (cb) => {
   gulp.src(['app/**/*.js', 'config/**/*.js'])
@@ -65,4 +83,4 @@ gulp.task('bower', () => {
 });
 
 
-gulp.task('default', ['lint', 'start']);
+gulp.task('default', ['transpile', 'lint', 'start']);
