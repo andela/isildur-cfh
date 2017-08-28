@@ -13,8 +13,7 @@
     "npm": "5.3.0"
   },
   "scripts": {
-    "start": "gulp",
-    "test": "test"
+    "start": "gulp"
   },
   "dependencies": {
     "async": "~0.2.9",
