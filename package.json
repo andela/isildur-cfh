@@ -14,7 +14,7 @@
   },
   "scripts": {
     "start": "gulp",
-    "test": "gulp test"
+    "test": "test"
   },
   "dependencies": {
     "async": "~0.2.9",
