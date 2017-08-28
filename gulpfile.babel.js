@@ -25,7 +25,7 @@ gulp.task('jasmine', () => {
     .pipe(plugins.jasmine());
 });
 
-gulp.task('test', ['transpile'], () => gulp.src(['./dist/test/game/game.js', './dist/test/user/model.js'], { read: false })
+gulp.task('test', () => gulp.src(['./dist/test/game/game.js', './dist/test/user/model.js'], { read: false })
   .pipe(plugins.coverage.instrument({
     pattern: ['**/test*'],
     debugDirectory: 'debug'
@@ -83,4 +83,4 @@ gulp.task('bower', () => {
 });
 
 
-gulp.task('default', ['transpile', 'lint', 'start']);
+gulp.task('default', ['transpile', 'test', 'lint', 'start']);
