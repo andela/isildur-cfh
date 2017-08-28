@@ -32,13 +32,13 @@ const env = process.env.NODE_ENV = process.env.NODE_ENV || 'development',
     mongoose = require('mongoose');
 
 //Bootstrap db connection
-const db = mongoose.connect(config.db, {
-    useMongoClient: true
-  });
-// const db = mongoose.connect(config.db, (err) => {
-//     if (err)
-//         throw err
-// });
+// const db = mongoose.connect(config.db, {
+//     useMongoClient: true
+//   });
+const db = mongoose.connect(config.db, (err) => {
+    if (err)
+        throw err
+});
 
 //Bootstrap models
 const models_path = __dirname + '/app/models';
