@@ -1,85 +1,62 @@
 <div id="main-bod">
   <!-- Fixed Logo & Menu Bar Start -->
-  <div id="top-part">
-    <div class="wpb-top-bar">
-      <div class="mod-contain" id="navver">
-        <div class="row">
-          <!-- Logo -->
-          <div class="wpb-logo-container">
-            <div id="landing-logo"> 
-              <span id="first-word">Cards</span>
-              <span id="second-word"> for</span> 
-              <span id="third-word">Humanity</span> 
-            </div> 
-            <div class="col-md-9 wpb-menu-container">
-              <ul class="wpb-main-menu">
-                <li><a href="/">Home</a></li>
-              </ul>
-            </div>
-          </div>      
-        </div>
-      </div>
-    </div>
-  </div>
-<!-- Fixed Logo & Menu Bar End -->
+  <!-- Fixed Logo & Menu Bar Ends -->
 
-<!-- Landing Start -->
-<div class="wpb-teaser parallax-background" id="homer">
-  <div class="background-opacity"></div> 
-  <div class="modified-container">
-    <div class="row" id="main-text"> 
-    <!-- Teaser Text Start -->
-    <div id="landing-logo">
-      <h2 id="slogan">Sign Up with:</h2>
-      <div id="login-buttons">
-        <a href="/auth/facebook"><img class="login-item" src="/img/icons/facebook.png"></a>
-        <a href="/auth/github"><img class="login-item" src="/img/icons/github.png"></a>
-        <a href="/auth/twitter"><img class="login-item" src="/img/icons/twitter.png"></a>
-        <a href="/auth/google"><img class="login-item" src="/img/icons/google.png"></a>
-      </div>
-      <p id="create">Or create a username/password and select an avatar:</p>
-
-      <div class="sign-body">
-        <div class="more-sign">
-          <form class="signup form-horizontal" action="/users" method="post">
-            <div class="control-group">
-              <label for="name" class="control-label"></label>
-              <div class="controls">
-                <input class="input-info" id="name" type="text" name="name" placeholder="Full name" required novalidate />
+  <div class="container">
+    <div class="row">
+      <h3 class="text-white text-center">SIGN UP</h3>
+      <div class="flex-center">
+        <div id="content-body" class="col-md-6 col-sm-8 col-xs-12">
+          <!-- page content starts -->
+          <form action="/users" method="post">
+            <!-- registration form starts -->
+            <div class="form-group">
+              <label for="full-name"></label>
+              <input type="text" class="form-control" id="full-name" placeholder="Full Name" required>
+            </div>
+            <div class="form-group">
+              <label for="password"></label>
+              <input type="password" class="form-control" id="password" placeholder="Password" required>
+            </div>
+            <div class="form-group">
+              <label for="email"></label>
+              <input type="email" class="form-control" id="email" placeholder="Email" required>
+            </div>
+            <!-- avatars start -->
+            <h5 class="text-primary">Choose an avatar</h3>
+              <div id="contain-avatars" class="col-xs-12">
+                <ul ng-controller="IndexController" class="avatar-list">
+                  <li ng-repeat="avatar in avatars" class="avatars ng-scope">
+                    <input name="avatar" type='radio' value="{{$index}}">
+                      <img ng-src="{{avatar}}">
+                    </input>
+                  </li>
+                </ul>
               </div>
-            </div>
-            <div class="control-group">
-              <label for="email" class="control-label"></label>
-              <div class="controls">
-                <input class="input-info" id="email" type="email" name="email" placeholder="Email" required novalidate />
-              </div>
-            </div>
-            <div class="control-group">
-              <label for="password" class="control-label"></label>
-              <div class="controls">
-                <input class="input-info" id="password" type="password" name="password" placeholder="Password" required novalidate />
-              </div>
-            </div>
-            <div id="contain-avatars">
-              <ul ng-controller="IndexController" class="avatar-list">
-                <li ng-repeat="avatar in avatars" class="avatars ng-scope">
-                  <input name="avatar" type='radio' value="{{$index}}">
-                    <img ng-src="{{avatar}}">
-                  </input>
-                </li>
-              </ul>
-            </div>
-            <div class="form-actions">
-              <button id="sign-up-btn-other" type='submit'>Sign Up</button>
-            </div>
+            <!-- avatars end -->
+            <button type="submit" class="btn btn-default btn-block custom-button">SUBMIT</button>
+            <!-- registration form ends -->
           </form>
+          <div class="social-signup text-center">
+              <!-- social signup icons starts -->
+              <h4 class="teaser-heading text-primary">Or Sign Up With:</h4>
+              <a href="/auth/facebook" title="Facebook">
+                <img class="social-icons" src="/img/icons/facebook.png" alt="Facebook">
+              </a>
+              <a href="/auth/github" title="Github">
+                <img class="social-icons" src="/img/icons/github.png" alt="Github">
+              </a>
+              <a href="/auth/google" title="Google">
+                <img class="social-icons" src="/img/icons/google.png" alt="Google">
+              </a>
+              <a href="/auth/twitter" title="Twitter">
+                <img class="social-icons" src="/img/icons/twitter.png" alt="Twitter">
+              </a>
+              <!-- social signup icons ends -->
+          </div>
+          <!-- page content ends -->
         </div>
       </div>
-    </div>
-    </div>
     </div>
   </div>
 </div>
-
-
-
