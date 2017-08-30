@@ -9,6 +9,9 @@ Schema = mongoose.Schema;
 * GameLog Schema
 */
 var GameLog = new Schema({
+id: {
+    type: Number
+},
 gameId: {
     type: Number
 },
