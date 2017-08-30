@@ -5,8 +5,8 @@ const plugins = gulpLoadPlugins();
 
 gulp.task('lint', () => gulp.src(
   [
-    'gulpfile.babel.js', 
-    './config/**/*.js', 
+    'gulpfile.babel.js',
+    './config/**/*.js',
     '.app/**/*.js'
   ]
 )
@@ -17,21 +17,21 @@ gulp.task('transpile', ['public'], () => {
   gulp.src(
     [
       './**/*.js',
-       '!dist/**',
-        '!node_modules/**', 
-        '!bower_components/**', 
-        '!public/lib/**'
-      ]
-    )
-  .pipe(plugins.babel({
-    presets: ['es2015']
-  }))
-  .pipe(gulp.dest('dist'));
+      '!dist/**',
+      '!node_modules/**',
+      '!bower_components/**',
+      '!public/lib/**'
+    ]
+  )
+    .pipe(plugins.babel({
+      presets: ['es2015']
+    }))
+    .pipe(gulp.dest('dist'));
 });
 
-gulp.task('watch', () => {
+gulp.task('watch', ['public'], () => {
   plugins.nodemon({
-    watch: ['./app', './config'],
+    // watch: ['./dist/server.js', './app', './config'],
     script: 'dist/server.js',
     ext: 'js',
     env: { NODE_ENV: 'development' }
@@ -51,10 +51,10 @@ gulp.task('jasmine', () => {
 gulp.task('test', () => gulp.src(
   [
     './dist/test/game/game.js',
-     './dist/test/user/model.js'
-    ], 
-    { read: false }
-  )
+    './dist/test/user/model.js'
+  ],
+  { read: false }
+)
   .pipe(plugins.coverage.instrument({
     pattern: ['**/test*'],
     debugDirectory: 'debug'
@@ -95,9 +95,9 @@ gulp.task('coverage', (cb) => {
     .on('finish', () => {
       gulp.src(
         [
-          '/test/user/model.js', 
+          '/test/user/model.js',
           'test/game/game.js'
-        ], 
+        ],
         { read: false })
         .pipe(plugins.mocha({
           timeout: 20000
