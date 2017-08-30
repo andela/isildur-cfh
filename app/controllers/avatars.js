@@ -1,7 +1,7 @@
 /**
  * List of Avatars
  */
-let avatars = ['/img/chosen/E01.png',
+const avatars = ['/img/chosen/E01.png',
            '/img/chosen/F01.png',
            '/img/chosen/FA04.png',
            '/img/chosen/FB03.png',

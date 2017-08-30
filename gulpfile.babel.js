@@ -3,16 +3,30 @@ import gulpLoadPlugins from 'gulp-load-plugins';
 
 const plugins = gulpLoadPlugins();
 
-gulp.task('lint', () => gulp.src(['gulpfile.babel.js', './config/**/*.js', '.app/**/*.js'])
+gulp.task('lint', () => gulp.src(
+  [
+    'gulpfile.babel.js', 
+    './config/**/*.js', 
+    '.app/**/*.js'
+  ]
+)
   .pipe(plugins.jshint())
   .pipe(plugins.livereload()));
 
 gulp.task('transpile', ['public'], () => {
-  gulp.src(['./**/*.js', '!dist/**', '!node_modules/**', '!bower_components/**', '!public/lib/**'])
+  gulp.src(
+    [
+      './**/*.js',
+       '!dist/**',
+        '!node_modules/**', 
+        '!bower_components/**', 
+        '!public/lib/**'
+      ]
+    )
   .pipe(plugins.babel({
     presets: ['es2015']
   }))
-  .pipe(gulp.dest('dist'))
+  .pipe(gulp.dest('dist'));
 });
 
 gulp.task('watch', () => {
@@ -21,8 +35,8 @@ gulp.task('watch', () => {
     script: 'dist/server.js',
     ext: 'js',
     env: { NODE_ENV: 'development' }
-  })
-})
+  });
+});
 
 gulp.task('sass', () => gulp.src('./public/**/*.scss')
   .pipe(plugins.sass().on('error', plugins.sass.logError))
@@ -34,7 +48,13 @@ gulp.task('jasmine', () => {
     .pipe(plugins.jasmine());
 });
 
-gulp.task('test', () => gulp.src(['./dist/test/game/game.js', './dist/test/user/model.js'], { read: false })
+gulp.task('test', () => gulp.src(
+  [
+    './dist/test/game/game.js',
+     './dist/test/user/model.js'
+    ], 
+    { read: false }
+  )
   .pipe(plugins.coverage.instrument({
     pattern: ['**/test*'],
     debugDirectory: 'debug'
@@ -73,12 +93,20 @@ gulp.task('coverage', (cb) => {
     .pipe(plugins.istanbul())
     .pipe(plugins.istanbul.hookRequire())
     .on('finish', () => {
-      gulp.src(['/test/user/model.js', 'test/game/game.js'], { read: false })
+      gulp.src(
+        [
+          '/test/user/model.js', 
+          'test/game/game.js'
+        ], 
+        { read: false })
         .pipe(plugins.mocha({
           timeout: 20000
         }))
         .pipe(plugins.istanbul.writeReports())
-        .pipe(plugins.istanbul.enforceThresholds({ thresholds: { global: 50 } }))
+        .pipe(
+          plugins.istanbul.enforceThresholds(
+            { thresholds: { global: 50 } }
+          ))
         .on('end', cb);
     });
 });
