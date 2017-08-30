@@ -11,7 +11,8 @@ import questions from '../app/controllers/questions';
 import avatars from '../app/controllers/avatars';
 // Root Controllers
 import index from '../app/controllers/index';
-
+// GameLog Controllers
+import gameLog from '../app/controllers/gameLog';
 
 module.exports = (app, passport, auth) => {
 
@@ -106,5 +107,8 @@ module.exports = (app, passport, auth) => {
 
   // Endpoint to search and Invite Users to Game
   app.get('/api/users/search', users.search);
-//   app.post('/api/user/invite/:user_details', users.invitePlayers);
+  // app.post('/api/user/invite/:user_details', users.invitePlayers);
+
+  // GameLog route
+  app.post('/api/games/:id/start', gameLog.create);
 };
