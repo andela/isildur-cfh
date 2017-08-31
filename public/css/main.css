@@ -1,25 +1,21 @@
 /* #0B4F6C */
 /* #f2D234 */
-
 body, html {
     background: #0B4F6C;
+    margin: 0;
 }
-
 #content-body {
     background: #FFF;
     border-radius: 4px;
     padding: 2rem;
     margin: 5rem auto;
 }
-
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Quicksand', sans-serif;
 }
-
 .flex-center {
     display: flex;
 }
-
 /* custom input placeholder style */
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
   color: #0B4F6C !important;
@@ -37,16 +33,27 @@ h1, h2, h3, h4, h5, h6 {
   color: #0B4F6C !important;
   font-family: 'Quicksand', sans-serif;
 }
-
 .social-signup {
     margin-top: 3rem;
 }
-
 .social-signup > a > img {
     max-width: 3%;
     margin: 0 .3rem;    
 }
-
+span.auth-option {
+    display: inline-block;
+}
+.auth-option > li {
+    display: inline-block;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+.auth-option > li > a {
+    display: inline-block; 
+    padding: 10px 15px;
+    color: #FFF;
+    font-family: 'Quicksand', sans-serif;
+}
 /* custom submit button to override bootstrap button */
 .custom-button {
     background: #F2D234;
@@ -55,12 +62,61 @@ h1, h2, h3, h4, h5, h6 {
     padding: 1.5rem;
     font-weight: 500;
 }
-
 .custom-button:hover {
     background: #0B4F6C;
     color: #FFF;
 }
-
+.hero-image {
+  height: 80vh;
+}
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80vh;
+  width: 100%;
+  opacity: 0.8;
+  transition: .5s ease;
+  background-color: #0B4F6C;
+}
+.hero-text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  width: 100%;
+}
+@media (max-width: 768px) {
+  .hero-image {
+    background-position-y: 70%;
+    background-position-x: 28%;
+  }
+  .donation {
+      height: 116vh !important;
+  }
+  .foot {
+    height: 180px;
+  }
+}
+.home-button {
+    padding: 1.7rem 4.5rem;
+}
+.donation {
+  height: 80vh;
+}
+.team-image {
+  width: 75%;
+  margin-top: 8rem;
+}
+.foot {
+  height: 124px;
+  border-radius: 0;
+}
 /* overriding existing styles */
 .avatar-list img {
     max-width: 35px;
@@ -71,26 +127,71 @@ h1, h2, h3, h4, h5, h6 {
 .avatars {
     cursor: pointer;
 }
-
 /* overriding bootstrap classes */
 .form-control {
     padding: 2rem 1.5rem;
     border: 1px solid #0B4F6C;
 }
-
-
+.navbar {
+  border-radius: 0;
+  border: 0;
+  margin-bottom: 0;
+}
+.navbar-inverse {
+  background: #0B4F6C;
+}
+.navbar-inverse .navbar-brand {
+  color: #FFF;
+  cursor: pointer;
+  font-family: 'Quicksand', sans-serif;
+}
+.navbar-inverse .navbar-brand:hover {
+  color: #F2D234;
+}
+.navbar-inverse .navbar-nav > li > a {
+  color: #FFF;
+  font-family: 'Quicksand', sans-serif;
+  cursor: pointer;
+}
+.navbar-inverse .navbar-nav > li > a:hover {
+  color: #F2D234;
+}
+.navbar-inverse .navbar-toggle {
+    border-color: #FFF;
+    cursor: pointer;
+}
+.navbar-inverse .navbar-toggle:hover {
+    background: #0B4F6C;
+}
+.navbar-inverse .navbar-toggle:focus {
+    outline: none;
+    background: #0B4F6C;
+}
+.navbar-toggle {
+  position: relative;
+  float: left;
+  padding: 9px 10px;
+  margin-top: 8px;
+  margin-left: 15px;
+  margin-bottom: 8px;
+  background-color: transparent;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
 /* color classes */
 .text-white {
     color: #FFF;
 }
-
 .text-primary {
     color: #0B4F6C;
 }
 .text-red {
     color: #D61D1D;
 }
-
+.background-white {
+  background: #FFF;
+}
 /* font weight classes */
 .bold {
     font-weight: 700;
@@ -100,4 +201,94 @@ h1, h2, h3, h4, h5, h6 {
 }
 .medium {
     font-weight: 400;
+}
+/* position classes */
+.relative {
+  position: relative;
+}
+/* spacing classes */
+.padding {
+  padding: 2rem;
+}
+.padding2 {
+  padding: 4rem;
+}
+.padding-h {
+  padding: 0rem 2rem;
+}
+.padding-v {
+  padding: 2rem 0;
+}
+.padding-h2 {
+  padding: 0rem 4rem;
+}
+.padding-v2 {
+  padding: 4rem 0;
+}
+.margin {
+  margin: 2rem;
+}
+.margin2 {
+  margin: 4rem;
+}
+.margin-h {
+  margin: 0rem 2rem;
+}
+.margin-v {
+  margin: 2rem 0;
+}
+.margin-h2 {
+  margin: 0rem 4rem;
+}
+.margin-v2 {
+  margin: 4rem 0;
+}
+.line-height {
+    line-height: inherit;
+}
+.home-card {
+  border-radius: 4px;
+  margin-bottom: 2rem;
+  padding: 2rem 4rem;
+  min-height: 23rem;
+  cursor: pointer;
+}
+.home-card:hover {
+  animation-name: shake;
+    animation-duration: 0.8s;
+    transform-origin:50% 50%;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+  -webkit-animation-name: shake;
+    -webkit-animation-duration: 0.8s;
+    -webkit-transform-origin:50% 50%;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+/* shake animation */
+@keyframes shake {
+    0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
+    10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
+    30% { -webkit-transform: translate(0px, 2px) rotate(0deg); }
+    40% { -webkit-transform: translate(1px, -1px) rotate(1deg); }
+    50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); }
+    70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); }
+    80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
+    90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
+    100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
+}
+@-webkit-keyframes shake {
+    0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }
+    10% { -webkit-transform: translate(-1px, -2px) rotate(-1deg); }
+    20% { -webkit-transform: translate(-3px, 0px) rotate(1deg); }
+    30% { -webkit-transform: translate(0px, 2px) rotate(0deg); }
+    40% { -webkit-transform: translate(1px, -1px) rotate(1deg); }
+    50% { -webkit-transform: translate(-1px, 2px) rotate(-1deg); }
+    60% { -webkit-transform: translate(-3px, 1px) rotate(0deg); }
+    70% { -webkit-transform: translate(2px, 1px) rotate(-1deg); }
+    80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
+    90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
+    100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
 }
