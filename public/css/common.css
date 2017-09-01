@@ -130,7 +130,15 @@ body {
 
 #main-container {
   height: 100%;
+  background-image:url('../img/hero.jpg');
 }
+
+#main-overlay {
+  height: 100%;
+  background-color: #0B4F6C;
+  opacity: 0.8;
+}
+
 #main-container #app-container {
   height: 100%;
   max-width: 1200px;
@@ -143,9 +151,17 @@ body {
   -moz-border-radius: 8px;
   border-radius: 8px;
   background: #252525;
-  margin-bottom: 10px;
-  margin-top: 5px;
-  padding: 5px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  padding: 0px;
+}
+#after-overlay{
+  height: 100%;
+  width: 100%;
+  background-color: #0B4F6C;
+  opacity: 0.6;
+  position: absolute;
+  z-index: 0;
 }
 @media (max-width: 520px) {
   #main-container #app-container #menu-container {

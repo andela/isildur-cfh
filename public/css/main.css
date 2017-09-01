@@ -248,7 +248,6 @@ span.auth-option {
 }
 
 .medium {
-<<<<<<< HEAD
   font-weight: 400;
 }
 
@@ -357,33 +356,80 @@ span.auth-option {
 	80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
 	90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
 	100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
-=======
     font-weight: 400;
 }
+
 .timer-status-round{
     color: whitesmoke;
-    background: #1497c2;
+    background: #0b4f6c;
     font-size: 16px;
     padding: 10px;
     border-radius: 3px;
     text-align: center;
 }
+
 .transparent-bg{
     background: #252138;
     opacity: 0.2;
     filter: alpha(opacity=20);
 }
+
 .player-count-container{
     float: center;
 }
+
 .player-count{
     font-size: 9px;
 }
+
 .time{
     color: whitesmoke;
+
 }
+
 .start-game-row {
     margin-left: 15px;
     margin-right: 0px;
->>>>>>> feature(startGame): create a button for a user to start Game
+}
+
+.gameplay-container{
+  padding-top: 60px;
+}
+
+.cover-image{
+  background-image:url('../img/hero.jpg');
+}
+
+.chat{
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+  width: 250px;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.chat-message{
+  height: 100px;
+  overflow-y: scroll;
+}
+
+.chat-textarea{
+  margin: 5px;
+  padding: 5px;
+}
+
+.chat-header{
+  background-color: #f2d234;
+  font-size: 15px;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.chat-body{
+  background-color: white;
+  width: 100%;
 }
