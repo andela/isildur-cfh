@@ -248,6 +248,7 @@ span.auth-option {
 }
 
 .medium {
+<<<<<<< HEAD
   font-weight: 400;
 }
 
@@ -356,4 +357,33 @@ span.auth-option {
 	80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
 	90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
 	100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
+=======
+    font-weight: 400;
+}
+.timer-status-round{
+    color: whitesmoke;
+    background: #1497c2;
+    font-size: 16px;
+    padding: 10px;
+    border-radius: 3px;
+    text-align: center;
+}
+.transparent-bg{
+    background: #252138;
+    opacity: 0.2;
+    filter: alpha(opacity=20);
+}
+.player-count-container{
+    float: center;
+}
+.player-count{
+    font-size: 9px;
+}
+.time{
+    color: whitesmoke;
+}
+.start-game-row {
+    margin-left: 15px;
+    margin-right: 0px;
+>>>>>>> feature(startGame): create a button for a user to start Game
 }
