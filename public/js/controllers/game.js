@@ -77,7 +77,7 @@ angular.module('mean.system')
         return false;
       };
 
-      $scope.showFirst = card => game.curQuestion.numAnswers > 1 && 
+      $scope.showFirst = card => game.curQuestion.numAnswers > 1 &&
       $scope.pickedCards[0] === card.id;
 
       $scope.showSecond = card => game.curQuestion.numAnswers > 1 &&
@@ -87,7 +87,7 @@ angular.module('mean.system')
 
       $scope.isPlayer = $index => $index === game.playerIndex;
 
-      $scope.isCustomGame = () => !(/^\d+$/).test(game.gameID) && 
+      $scope.isCustomGame = () => !(/^\d+$/).test(game.gameID) &&
       game.state === 'awaiting players';
 
       $scope.isPremium = $index => game.players[$index].premium;
@@ -146,7 +146,7 @@ angular.module('mean.system')
             // If the player didn't successfully enter the request room,
             // reset the URL so they don't think they're in the requested room.
             $location.search({});
-          } else if ($scope.isCustomGame() && 
+          } else if ($scope.isCustomGame() &&
             !$location.search().game) {
             // Once the game ID is set, update the URL if this is a game with friends,
             // where the link is meant to be shared.
@@ -156,12 +156,12 @@ angular.module('mean.system')
                 const link = document.URL;
                 const txt = `Give the following link to 
                 your friends so they can join your game: `;
-                $('#lobby-how-to-play').text(txt);
-                $('#oh-el').css(
-                  { 'text-align': 'center',
-                     'font-size': '22px',
-                      background: 'white',
-                      color: 'black' }).text(link);
+              $('#lobby-how-to-play').text(txt);
+            $('#oh-el').css(
+              { 'text-align': 'center',
+                  'font-size': '22px',
+                  background: 'white',
+                  color: 'black' }).text(link);
               }, 200);
               $scope.modalShown = true;
             }
