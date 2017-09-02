@@ -159,10 +159,10 @@ angular.module('mean.system')
                 your friends so they can join your game: `;
                 $('#lobby-how-to-play').text(txt);
                 $('#oh-el').css(
-              { 'text-align': 'center',
-                'font-size': '22px',
-                background: 'white',
-                color: 'black' }).text(link);
+                  { 'text-align': 'center',
+                    'font-size': '22px',
+                    background: 'white',
+                    color: 'black' }).text(link);
               }, 200);
               $scope.modalShown = true;
             }
