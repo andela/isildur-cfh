@@ -157,12 +157,12 @@ angular.module('mean.system')
                 const link = document.URL;
                 const txt = `Give the following link to 
                 your friends so they can join your game: `;
-              $('#lobby-how-to-play').text(txt);
-            $('#oh-el').css(
+                $('#lobby-how-to-play').text(txt);
+                $('#oh-el').css(
               { 'text-align': 'center',
-                  'font-size': '22px',
-                  background: 'white',
-                  color: 'black' }).text(link);
+                'font-size': '22px',
+                background: 'white',
+                color: 'black' }).text(link);
               }, 200);
               $scope.modalShown = true;
             }
