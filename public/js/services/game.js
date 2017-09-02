@@ -29,7 +29,7 @@ angular.module('mean.system')
       let timeout = false;
       // const self = this;
       let joinOverrideTimeout = 0;
-      
+
       const setNotification = () => {
         // If notificationQueue is empty, stop
         if (notificationQueue.length === 0) {
