@@ -101,6 +101,11 @@ module.exports = (app, passport, auth) => {
   app.get('/play', index.play);
   app.get('/', index.render);
 
+
+  // Endpoint to search and Invite Users to Game
+  app.get('/api/users/search', users.search);
+  //   app.post('/api/user/invite/:user_details', users.invitePlayers);
+
   // GameLog route
   app.post('/api/games/:id/start', gameLog.create);
 };
