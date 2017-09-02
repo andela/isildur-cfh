@@ -12,7 +12,7 @@ import avatars from '../app/controllers/avatars';
 // Root Controllers
 import index from '../app/controllers/index';
 // GameLog Controllers
-import gameLog from '../app/controllers/gameLog.js';
+import gameLog from '../app/controllers/gameLog';
 
 module.exports = (app, passport, auth) => {
   // User Routes
