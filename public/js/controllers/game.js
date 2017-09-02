@@ -6,7 +6,8 @@ angular.module('mean.system')
       '$location',
       'MakeAWishFactsService',
       '$dialog',
-      ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog) => {
+      '$http',
+      ($scope, game, $timeout, $location, MakeAWishFactsService, $dialog, $http) => {
         $scope.hasPickedCards = false;
         $scope.winningCardPicked = false;
         $scope.showTable = false;
