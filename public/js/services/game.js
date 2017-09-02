@@ -126,6 +126,23 @@ angular.module('mean.system')
             }
           }
         }
+        for (i = 0; i < removed.length; i++) {
+          for (let k = 0; k < game.table.length; k++) {
+            if (removed[i] === game.table[k].player) {
+              game.table.splice(k, 1);
+            }
+          }
+        }
+        // add to gameLog collections
+        const gameId = game.gameID;
+        // define the gameLog payload
+        const gamePayload = {
+          gameId,
+          winner: game.gameWinner,
+          players: data.players,
+          rounds: game.round
+        };
+        $http.post(`/api/games/${gameId}/start`, gamePayload);
       }
 
       if (game.state !== 'waiting for players to pick' || game.players.length !== data.players.length) {

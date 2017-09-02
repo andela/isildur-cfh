@@ -1,40 +1,40 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-config = require('../../config/config'),
-Schema = mongoose.Schema;
+const mongoose = require('mongoose'),
+  config = require('../../config/config'),
+  Schema = mongoose.Schema;
 
 /**
 * GameLog Schema
 */
-var GameLog = new Schema({
-id: {
+const GameLog = new Schema({
+  id: {
     type: Number
-},
-gameId: {
+  },
+  gameId: {
     type: Number
-},
-winner: {
+  },
+  winner: {
     type: String
-},
-players: {
+  },
+  players: {
     type: Array
-},
-rounds: {
+  },
+  rounds: {
     type: Number
-}
+  }
 });
 
 /**
 * Statics
 */
 GameLog.statics = {
-load: function(id, cb) {
+  load: (id, cb) => {
     this.findOne({
-        id: id
+      id
     }).select('-_id').exec(cb);
-}
+  }
 };
 
 mongoose.model('GameLog', GameLog);
