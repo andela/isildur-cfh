@@ -210,7 +210,7 @@ angular.module('mean.system')
         $http.post(`/api/games/${gameId}/start`, gamePayload);
       }
 
-      if (game.state !== 'waiting for players to pick' || game.players.length !== data.players.length) {
+      if(game.state !== 'waiting for players to pick' || game.players.length !== data.players.length) {
         game.players = data.players;
       }
 
