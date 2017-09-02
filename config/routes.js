@@ -15,7 +15,6 @@ import index from '../app/controllers/index';
 import gameLog from '../app/controllers/gameLog';
 
 module.exports = (app, passport, auth) => {
-
   // User Routes
   // const users = require('../app/controllers/users');
   app.get('/signin', users.signin);
