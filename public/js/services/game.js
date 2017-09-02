@@ -1,3 +1,4 @@
+/* global _ */
 angular.module('mean.system')
   .factory('game', ['socket', '$timeout', (socket, $timeout) => {
     const game = {
@@ -81,50 +82,114 @@ angular.module('mean.system')
         if (game.id === data.players[i].socketID) {
           game.playerIndex = i;
         }
-      }
+      };
 
-      const newState = (data.state !== game.state);
+      const addToNotificationQueue = (msg) => {
+        notificationQueue.push(msg);
+        if (!timeout) { // Start a cycle if there isn't one
+          setNotification();
+        }
+      };
 
-      // Handle updating game.time
-      if (data.round !== game.round && data.state !== 'awaiting players' &&
-      data.state !== 'game ended' && data.state !== 'game dissolved') {
-        game.time = game.timeLimits.stateChoosing - 1;
-        timeSetViaUpdate = true;
-      } else if (newState && data.state === 'waiting for czar to decide') {
-        game.time = game.timeLimits.stateJudging - 1;
-        timeSetViaUpdate = true;
-      } else if (newState && data.state === 'winner has been chosen') {
-        game.time = game.timeLimits.stateResults - 1;
-        timeSetViaUpdate = true;
-      }
+      let timeSetViaUpdate = false;
+      const decrementTime = () => {
+        if (game.time > 0 && !timeSetViaUpdate) {
+          game.time -= 1;
+        } else {
+          timeSetViaUpdate = false;
+        }
+        $timeout(decrementTime, 950);
+      };
 
-      // Set these properties on each update
-      game.round = data.round;
-      game.winningCard = data.winningCard;
-      game.winningCardPlayer = data.winningCardPlayer;
-      game.winnerAutopicked = data.winnerAutopicked;
-      game.gameWinner = data.gameWinner;
-      game.pointLimit = data.pointLimit;
+      socket.on('id', (data) => {
+        game.id = data.id;
+      });
 
-      // Handle updating game.table
-      if (data.table.length === 0) {
-        game.table = [];
-      } else {
-        const added = _.difference(_.pluck(data.table, 'player'), _.pluck(game.table, 'player'));
-        const removed = _.difference(_.pluck(game.table, 'player'), _.pluck(data.table, 'player'));
-        for (i = 0; i < added.length; i++) {
-          for (let j = 0; j < data.table.length; j++) {
-            if (added[i] === data.table[j].player) {
-              game.table.push(data.table[j], 1);
-            }
+      socket.on('prepareGame', (data) => {
+        game.playerMinLimit = data.playerMinLimit;
+        game.playerMaxLimit = data.playerMaxLimit;
+        game.pointLimit = data.pointLimit;
+        game.timeLimits = data.timeLimits;
+      });
+
+      socket.on('gameUpdate', (data) => {
+      // Update gameID field only if it changed.
+      // That way, we don't trigger the $scope.$watch too often
+        if (game.gameID !== data.gameID) {
+          game.gameID = data.gameID;
+        }
+
+        game.joinOverride = false;
+        clearTimeout(game.joinOverrideTimeout);
+
+        let i;
+        // Cache the index of the player in the players array
+        for (i = 0; i < data.players.length; i += 1) {
+          if (game.id === data.players[i].socketID) {
+            game.playerIndex = i;
           }
         }
-        for (i = 0; i < removed.length; i++) {
-          for (let k = 0; k < game.table.length; k++) {
-            if (removed[i] === game.table[k].player) {
-              game.table.splice(k, 1);
+
+        const newState = (data.state !== game.state);
+
+        // Handle updating game.time
+        if (data.round !== game.round && data.state !== 'awaiting players' &&
+        data.state !== 'game ended' && data.state !== 'game dissolved') {
+          game.time = game.timeLimits.stateChoosing - 1;
+          timeSetViaUpdate = true;
+        } else if (newState && data.state === 'waiting for czar to decide') {
+          game.time = game.timeLimits.stateJudging - 1;
+          timeSetViaUpdate = true;
+        } else if (newState && data.state === 'winner has been chosen') {
+          game.time = game.timeLimits.stateResults - 1;
+          timeSetViaUpdate = true;
+        }
+
+        // Set these properties on each update
+        game.round = data.round;
+        game.winningCard = data.winningCard;
+        game.winningCardPlayer = data.winningCardPlayer;
+        game.winnerAutopicked = data.winnerAutopicked;
+        game.gameWinner = data.gameWinner;
+        game.pointLimit = data.pointLimit;
+
+        // Handle updating game.table
+        if (data.table.length === 0) {
+          game.table = [];
+        } else {
+          const added = _.difference(_.pluck(data.table, 'player'),
+            _.pluck(game.table, 'player'));
+          const removed = _.difference(_.pluck(game.table, 'player'),
+            _.pluck(data.table, 'player'));
+          for (i = 0; i < added.length; i += 1) {
+            for (let j = 0; j < data.table.length; j += 1) {
+              if (added[i] === data.table[j].player) {
+                game.table.push(data.table[j], 1);
+              }
             }
           }
+          for (i = 0; i < removed.length; i += 1) {
+            for (let k = 0; k < game.table.length; k += 1) {
+              if (removed[i] === game.table[k].player) {
+                game.table.splice(k, 1);
+              }
+            }
+          }
+          // add to gameLog collections
+          const gameId = game.gameID;
+          // define the gameLog payload
+          const gamePayload = {
+            gameId,
+            winner: game.gameWinner,
+            players: data.players,
+            rounds: game.round
+          };
+          $http.post(`/api/games/${gameId}/start`, gamePayload);
+        }
+
+        if (game.state !== 'waiting for players to pick' ||
+            game.players.length !== data.players.length) {
+          game.players = data.players;
         }
         for (i = 0; i < removed.length; i++) {
           for (let k = 0; k < game.table.length; k++) {
@@ -162,28 +227,43 @@ angular.module('mean.system')
         // Set notifications only when entering state
         if (newState) {
           if (game.czar === game.playerIndex) {
-            addToNotificationQueue('You\'re the Card Czar! Please wait!');
-          } else if (game.curQuestion.numAnswers === 1) {
-            addToNotificationQueue('Select an answer!');
+            addToNotificationQueue("Everyone's done. Choose the winner!");
           } else {
-            addToNotificationQueue('Select TWO answers!');
+            addToNotificationQueue('The czar is contemplating...');
           }
+        } else if (data.state === 'winner has been chosen' &&
+                game.curQuestion.text.indexOf('<u></u>') > -1) {
+          game.curQuestion = data.curQuestion;
+        } else if (data.state === 'awaiting players') {
+          joinOverrideTimeout = $timeout(() => {
+            game.joinOverride = true;
+          }, 15000);
+        } else if (
+          data.state === 'game dissolved' ||
+          data.state === 'game ended') {
+          game.players[game.playerIndex].hand = [];
+          game.time = 0;
         }
-      } else if (data.state === 'waiting for czar to decide') {
-        if (game.czar === game.playerIndex) {
-          addToNotificationQueue("Everyone's done. Choose the winner!");
-        } else {
-          addToNotificationQueue('The czar is contemplating...');
-        }
-      } else if (data.state === 'winner has been chosen' &&
-              game.curQuestion.text.indexOf('<u></u>') > -1) {
-        game.curQuestion = data.curQuestion;
-      } else if (data.state === 'awaiting players') {
-        joinOverrideTimeout = $timeout(() => {
-          game.joinOverride = true;
-        }, 15000);
-      } else if (data.state === 'game dissolved' || data.state === 'game ended') {
-        game.players[game.playerIndex].hand = [];
+      });
+
+      socket.on('notification', (data) => {
+        addToNotificationQueue(data.notification);
+      });
+
+      game.joinGame = (mode, room, createPrivate) => {
+        mode = mode || 'joinGame';
+        room = room || '';
+        createPrivate = createPrivate || false;
+        const userID = window.user ? user._id : 'unauthenticated';
+        socket.emit(mode, { userID, room, createPrivate });
+      };
+
+      game.startGame = () => {
+        socket.emit('startGame');
+      };
+
+      game.leaveGame = () => {
+        game.players = [];
         game.time = 0;
       }
     });
