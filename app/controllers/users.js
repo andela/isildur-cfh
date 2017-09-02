@@ -1,21 +1,28 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-  User = mongoose.model('User');
-var avatars = require('./avatars').all();
+// TODO: Add/Import Email Helper Method and Libraries
+import mongoose from 'mongoose';
+
+const avatars = require('./avatars').all();
+// import avatars from './avatars';
+// avatar.all();
+
+const User = mongoose.model('User');
+// const mongoose = require('mongoose'),
+//   User = mongoose.model('User');
 
 /**
  * Auth callback
  */
-exports.authCallback = function(req, res, next) {
+exports.authCallback = function (req, res, next) {
   res.redirect('/chooseavatars');
 };
 
 /**
  * Show login form
  */
-exports.signin = function(req, res) {
+exports.signin = function (req, res) {
   if (!req.user) {
     res.redirect('/#!/signin?error=invalid');
   } else {
@@ -26,7 +33,7 @@ exports.signin = function(req, res) {
 /**
  * Show sign up form
  */
-exports.signup = function(req, res) {
+exports.signup = function (req, res) {
   if (!req.user) {
     res.redirect('/#!/signup');
   } else {
@@ -37,7 +44,7 @@ exports.signup = function(req, res) {
 /**
  * Logout
  */
-exports.signout = function(req, res) {
+exports.signout = function (req, res) {
   req.logout();
   res.redirect('/');
 };
@@ -45,7 +52,7 @@ exports.signout = function(req, res) {
 /**
  * Session
  */
-exports.session = function(req, res) {
+exports.session = function (req, res) {
   res.redirect('/');
 };
 
@@ -54,12 +61,12 @@ exports.session = function(req, res) {
  * already has an avatar. If they don't have one, redirect them
  * to our Choose an Avatar page.
  */
-exports.checkAvatar = function(req, res) {
+exports.checkAvatar = function (req, res) {
   if (req.user && req.user._id) {
     User.findOne({
       _id: req.user._id
     })
-    .exec(function(err, user) {
+      .exec((err, user) => {
       if (user.avatar !== undefined) {
         res.redirect('/#!/');
       } else {
@@ -70,19 +77,18 @@ exports.checkAvatar = function(req, res) {
     // If user doesn't even exist, redirect to /
     res.redirect('/');
   }
-
 };
 
 /**
  * Create user
  */
-exports.create = function(req, res) {
+exports.create = function (req, res) {
   if (req.body.name && req.body.password && req.body.email) {
     User.findOne({
       email: req.body.email
-    }).exec(function(err,existingUser) {
+    }).exec((err,existingUser) => {
       if (!existingUser) {
-        var user = new User(req.body);
+        let user = new User(req.body);
         // Switch the user's avatar index to an actual avatar url
         user.avatar = avatars[user.avatar];
         user.provider = 'local';
@@ -110,14 +116,14 @@ exports.create = function(req, res) {
 /**
  * Assign avatar to user
  */
-exports.avatars = function(req, res) {
+exports.avatars = function (req, res) {
   // Update the current user's profile to include the avatar choice they've made
   if (req.user && req.user._id && req.body.avatar !== undefined &&
     /\d/.test(req.body.avatar) && avatars[req.body.avatar]) {
     User.findOne({
       _id: req.user._id
     })
-    .exec(function(err, user) {
+      .exec((err, user) => {
       user.avatar = avatars[req.body.avatar];
       user.save();
     });
@@ -125,17 +131,17 @@ exports.avatars = function(req, res) {
   return res.redirect('/#!/app');
 };
 
-exports.addDonation = function(req, res) {
+exports.addDonation = function (req, res) {
   if (req.body && req.user && req.user._id) {
     // Verify that the object contains crowdrise data
     if (req.body.amount && req.body.crowdrise_donation_id && req.body.donor_name) {
       User.findOne({
         _id: req.user._id
       })
-      .exec(function(err, user) {
+        .exec((err, user) => {
         // Confirm that this object hasn't already been entered
-        var duplicate = false;
-        for (var i = 0; i < user.donations.length; i++ ) {
+        let duplicate = false;
+        for (let i = 0; i < user.donations.length; i++ ) {
           if (user.donations[i].crowdrise_donation_id === req.body.crowdrise_donation_id) {
             duplicate = true;
           }
@@ -155,34 +161,50 @@ exports.addDonation = function(req, res) {
 /**
  *  Show profile
  */
-exports.show = function(req, res) {
-  var user = req.profile;
+exports.show = function (req, res) {
+  const user = req.profile;
 
   res.render('users/show', {
     title: user.name,
-    user: user
+    user
   });
 };
 
 /**
  * Send User
  */
-exports.me = function(req, res) {
+exports.me = function (req, res) {
   res.jsonp(req.user || null);
 };
 
 /**
  * Find user by id
  */
-exports.user = function(req, res, next, id) {
+exports.user = (req, res, next, id) => {
   User
     .findOne({
       _id: id
     })
-    .exec(function(err, user) {
+    .exec((err, user) => {
       if (err) return next(err);
-      if (!user) return next(new Error('Failed to load User ' + id));
+      if (!user) return next(new Error(`Failed to load User + ${id}`));
       req.profile = user;
       next();
     });
 };
+
+// Get all user in the dtatabase
+module.exports.search = (req, res) => {
+  // get all the users from mongoDB
+  User.find({}, (err, users) => {
+    if (err) {
+      return res.json({ err });
+    }
+    return res.json(users);
+  });
+};
+
+// send an invitation email to user
+// module.exports.invitePlayers = (req, res) => {
+//   console.log('===> inviting User');
+// };
