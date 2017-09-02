@@ -1,3 +1,9 @@
+import validator from 'validator';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+
+const secret = process.env.SECRET_TOKEN;
+
 /**
  * Module dependencies.
  */
@@ -82,24 +88,26 @@ exports.checkAvatar = function (req, res) {
 /**
  * Create user
  */
-exports.create = function (req, res) {
-  if (req.body.name && req.body.password && req.body.email) {
+exports.create = (req, res) => {
+  if (req.body.name &&
+    req.body.password &&
+    req.body.email) {
     User.findOne({
       email: req.body.email
-    }).exec((err,existingUser) => {
+    }).exec((err, existingUser) => {
       if (!existingUser) {
-        let user = new User(req.body);
+        const user = new User(req.body);
         // Switch the user's avatar index to an actual avatar url
         user.avatar = avatars[user.avatar];
         user.provider = 'local';
-        user.save(function(err) {
+        user.save((err) => {
           if (err) {
             return res.render('/#!/signup?error=unknown', {
               errors: err.errors,
-              user: user
+              user
             });
           }
-          req.logIn(user, function(err) {
+          req.logIn(user, (err) => {
             if (err) return next(err);
             return res.redirect('/#!/');
           });
@@ -112,6 +120,66 @@ exports.create = function (req, res) {
     return res.redirect('/#!/signup?error=incomplete');
   }
 };
+
+/**
+ * Signup a new user
+ * @param {object} req The user's information
+ * @param {object} res The server's response
+ * @returns {object} The server's response
+ */
+exports.signup = (req, res) => {
+  if (
+    req.body.name &&
+    req.body.name.trim() &&
+    req.body.password &&
+    req.body.password.length > 7 &&
+    req.body.email &&
+    validator.isEmail(req.body.email)
+  ) {
+    User.findOne({
+      email: req.body.email
+    }).exec((err, existingUser) => {
+      if (existingUser) {
+        return res.status(400).send({
+          success: false,
+          message: 'A user already exists with that mail'
+        });
+      }
+      // hash password
+      const salt = bcrypt.genSaltSync(10);
+      req.body.password = bcrypt.hashSync(req.body.password, salt);
+
+      const user = new User(req.body);
+
+      // Switch the user's avatar index to an actual avatar url
+      user.avatar = avatars[user.avatar];
+      user.provider = 'local';
+      user.save((err) => {
+        if (err) {
+          return res.status(400).send({
+            success: false,
+            message: 'an error occured while trying to save the user'
+          });
+        }
+        const token = jwt.sign({
+          name: user.name,
+          email: user.email,
+          id: user._id
+        }, secret);
+        return res.status(201).send({
+          success: true,
+          token
+        });
+      });
+    });
+  } else {
+    return res.status(400).send({
+      success: false,
+      message: 'Invalid Credentials'
+    });
+  }
+};
+
 
 /**
  * Assign avatar to user
@@ -145,14 +213,13 @@ exports.addDonation = function (req, res) {
           if (user.donations[i].crowdrise_donation_id === req.body.crowdrise_donation_id) {
             duplicate = true;
           }
-        }
-        if (!duplicate) {
-          console.log('Validated donation');
-          user.donations.push(req.body);
-          user.premium = 1;
-          user.save();
-        }
-      });
+          if (!duplicate) {
+            console.log('Validated donation');
+            user.donations.push(req.body);
+            user.premium = 1;
+            user.save();
+          }
+        });
     }
   }
   res.send();
