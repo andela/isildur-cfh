@@ -7,3 +7,5 @@ c4h_keys.txt
 reports/
 .coverrun
 dist
+.idea
+.vscode
