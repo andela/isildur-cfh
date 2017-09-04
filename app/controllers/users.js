@@ -88,38 +88,38 @@ exports.checkAvatar = function (req, res) {
 /**
  * Create user
  */
-exports.create = (req, res) => {
-  if (req.body.name &&
-    req.body.password &&
-    req.body.email) {
-    User.findOne({
-      email: req.body.email
-    }).exec((err, existingUser) => {
-      if (!existingUser) {
-        const user = new User(req.body);
-        // Switch the user's avatar index to an actual avatar url
-        user.avatar = avatars[user.avatar];
-        user.provider = 'local';
-        user.save((err) => {
-          if (err) {
-            return res.render('/#!/signup?error=unknown', {
-              errors: err.errors,
-              user
-            });
-          }
-          req.logIn(user, (err) => {
-            if (err) return next(err);
-            return res.redirect('/#!/');
-          });
-        });
-      } else {
-        return res.redirect('/#!/signup?error=existinguser');
-      }
-    });
-  } else {
-    return res.redirect('/#!/signup?error=incomplete');
-  }
-};
+// exports.create = (req, res) => {
+//   if (req.body.name &&
+//     req.body.password &&
+//     req.body.email) {
+//     User.findOne({
+//       email: req.body.email
+//     }).exec((err, existingUser) => {
+//       if (!existingUser) {
+//         const user = new User(req.body);
+//         // Switch the user's avatar index to an actual avatar url
+//         user.avatar = avatars[user.avatar];
+//         user.provider = 'local';
+//         user.save((err) => {
+//           if (err) {
+//             return res.render('/#!/signup?error=unknown', {
+//               errors: err.errors,
+//               user
+//             });
+//           }
+//           req.logIn(user, (err) => {
+//             if (err) return next(err);
+//             return res.redirect('/#!/');
+//           });
+//         });
+//       } else {
+//         return res.redirect('/#!/signup?error=existinguser');
+//       }
+//     });
+//   } else {
+//     return res.redirect('/#!/signup?error=incomplete');
+//   }
+// };
 
 /**
  * Signup a new user
@@ -127,7 +127,7 @@ exports.create = (req, res) => {
  * @param {object} res The server's response
  * @returns {object} The server's response
  */
-exports.signup = (req, res) => {
+exports.create = (req, res) => {
   if (
     req.body.name &&
     req.body.name.trim() &&
@@ -142,6 +142,7 @@ exports.signup = (req, res) => {
       if (existingUser) {
         return res.status(400).send({
           success: false,
+          error: 'existingUser',
           message: 'A user already exists with that mail'
         });
       }
@@ -175,6 +176,7 @@ exports.signup = (req, res) => {
   } else {
     return res.status(400).send({
       success: false,
+      error: 'invalid',
       message: 'Invalid Credentials'
     });
   }
@@ -219,11 +221,12 @@ exports.addDonation = function (req, res) {
             user.premium = 1;
             user.save();
           }
-        });
-    }
+        }
+    });
   }
   res.send();
 };
+}
 
 /**
  *  Show profile
