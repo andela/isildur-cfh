@@ -73,12 +73,12 @@ exports.checkAvatar = function (req, res) {
       _id: req.user._id
     })
       .exec((err, user) => {
-      if (user.avatar !== undefined) {
-        res.redirect('/#!/');
-      } else {
-        res.redirect('/#!/choose-avatar');
-      }
-    });
+        if (user.avatar !== undefined) {
+          res.redirect('/#!/');
+        } else {
+          res.redirect('/#!/choose-avatar');
+        }
+      });
   } else {
     // If user doesn't even exist, redirect to /
     res.redirect('/');
@@ -162,14 +162,24 @@ exports.create = (req, res) => {
             message: 'an error occured while trying to save the user'
           });
         }
+        // sign token
         const token = jwt.sign({
           name: user.name,
           email: user.email,
           id: user._id
         }, secret);
-        return res.status(201).send({
-          success: true,
-          token
+        // login user
+        req.logIn(user, (err) => {
+          if (err) {
+            return res.status(400).send({
+              success: false,
+              message: 'error occured on logging in'
+            });
+          }
+          return res.status(201).send({
+            success: true,
+            token
+          });
         });
       });
     });
@@ -194,9 +204,9 @@ exports.avatars = function (req, res) {
       _id: req.user._id
     })
       .exec((err, user) => {
-      user.avatar = avatars[req.body.avatar];
-      user.save();
-    });
+        user.avatar = avatars[req.body.avatar];
+        user.save();
+      });
   }
   return res.redirect('/#!/app');
 };
@@ -210,22 +220,22 @@ exports.addDonation = function (req, res) {
       })
         .exec((err, user) => {
         // Confirm that this object hasn't already been entered
-        let duplicate = false;
-        for (let i = 0; i < user.donations.length; i++ ) {
-          if (user.donations[i].crowdrise_donation_id === req.body.crowdrise_donation_id) {
-            duplicate = true;
+          let duplicate = false;
+          for (let i = 0; i < user.donations.length; i++ ) {
+            if (user.donations[i].crowdrise_donation_id === req.body.crowdrise_donation_id) {
+              duplicate = true;
+            }
+            if (!duplicate) {
+              console.log('Validated donation');
+              user.donations.push(req.body);
+              user.premium = 1;
+              user.save();
+            }
           }
-          if (!duplicate) {
-            console.log('Validated donation');
-            user.donations.push(req.body);
-            user.premium = 1;
-            user.save();
-          }
-        }
-    });
-  }
-  res.send();
-};
+        });
+    }
+    res.send();
+  };
 }
 
 /**
