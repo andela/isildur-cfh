@@ -29,7 +29,7 @@ gulp.task('transpile', ['public'], () => {
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('watch', ['public'], () => {
+gulp.task('serve', ['public'], () => {
   plugins.nodemon({
     // watch: ['./dist/server.js', './app', './config'],
     script: 'dist/server.js',
@@ -66,9 +66,12 @@ gulp.task('test', () => gulp.src(
   .pipe(plugins.coverage.format())
   .pipe(gulp.dest('reports')));
 
-gulp.task('sass:watch', () => {
+gulp.task('watch', () => {
   plugins.livereload.listen();
-  gulp.watch('./public/**/*.scss', ['sass']);
+  gulp.watch('./public/**/*.scss', ['sass', 'transpile']);
+  gulp.watch('./public/**/*.html', ['sass', 'transpile']);
+  gulp.watch('./public/**/*.css', ['sass', 'transpile']);
+  gulp.watch('./public/**/*.js', ['sass', 'transpile']);
 });
 
 gulp.task('coveralls', ['test'], () => gulp.src('coverage/lcov.info')
@@ -116,4 +119,4 @@ gulp.task('bower', () => {
 });
 
 
-gulp.task('default', ['transpile', 'watch']);
+gulp.task('default', ['transpile', 'serve', 'watch']);
