@@ -1,7 +1,24 @@
 angular.module('mean.system')
   .controller('IndexController',
-    ['$scope', 'Global', '$location', 'socket', 'game', 'AvatarService', '$http', '$window',
-      ($scope, Global, $location, socket, game, AvatarService, $http, $window) => {
+    [
+      '$scope',
+      'Global',
+      '$location',
+      'socket',
+      'game',
+      'AvatarService',
+      '$http',
+      '$window',
+      (
+        $scope,
+        Global,
+        $location,
+        socket,
+        game,
+        AvatarService,
+        $http,
+        $window
+      ) => {
         $scope.global = Global;
 
         $scope.errorMessage = '';

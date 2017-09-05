@@ -185,8 +185,11 @@ exports.addDonation = function (req, res) {
         .exec((err, user) => {
         // Confirm that this object hasn't already been entered
           let duplicate = false;
-          for (let i = 0; i < user.donations.length; i++ ) {
-            if (user.donations[i].crowdrise_donation_id === req.body.crowdrise_donation_id) {
+          for (let i = 0; i < user.donations.length; i++) {
+            if (
+              user.donations[i].crowdrise_donation_id ===
+              req.body.crowdrise_donation_id
+            ) {
               duplicate = true;
             }
             if (!duplicate) {
@@ -199,8 +202,8 @@ exports.addDonation = function (req, res) {
         });
     }
     res.send();
-  };
-}
+  }
+};
 
 /**
  *  Show profile
