@@ -1,5 +1,6 @@
 import gulp from 'gulp';
 import gulpLoadPlugins from 'gulp-load-plugins';
+
 const plugins = gulpLoadPlugins();
 gulp.task('lint', () => gulp.src(
   [
@@ -25,7 +26,8 @@ gulp.task('transpile', ['public'], () => {
     }))
     .pipe(gulp.dest('dist'));
 });
-gulp.task('watch', ['public'], () => {
+
+gulp.task('serve', ['public'], () => {
   plugins.nodemon({
     watch: ['./dist', './app', './config', './public'],
     script: 'dist/server.js',
@@ -58,9 +60,13 @@ gulp.task('test', () => gulp.src(
   .pipe(plugins.coverage.gather())
   .pipe(plugins.coverage.format())
   .pipe(gulp.dest('reports')));
-gulp.task('sass:watch', () => {
+
+gulp.task('watch', () => {
   plugins.livereload.listen();
-  gulp.watch('./public/**/*.scss', ['sass']);
+  gulp.watch('./public/**/*.scss', ['sass', 'transpile']);
+  gulp.watch('./public/**/*.html', ['sass', 'transpile']);
+  gulp.watch('./public/**/*.css', ['sass', 'transpile']);
+  gulp.watch('./public/**/*.js', ['sass', 'transpile']);
 });
 gulp.task('coveralls', ['test'], () => gulp.src('coverage/lcov.info')
   .pipe(plugins.coveralls())
@@ -101,4 +107,6 @@ gulp.task('bower', () => {
   plugins.bower({ directory: './bower_components' })
     .pipe(gulp.dest('./public/lib'));
 });
-gulp.task('default', ['bower', 'transpile', 'watch']);
+
+
+gulp.task('default', ['bower', 'transpile', 'serve', 'watch']);
