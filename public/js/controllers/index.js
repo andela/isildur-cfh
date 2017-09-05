@@ -23,6 +23,7 @@ angular.module('mean.system')
               .then((response) => {
                 $window.localStorage.setItem('token', response.data.token);
                 $location.path('/#!/');
+                $window.location.reload();
               }, (err) => {
                 $location.search(`error=${err.data.error}`);
               });
