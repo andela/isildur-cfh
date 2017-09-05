@@ -193,7 +193,6 @@ exports.addDonation = function (req, res) {
               duplicate = true;
             }
             if (!duplicate) {
-              console.log('Validated donation');
               user.donations.push(req.body);
               user.premium = 1;
               user.save();
