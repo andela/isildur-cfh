@@ -16,6 +16,7 @@
     "max-len": [1, 80, 2],
     "curly": ["error", "multi-line"],
     "import/no-unresolved": [0, { "commonjs": false }],
+    "import/extensions": ["off", "never"],
     "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
     "valid-jsdoc": ["error", {
       "requireReturn": true,
