@@ -31,19 +31,19 @@ angular.module('mean.system')
             $scope.password
           ) {
           const newUser = {
-              name: $scope.name,
-              password: $scope.password,
-              email: $scope.email
-            };
+            name: $scope.name,
+            password: $scope.password,
+            email: $scope.email
+          };
 
           $http.post('/api/auth/signup', newUser)
-              .then((response) => {
-                $window.localStorage.setItem('token', response.data.token);
-                $location.path('/#!/');
-                $window.location.reload();
-              }, (err) => {
-                $location.search(`error=${err.data.error}`);
-              });
+          .then((response) => {
+            $window.localStorage.setItem('token', response.data.token);
+            $location.path('/#!/');
+            $window.location.reload();
+          }, (err) => {
+            $location.search(`error=${err.data.error}`);
+          });
         }
       };
 
