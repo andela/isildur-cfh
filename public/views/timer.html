@@ -3,10 +3,10 @@
     <p class="timer-status-round" id="timer-status-round">Time Remaining</p>
   </span>
   <span id="timer-status-czar-choosing" ng-show="game.state === 'winner has been chosen'">
-      <p class="text-center">Next Round In</p>
+      <p class="text-center timer-status-round" id="timer-status-round">Next Round In</p>
   </span>
   <span id="timer-status-czar-choosing" ng-show="game.state === 'waiting for czar to decide'">
-     <p class="text-center">Czar Choosing</p>
+     <p class="text-center timer-status-round" id="timer-status-round">Czar Choosing</p>
   </span>
   <div class="time" id="time" ng-bind="game.time"></div>
   
