@@ -15,7 +15,8 @@
     "comma-dangle": 0,
     "max-len": [1, 80, 2],
     "curly": ["error", "multi-line"],
-    "import/no-unresolved": [2, { "commonjs": true }],
+    "import/no-unresolved": [0, { "commonjs": false }],
+    "import/extensions": ["off", "never"],
     "no-underscore-dangle": ["error", { "allowAfterThis": true }],
     "no-shadow": ["error", { "allow": ["req", "res", "err"] }],
     "valid-jsdoc": ["error", {
