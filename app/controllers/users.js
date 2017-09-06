@@ -1,5 +1,4 @@
 import validator from 'validator';
-import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 const secret = process.env.SECRET_TOKEN;
@@ -110,9 +109,6 @@ exports.create = (req, res) => {
           message: 'A user already exists with that mail'
         });
       }
-      // hash password
-      const salt = bcrypt.genSaltSync(10);
-      req.body.password = bcrypt.hashSync(req.body.password, salt);
 
       const user = new User(req.body);
 
