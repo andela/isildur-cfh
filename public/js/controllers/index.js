@@ -9,7 +9,7 @@ angular.module('mean.system')
     'AvatarService',
     '$http',
     '$window',
-      (
+    (
         $scope,
         Global,
         $location,
