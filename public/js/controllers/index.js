@@ -24,7 +24,7 @@ angular.module('mean.system')
       $scope.errorMessage = '';
 
       $scope.signup = () => {
-          if (
+        if (
             $scope.name &&
             $scope.name.length > 0 &&
             $scope.email &&
@@ -45,7 +45,7 @@ angular.module('mean.system')
                 $location.search(`error=${err.data.error}`);
               });
           }
-        };
+      };
 
         $scope.playAsGuest = () => {
           game.joinGame();
