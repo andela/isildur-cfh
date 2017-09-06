@@ -30,13 +30,13 @@ angular.module('mean.system')
             $scope.email &&
             $scope.password
           ) {
-            const newUser = {
+          const newUser = {
               name: $scope.name,
               password: $scope.password,
               email: $scope.email
             };
 
-            $http.post('/api/auth/signup', newUser)
+          $http.post('/api/auth/signup', newUser)
               .then((response) => {
                 $window.localStorage.setItem('token', response.data.token);
                 $location.path('/#!/');
@@ -44,7 +44,7 @@ angular.module('mean.system')
               }, (err) => {
                 $location.search(`error=${err.data.error}`);
               });
-          }
+        }
       };
 
         $scope.playAsGuest = () => {
