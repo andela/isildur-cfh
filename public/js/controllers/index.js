@@ -21,9 +21,9 @@ angular.module('mean.system')
       ) => {
         $scope.global = Global;
 
-        $scope.errorMessage = '';
+      $scope.errorMessage = '';
 
-        $scope.signup = () => {
+      $scope.signup = () => {
           if (
             $scope.name &&
             $scope.name.length > 0 &&
