@@ -1,66 +1,75 @@
 <div id="main-bod">
-  <!-- Fixed Logo & Menu Bar Start -->
-
-  <!-- Fixed Logo & Menu Bar Ends -->
-
-  <div class="container">
-    <div class="row">
-      <h3 class="text-white text-center">SIGN UP</h3>
-      <div class="flex-center">
-        <div id="content-body" class="col-md-6 col-sm-8 col-xs-12">
-          <!-- page content starts -->
-          <form action="/users" method="post">
-            <!-- registration form starts -->
-            <div class="form-group">
-              <label for="name"></label>
-              <input type="text" class="form-control" id="name" name="name" placeholder="Full Name" required>
+    <!-- Fixed Logo & Menu Bar Start -->
+  
+    <!-- Fixed Logo & Menu Bar Ends -->
+  
+    <div class="container" ng-controller="IndexController">
+      <div class="row">
+        <h3 class="text-white text-center">SIGN UP</h3>
+        <div class="flex-center">
+          <div id="content-body" class="col-md-6 col-sm-8 col-xs-12">
+            <!-- Error content -->
+            <div class="sign-error alert alert-danger alert alert-danger" ng-show="showError() === 'existingUser'">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <p class="text-red">A user already exists with that mail</p>
             </div>
-            <div class="form-group">
-              <label for="password"></label>
-              <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            <div class="sign-error alert alert-danger alert alert-danger" ng-show="showError() === 'invalid'">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <p class="text-red">Invalid credentials</p>1cosi
             </div>
-            <div class="form-group">
-              <label for="email"></label>
-              <input type="email" class="form-control" id="email" name="email"placeholder="Email" required>
-            </div>
-            <!-- avatars start -->
-            <h5 class="text-primary">Choose an avatar</h3>
-              <div id="contain-avatars" class="col-xs-12">
-                <ul ng-controller="IndexController" class="avatar-list">
-                  <li ng-repeat="avatar in avatars" class="avatars ng-scope">
-                    <input name="avatar" type='radio' value="{{$index}}">
-                      <img ng-src="{{avatar}}">
-                    </input>
-                  </li>
-                </ul>
+            <!-- page content starts -->
+            <form ng-submit="signup()">
+              <!-- registration form starts -->
+              <div class="form-group">
+                <label for="name"></label>
+                <input ng-model="name" type="text" class="form-control" id="name" name="name" placeholder="Full Name" required>
               </div>
-            <!-- avatars end -->
-            <button type="submit" class="btn btn-default btn-block custom-button">SUBMIT</button>
-            <!-- registration form ends -->
-          </form>
-          <div class="social-signup text-center">
-              <!-- social signup icons starts -->
-              <h4 class="teaser-heading text-primary">Or Sign Up With:</h4>
-              <a href="/auth/facebook" title="Facebook">
-                <img class="social-icons" src="/img/icons/facebook.png" alt="Facebook">
-              </a>
-              <a href="/auth/github" title="Github">
-                <img class="social-icons" src="/img/icons/github.png" alt="Github">
-              </a>
-              <a href="/auth/google" title="Google">
-                <img class="social-icons" src="/img/icons/google.png" alt="Google">
-              </a>
-              <a href="/auth/twitter" title="Twitter">
-                <img class="social-icons" src="/img/icons/twitter.png" alt="Twitter">
-              </a>
-              <!-- social signup icons ends -->
+              <div class="form-group">
+                <label for="password"></label>
+                <input ng-model="password" type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+              </div>
+              <div class="form-group">
+                <label for="email"></label>
+                <input ng-model="email" type="email" class="form-control" id="email" name="email"placeholder="Email" required>
+              </div>
+              <!-- avatars start -->
+              <h5 class="text-primary">Choose an avatar</h3>
+                <div id="contain-avatars" class="col-xs-12">
+                  <ul class="avatar-list">
+                    <li ng-repeat="avatar in avatars" class="avatars ng-scope">
+                      <input name="avatar" type='radio' value="{{$index}}">
+                        <img ng-src="{{avatar}}">
+                      </input>
+                    </li>
+                  </ul>
+                </div>
+              <!-- avatars end -->
+              <button type="submit" class="btn btn-default btn-block custom-button">SUBMIT</button>
+              <!-- registration form ends -->
+            </form>
+            <div class="social-signup text-center">
+                <!-- social signup icons starts -->
+                <h4 class="teaser-heading text-primary">Or Sign Up With:</h4>
+                <a href="/auth/facebook" title="Facebook">
+                  <img class="social-icons" src="/img/icons/facebook.png" alt="Facebook">
+                </a>
+                <a href="/auth/github" title="Github">
+                  <img class="social-icons" src="/img/icons/github.png" alt="Github">
+                </a>
+                <a href="/auth/google" title="Google">
+                  <img class="social-icons" src="/img/icons/google.png" alt="Google">
+                </a>
+                <a href="/auth/twitter" title="Twitter">
+                  <img class="social-icons" src="/img/icons/twitter.png" alt="Twitter">
+                </a>
+                <!-- social signup icons ends -->
+            </div>
+            <!-- page content ends -->
           </div>
-          <!-- page content ends -->
+        </div>
+        <div class="text-center">
+          <a href="/" title="Go Back Home" class="text-white">Back To Homepage</a> 
         </div>
       </div>
-      <div class="text-center">
-        <a href="/" title="Go Back Home" class="text-white">Back To Homepage</a> 
-      </div>
     </div>
-  </div>
-</div
+  </div
