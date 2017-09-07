@@ -1,14 +1,14 @@
 angular.module('mean.system')
-  .controller('IndexController',
-  [
-    '$scope',
-    'Global',
-    '$location',
-    'socket',
-    'game',
-    'AvatarService',
-    '$http',
-    '$window',
+.controller('IndexController',
+[
+  '$scope',
+  'Global',
+  '$location',
+  'socket',
+  'game',
+  'AvatarService',
+  '$http',
+  '$window',
     (
       $scope,
       Global,
@@ -26,9 +26,9 @@ angular.module('mean.system')
       $scope.signup = () => {
         if (
           $scope.name &&
-        $scope.name.length > 0 &&
-        $scope.email &&
-        $scope.password
+          $scope.name.length > 0 &&
+          $scope.email &&
+          $scope.password
         ) {
           const newUser = {
             name: $scope.name,
@@ -44,6 +44,29 @@ angular.module('mean.system')
             }, (err) => {
               $location.search(`error=${err.data.error}`);
             });
+        }
+      };
+
+      $scope.signin = () => {
+        if (
+          $scope.email &&
+          $scope.password
+        ) {
+          const user = {
+            email: $scope.email,
+            password: $scope.password
+          };
+
+          $http.post('/api/auth/login', user)
+            .then((response) => {
+              $window.localStorage.setItem('token', response.data.token);
+              $location.path('/#!/');
+              $window.location.reload();
+            }, (err) => {
+              $location.search(`error=${err.data.error}`);
+            });
+        } else {
+          $location.search('error=invalid');
         }
       };
 
