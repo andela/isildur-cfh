@@ -1,5 +1,6 @@
+/* global angular */
 angular.module('mean.system')
-.controller('IndexController',
+  .controller('IndexController',
   [
     '$scope',
     'Global',

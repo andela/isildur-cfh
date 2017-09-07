@@ -1,10 +1,11 @@
+/* global angular */
 angular.module('mean.system')
   .controller('GameController',
-    ['$scope',
-      'game',
-      '$timeout',
-      '$location',
-      'MakeAWishFactsService',
+  ['$scope',
+    'game',
+    '$timeout',
+    '$location',
+    'MakeAWishFactsService',
     ($scope, game, $timeout,
       $location,
       MakeAWishFactsService) => {
@@ -25,7 +26,7 @@ angular.module('mean.system')
               $scope.sendPickedCards();
               $scope.hasPickedCards = true;
             } else if (game.curQuestion.numAnswers === 2 &&
-          $scope.pickedCards.length === 2) {
+              $scope.pickedCards.length === 2) {
               // delay and send
               $scope.hasPickedCards = true;
               $timeout($scope.sendPickedCards, 300);
@@ -78,17 +79,17 @@ angular.module('mean.system')
       };
 
       $scope.showFirst = card => game.curQuestion.numAnswers > 1 &&
-      $scope.pickedCards[0] === card.id;
+        $scope.pickedCards[0] === card.id;
 
       $scope.showSecond = card => game.curQuestion.numAnswers > 1 &&
-      $scope.pickedCards[1] === card.id;
+        $scope.pickedCards[1] === card.id;
 
       $scope.isCzar = () => game.czar === game.playerIndex;
 
       $scope.isPlayer = $index => $index === game.playerIndex;
 
       $scope.isCustomGame = () => !(/^\d+$/).test(game.gameID) &&
-      game.state === 'awaiting players';
+        game.state === 'awaiting players';
 
       $scope.isPremium = $index => game.players[$index].premium;
 
@@ -158,10 +159,12 @@ angular.module('mean.system')
                 your friends so they can join your game: `;
                 $('#lobby-how-to-play').text(txt);
                 $('#oh-el').css(
-                  { 'text-align': 'center',
+                  {
+                    'text-align': 'center',
                     'font-size': '22px',
                     background: 'white',
-                    color: 'black' }).text(link);
+                    color: 'black'
+                  }).text(link);
               }, 200);
               $scope.modalShown = true;
             }
