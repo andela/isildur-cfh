@@ -101,12 +101,37 @@ angular.module('mean.system')
         return '#f9f9f9';
       };
 
-      $scope.pickWinning = (winningSet) => {
-        if ($scope.isCzar()) {
-          game.pickWinning(winningSet.card[0]);
-          $scope.winningCardPicked = true;
-        }
-      };
+        $scope.pickWinning = (winningSet) => {
+          if ($scope.isCzar()) {
+            game.pickWinning(winningSet.card[0]);
+            $scope.winningCardPicked = true;
+          }
+        };
+        debugger;
+
+        $scope.winnerPicked = () => game.winningCard !== -1;
+
+        $scope.startGame = () => {
+          game.startGame();
+        };
+
+        $scope.abandonGame = () => {
+          game.leaveGame();
+          $location.path('/');
+        };
+
+        // Catches changes to round to update when no players pick card
+        // (because game.state remains the same)
+        $scope.$watch('game.round', () => {
+          $scope.hasPickedCards = false;
+          $scope.showTable = false;
+          $scope.winningCardPicked = false;
+          $scope.makeAWishFact = makeAWishFacts.pop();
+          if (!makeAWishFacts.length) {
+            makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
+          }
+          $scope.pickedCards = [];
+        });
 
       $scope.winnerPicked = () => game.winningCard !== -1;
 
