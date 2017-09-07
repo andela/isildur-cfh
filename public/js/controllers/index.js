@@ -1,15 +1,15 @@
 angular.module('mean.system')
 .controller('IndexController',
-[
-  '$scope',
-  'Global',
-  '$location',
-  'socket',
-  'game',
-  'AvatarService',
-  '$http',
-  '$window',
-  (
+  [
+    '$scope',
+    'Global',
+    '$location',
+    'socket',
+    'game',
+    'AvatarService',
+    '$http',
+    '$window',
+    (
       $scope,
       Global,
       $location,
@@ -21,10 +21,10 @@ angular.module('mean.system')
     ) => {
       $scope.global = Global;
 
-    $scope.errorMessage = '';
+      $scope.errorMessage = '';
 
-    $scope.signup = () => {
-      if (
+      $scope.signup = () => {
+        if (
           $scope.name &&
           $scope.name.length > 0 &&
           $scope.email &&
@@ -45,7 +45,7 @@ angular.module('mean.system')
           $location.search(`error=${err.data.error}`);
         });
       }
-    };
+      };
 
       $scope.playAsGuest = () => {
         game.joinGame();
