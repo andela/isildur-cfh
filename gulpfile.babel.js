@@ -31,9 +31,9 @@ gulp.task('transpile', ['public'], () => {
 
 gulp.task('watch', ['public'], () => {
   plugins.nodemon({
-    // watch: ['./dist/server.js', './app', './config'],
+    watch: ['./dist', './app', './config', './public'],
     script: 'dist/server.js',
-    ext: 'js',
+    ext: 'js html jade',
     env: { NODE_ENV: 'development' }
   });
 });

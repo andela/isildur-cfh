@@ -130,7 +130,15 @@ body {
 
 #main-container {
   height: 100%;
+  background-image:url('../img/hero.jpg');
 }
+
+#main-overlay {
+  height: 100%;
+  background-color: #0B4F6C;
+  opacity: 0.8;
+}
+
 #main-container #app-container {
   height: 100%;
   max-width: 1200px;
@@ -143,9 +151,17 @@ body {
   -moz-border-radius: 8px;
   border-radius: 8px;
   background: #252525;
-  margin-bottom: 10px;
-  margin-top: 5px;
-  padding: 5px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  padding: 0px;
+}
+#after-overlay{
+  height: 100%;
+  width: 100%;
+  background-color: #0B4F6C;
+  opacity: 0.6;
+  position: absolute;
+  z-index: 0;
 }
 @media (max-width: 520px) {
   #main-container #app-container #menu-container {
@@ -532,11 +548,11 @@ body {
   -webkit-box-shadow: inset 0px 1px 0px 0px #ffffff;
   box-shadow: inset 0px 1px 0px 0px #ffffff;
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fcfcfc', endColorstr='#f0f0f0');
-  background-color: #D5D5D5;
+  /* background-color: #D5D5D5; */
   text-indent: 0;
   text-shadow: 1px 1px 0px #ffffff;
   cursor: pointer;
-  background: #FFF;
+  /* background: #FFF; */
   text-shadow: none;
   cursor: default;
   border: none;
@@ -549,9 +565,7 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  padding-top: 5px;
-  padding-bottom: 8px;
-  bottom: 0;
+  padding-top: 10px;
 }
 @media only screen and (max-width: 1024px) {
   #main-container #app-container #gameplay-container #upper-gameplay-container #menu-timeremaining-container #timer-container #inner-timer-container #timer-status-round, #main-container #app-container #gameplay-container #upper-gameplay-container #menu-timeremaining-container #timer-container #inner-timer-container #timer-status-czar-choosing {
@@ -570,7 +584,9 @@ body {
   bottom: 25%;
   left: 0;
   right: 0;
+  margin: -30px;
 }
+
 @media only screen and (max-width: 1024px) {
   #main-container #app-container #gameplay-container #upper-gameplay-container #menu-timeremaining-container #timer-container #inner-timer-container #time {
     font-size: 90px;
@@ -607,10 +623,13 @@ body {
   width: 100%;
   margin: 0px auto;
   display: block;
+  background: white;
+  /* opacity: 0.5;
+  filter: alpha(opacity=50); */
 }
 #main-container #app-container #gameplay-container #upper-gameplay-container #question-container-outer #question-container-inner .card #notifications {
   position: absolute;
-  bottom: 0;
+  top: 0;
   right: 0;
   padding: 10px;
 }
@@ -620,6 +639,7 @@ body {
   height: 100%;
   position: absolute;
   right: 1%;
+  color: #0b4f6c;
 }
 #main-container #app-container #gameplay-container #upper-gameplay-container #question-container-outer #question-container-inner .card #startGame #finding-players {
   font-size: 33px;
@@ -633,12 +653,14 @@ body {
   }
 }
 #main-container #app-container #gameplay-container #upper-gameplay-container #question-container-outer #question-container-inner .card #startGame #player-count-container, #main-container #app-container #gameplay-container #upper-gameplay-container #question-container-outer #question-container-inner .card #startGame #loading-container, #main-container #app-container #gameplay-container #upper-gameplay-container #question-container-outer #question-container-inner .card #startGame #start-game-container {
-  width: 33.333%;
-  float: left;
+  width: 100%;
+  float: center;
   text-align: center;
 }
 #main-container #app-container #gameplay-container #upper-gameplay-container #question-container-outer #question-container-inner .card #startGame #player-count-container #player-count {
-  font-size: 33px;
+  font-size: 15px;
+  text-align: center;
+  float: center;
 }
 @media (max-width: 520px) {
   #main-container #app-container #gameplay-container #upper-gameplay-container #question-container-outer #question-container-inner .card #startGame #player-count-container #player-count {

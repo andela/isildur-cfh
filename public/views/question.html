@@ -1,4 +1,4 @@
-<div id="question-container-inner">
+<!-- <div id="question-container-inner">
   <div class="card longBlack">
     <span ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
 
@@ -13,6 +13,9 @@
       <div id="loading-container">
         <div id="loading-gif"><img ng-src="../img/loader.gif"/></div>
       </div>
+      <div>
+        <button class="btn btn-primary">Start Game</button>
+      </div>
       <div id="start-game-container" ng-click="startGame()" ng-show="(game.playerIndex === 0 || game.joinOverride) && game.players.length >= game.playerMinLimit">
         <div id='start-game-button'>
           Start Game</br>with {{game.players.length}} players
@@ -20,7 +23,7 @@
       </div>
     </div>
     <!-- Game Over Stuff -->
-    <div id="game-end-info">
+    <!-- <div id="game-end-info">
       <div id="people-left-game-top" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">
         <div class="game-end-headline">What the!? The game ended because too many people left! </div>
         Our sincere apologies.
@@ -34,5 +37,68 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<div id="question-container-inner">
+    <div class="card longBlack">
+        <span class="text-danger"ng-bind-html-unsafe="game.curQuestion.text" ng-hide="game.state === 'game ended' || game.state ==='game dissolved' || game.state === 'awaiting players'"></span>
+        <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>
+        
+        <div id="startGame" ng-show="game.state === 'awaiting players'">
+            <div id="finding-players">Finding Players</div>
+            <div class="player-count-container" id="player-count-container">
+                <div class="player-count" id="player-count">{{game.players.length}} / 12 Players avaliable</div>
+                <div id="loading-container">
+                    <div id="loading-gif"><img ng-src="../img/loader.gif"/></div>
+                </div>
+                <div class="row start-game-row">
+                  <div class="pull-left">
+                      <button type="button" data-toggle="modal" data-target="#start_game_modal" class="btn btn-primary">Start Game</button>
+                  </div>
+                  <div class="pull-right">
+                      <button class="btn btn-danger">Invite Friend</button>
+                  </div>
+                  
+                  <!-- Modal -->
+                  <div id="start_game_modal" class="modal fade" role="dialog">
+                    <div class="modal-dialog">
+                  
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 class="modal-title">Player Requirement</h4>
+                        </div>
+                        <div class="modal-body">
+                          <p ng-show="game.players.length >= game.playerMinLimit">Do you want to start game?</p>
+                          <p ng-show="game.players.length < game.playerMinLimit">Sorry! You require a minimum of three (3) players to play this game!</p>
+                          
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                          <button type="button" ng-show="game.players.length >= game.playerMinLimit" ng-click="startGame()" class="btn btn-primary" data-dismiss="modal">Start</button>
+                        </div>
+                      </div>
+                  
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <!-- Game Over Stuff -->
+        <div id="game-end-info">
+          <div id="people-left-game-top" ng-show="game.state ==='game dissolved' && game.gameWinner === -1">
+            <div class="text-danger game-end-headline">What the!? The game ended because too many people left! </div>
+            Our sincere apologies.
+          </div>
+          <div ng-show="game.state === 'game ended' && game.gameWinner === game.playerIndex">
+            <div class="text-primary game-end-headline">Congratulations! You won the game, {{game.players[game.playerIndex].username | upperFirstLetter}}!</div>We hope you feel special. If you'd like to share that special feeling with the world, consider donating to charity. Or just horde it all for youself.
+          </div>
+          <div ng-show="game.state === 'game ended' && game.gameWinner !== game.playerIndex">
+            <div class="text-danger game-end-headline">Aw, shucks! {{game.players[game.gameWinner].username | upperFirstLetter }} won the game!</div>
+            That makes you a loser, unfortunately.
+          </div>
+        </div>
+    </div>
 </div>
 

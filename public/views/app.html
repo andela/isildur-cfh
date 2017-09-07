@@ -1,7 +1,8 @@
 </script>
+<div id="after-overlay"></div>
 <div id="app-container" ng-controller="GameController">
-  <div id="menu-container">
-    <div id="logo">
+<div id="menu-container">
+    <!-- <div id="logo">
       <span id="first-word">Cards</span>
       <span id="second-word"> for</span>
       <span id="third-word">Humanity</span>
@@ -12,9 +13,41 @@
         <span id="tweet-container">
       <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good" data-related="CFH_App">Tweet</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
-    </span>
+    </span> -->
+
+  <!-- Brand and toggle get grouped for better mobile display -->
+
+<!-- Fixed Logo & Menu Bar Start -->
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobileToggle">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+      <a href="/" class="navbar-brand text-white bold" onClick="scroll(0,0)">CARDS FOR HUMANITY</a>
+    </div>
+    <div class="collapse navbar-collapse" id="mobileToggle">
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+          <span id="tweet-container">
+            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good" data-related="CFH_App">Tweet</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+          </span>
+        </li>
+        <li>
+          <div id = 'abandon-game-button' ng-click="abandonGame()">
+            Abandon Game
+        </div>
+        </li>
+      </ul>
+    </div>
   </div>
-  <div id="gameplay-container">
+</nav>
+</div> 
+<!-- Fixed Logo & Menu Bar End -->
+  <div class="gameplay-container" id="gameplay-container">
     <div id="upper-gameplay-container">
       <div id="menu-timeremaining-container">
         <div id="menu-container">
@@ -29,5 +62,27 @@
       </div>
     </div>
     <answers></answers>
+    <div class="chat">
+       <div class="chat-header">Chat Box</div>
+       <div clas="chat-body">
+          <div class="chat-message">
+            <ul>
+              <li><b>Kene:</b> Hi</li>
+              <li><b>Funsho:</b> Hello</li>
+              <li><b>McDavid:</b> How re u all doing</li>
+              <li><b>Funsho:</b> We re fine</li>
+              <li><b>Kene:</b> Hi</li>
+              <li><b>Funsho:</b> Hello</li>
+              <li><b>McDavid:</b> How re u all doing</li>
+              <li><b>Funsho:</b> We re fine</li>
+            </ul>
+          </div>
+          <div class="chat-textarea">
+            <form class="form-group">
+              <input class="form-control" placeholder="Type your message here!" type="text" name="chat-textarea" id="chat-text-area" />
+            </form>
+          </div>
+       </div>
+    </div>
   </div>
 </div>

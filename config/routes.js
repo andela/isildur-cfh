@@ -11,10 +11,10 @@ import questions from '../app/controllers/questions';
 import avatars from '../app/controllers/avatars';
 // Root Controllers
 import index from '../app/controllers/index';
-
+// GameLog Controllers
+import gameLog from '../app/controllers/gameLog';
 
 module.exports = (app, passport, auth) => {
-
   // User Routes
   // const users = require('../app/controllers/users');
   app.get('/signin', users.signin);
@@ -82,29 +82,29 @@ module.exports = (app, passport, auth) => {
   app.param('userId', users.user);
 
   // Answer Routes
-  // const answers = require('../app/controllers/answers');
   app.get('/answers', answers.all);
   app.get('/answers/:answerId', answers.show);
   // Finish with setting up the answerId param
   app.param('answerId', answers.answer);
 
   // Question Routes
-  //   const questions = require('../app/controllers/questions');
   app.get('/questions', questions.all);
   app.get('/questions/:questionId', questions.show);
   // Finish with setting up the questionId param
   app.param('questionId', questions.question);
 
   // Avatar Routes
-  //   const avatars = require('../app/controllers/avatars');
   app.get('/avatars', avatars.allJSON);
 
   // Home route
-  //   const index = require('../app/controllers/index');
   app.get('/play', index.play);
   app.get('/', index.render);
 
+
   // Endpoint to search and Invite Users to Game
   app.get('/api/users/search', users.search);
-//   app.post('/api/user/invite/:user_details', users.invitePlayers);
+  //   app.post('/api/user/invite/:user_details', users.invitePlayers);
+
+  // GameLog route
+  app.post('/api/games/:id/start', gameLog.create);
 };
