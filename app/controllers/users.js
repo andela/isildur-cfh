@@ -1,4 +1,5 @@
 import validator from 'validator';
+import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 const secret = process.env.SECRET_TOKEN;
@@ -148,6 +149,66 @@ exports.create = (req, res) => {
       success: false,
       error: 'invalid',
       message: 'Invalid Credentials'
+    });
+  }
+};
+
+/**
+ * Login a user
+ * @param {object} req The user's information
+ * @param {object} res The server's response
+ * @returns {object} The server's response
+ */
+exports.login = (req, res) => {
+  if (
+    req.body.email &&
+    req.body.password
+  ) {
+    User.findOne({
+      email: req.body.email
+    }).exec((err, user) => {
+      // if an error occurs when finding user
+      if (err) {
+        return res.status(400).send({
+          success: false,
+          error: 'invalid'
+        });
+      }
+      // if no user exists
+      if (!user) {
+        return res.status(400).send({
+          success: false,
+          error: 'invalid'
+        });
+      }
+      // compare passwords
+      if (!bcrypt.compareSync(req.body.password, user.hashed_password)) {
+        return res.status(400).send({
+          success: false,
+          error: 'invalid'
+        });
+      }
+
+      // sign token
+      const token = jwt.sign({
+        name: user.name,
+        email: user.email,
+        id: user._id
+      }, secret);
+
+      // login user
+      req.login(user, (err) => {
+        if (err) {
+          return res.status(400).send({
+            success: false,
+            message: 'error occured on logging in'
+          });
+        }
+        return res.status(201).send({
+          success: true,
+          token
+        });
+      });
     });
   }
 };

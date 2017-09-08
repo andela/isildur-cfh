@@ -1,52 +1,53 @@
 <div id="main-bod" ng-controller="IndexController">
-  <!-- Fixed Logo & Menu Bar Start -->
-  <!-- Fixed Logo & Menu Bar End -->
-  <div class="container">
-    <div class="row">
-        <h3 class="text-white text-center">SIGN IN</h3>
-      <div class="flex-center">
-        <div id="content-body" class="col-md-6 col-sm-8 col-xs-12">
-          <!-- page content starts -->
-          <div class="sign-error alert alert-danger alert alert-danger" ng-show="showError() === 'invalid'">
-            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            <p class="text-red">Please check your username/password and try again.</p>
-          </div>
-          <form action="/users/session" method="post">
-            <!-- signin form starts -->
-            <div class="form-group">
-              <label for="email"></label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+    <!-- Fixed Logo & Menu Bar Start -->
+    <!-- Fixed Logo & Menu Bar End -->
+    <div class="container">
+      <div class="row">
+          <h3 class="text-white text-center">SIGN IN</h3>
+        <div class="flex-center">
+          <div id="content-body" class="col-md-6 col-sm-8 col-xs-12">
+            <!-- page content starts -->
+            <!-- Error content -->
+            <div class="sign-error alert alert-danger alert alert-danger" ng-show="showError() === 'invalid'">
+              <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+              <p class="text-red">Please check your username/password and try again.</p>
             </div>
-            <div class="form-group">
-              <label for="password"></label>
-              <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+            <form ng-submit="signin()">
+              <!-- signin form starts -->
+              <div class="form-group">
+                <label for="email"></label>
+                <input ng-model="email" type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+              </div>
+              <div class="form-group">
+                <label for="password"></label>
+                <input ng-model="password" type="password" class="form-control" id="password" name="password" placeholder="Password" required>
+              </div>
+              <button type="submit" class="btn btn-default btn-block custom-button">SUBMIT</button>
+              <!-- signin form ends -->
+            </form>
+            <div class="social-signup text-center">
+                <!-- social signup icons starts -->
+                <h4 class="teaser-heading text-primary">Or Sign In With:</h4>
+                <a href="/auth/facebook" title="Facebook">
+                  <img class="social-icons" src="/img/icons/facebook.png" alt="Facebook">
+                </a>
+                <a href="/auth/github" title="Github">
+                  <img class="social-icons" src="/img/icons/github.png" alt="Github">
+                </a>
+                <a href="/auth/google" title="Google">
+                  <img class="social-icons" src="/img/icons/google.png" alt="Google">
+                </a>
+                <a href="/auth/twitter" title="Twitter">
+                  <img class="social-icons" src="/img/icons/twitter.png" alt="Twitter">
+                </a>
+                <!-- social signup icons ends -->
             </div>
-            <button type="submit" class="btn btn-default btn-block custom-button">SUBMIT</button>
-            <!-- signin form ends -->
-          </form>
-          <div class="social-signup text-center">
-              <!-- social signup icons starts -->
-              <h4 class="teaser-heading text-primary">Or Sign In With:</h4>
-              <a href="/auth/facebook" title="Facebook">
-                <img class="social-icons" src="/img/icons/facebook.png" alt="Facebook">
-              </a>
-              <a href="/auth/github" title="Github">
-                <img class="social-icons" src="/img/icons/github.png" alt="Github">
-              </a>
-              <a href="/auth/google" title="Google">
-                <img class="social-icons" src="/img/icons/google.png" alt="Google">
-              </a>
-              <a href="/auth/twitter" title="Twitter">
-                <img class="social-icons" src="/img/icons/twitter.png" alt="Twitter">
-              </a>
-              <!-- social signup icons ends -->
+            <!-- page content ends -->
           </div>
-          <!-- page content ends -->
         </div>
-      </div>
-      <div class="text-center">
-        <a href="/" title="Go Back Home" class="text-white">Back To Homepage</a> 
+        <div class="text-center">
+          <a href="/" title="Go Back Home" class="text-white">Back To Homepage</a> 
+        </div>
       </div>
     </div>
   </div>
-</div>
