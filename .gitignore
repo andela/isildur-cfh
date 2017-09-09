@@ -10,10 +10,5 @@ dist
 .idea
 .vscode
 npm-debug.log
-<<<<<<< HEAD
-/bower_components
-/public/lib
-=======
 bower_components/
 /public/lib/
->>>>>>> 3ab9a5f1d78c907a6c743903bd6ec0d4f93c433d
