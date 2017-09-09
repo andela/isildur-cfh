@@ -109,4 +109,10 @@ module.exports = (app, passport, auth) => {
   app.get('/api/users/search', users.search);
   //  app.post('/api/user/invite/:user_details', users.invitePlayers);
   app.post('/api/games/:id/start', gamelog.create);
+
+  // Send Invites to users in the game to show on their notifications table
+  app.post('/api/users/sendInvitation', users.sendInviteAsEmail);
+
+  // Send Invites to users in the game to show on their notifications table
+  // app.post('/api/user/invite/:userDetails', users.invitePlayers);
 };

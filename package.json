@@ -48,6 +48,7 @@
     "jsonwebtoken": "^7.4.3",
     "mean-logger": "~0.0.1",
     "mongoose": "^4.1.9",
+    "nodemailer": "^4.1.0",
     "passport": "^0.1.18",
     "passport-facebook": "~2.0.0",
     "passport-github": "~0.1.5",

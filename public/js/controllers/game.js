@@ -3,7 +3,11 @@
 /* global localStorage */
 angular.module('mean.system')
   .controller('GameController',
-    ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService',
+    ['$scope',
+      'game',
+      '$timeout',
+      '$location',
+      'MakeAWishFactsService',
       ($scope, game, $timeout,
         $location,
         MakeAWishFactsService) => {
@@ -24,7 +28,7 @@ angular.module('mean.system')
                 $scope.sendPickedCards();
                 $scope.hasPickedCards = true;
               } else if (game.curQuestion.numAnswers === 2 &&
-              $scope.pickedCards.length === 2) {
+          $scope.pickedCards.length === 2) {
               // delay and send
                 $scope.hasPickedCards = true;
                 $timeout($scope.sendPickedCards, 300);
