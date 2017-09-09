@@ -7,6 +7,10 @@
   padding: 1%;
   margin: 1%;
   background-color: #fff;
+  background-image: url('../img/card2.png');
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: center;
   border-radius: 8px;
   color: #252525;
   font-family: Arial;
@@ -131,6 +135,9 @@ body {
 #main-container {
   height: 100%;
   background-image:url('../img/hero.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
 }
 
 #main-overlay {
@@ -248,8 +255,9 @@ body {
 }
 #main-container #app-container #social-bar-container {
   width: 20%;
-  height: 63%;
+  height: 50%;
   position: absolute;
+  overflow-y: scroll;
   right: 0;
   top: 60px;
 }
@@ -270,7 +278,7 @@ body {
   padding-bottom: 4%;
   min-height: 50px;
   background: #7CE4E8;
-  margin: 0 0 6% 8%;
+  margin: 0 0 4% 8%;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
@@ -565,7 +573,6 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  padding-top: 10px;
 }
 @media only screen and (max-width: 1024px) {
   #main-container #app-container #gameplay-container #upper-gameplay-container #menu-timeremaining-container #timer-container #inner-timer-container #timer-status-round, #main-container #app-container #gameplay-container #upper-gameplay-container #menu-timeremaining-container #timer-container #inner-timer-container #timer-status-czar-choosing {
@@ -730,7 +737,7 @@ body {
 }
 #main-container #app-container #gameplay-container #info-container {
   width: 100%;
-  background: #252525;
+  background: #0b4f6c;
   color: white;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
@@ -785,7 +792,7 @@ body {
 }
 #main-container #app-container #gameplay-container #game-end-container {
   width: 100%;
-  background: #252525;
+  background: #0B4F6C;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
@@ -936,7 +943,7 @@ body {
 #main-container #app-container #gameplay-container #czar-blank-container {
   color: white;
   width: 100%;
-  background: #252525;
+  background: #0B4F6C;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
@@ -1027,7 +1034,7 @@ body {
 }
 #main-container #app-container #gameplay-container #cards-container {
   width: 100%;
-  background: #252525;
+  background: #0B4F6C;
   margin-top: 11px;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;

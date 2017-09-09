@@ -356,6 +356,7 @@ span.auth-option {
 	80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
 	90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
 	100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
+    font-weight: 400;
 }
 
 .timer-status-round{

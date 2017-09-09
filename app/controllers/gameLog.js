@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 const mongoose = require('mongoose'),
-GameLog = mongoose.model('GameLog');
+  GameLog = mongoose.model('GameLog');
 
 /**
  * create - create GameLog
@@ -12,26 +12,26 @@ GameLog = mongoose.model('GameLog');
  * @return {json}     returns json reponse
  */
 exports.create = (req, res) => {
-if (req.params.id &&
-    req.body.playerId &&
-    req.body.gameId &&
-    req.body.winner &&
-    req.body.players &&
-    req.body.rounds) {
-  const gamelog = new GameLog(req.body);
-  gamelog.save((err) => {
-    if (err) {
-      return res.status(400).send({
-        message: 'Cannot save gamelog'
+  if (req.params.id &&
+      req.body.playerId &&
+      req.body.gameId &&
+      req.body.winner &&
+      req.body.players &&
+      req.body.rounds) {
+    const gamelog = new GameLog(req.body);
+    gamelog.save((err) => {
+      if (err) {
+        return res.status(400).send({
+          message: 'Cannot save gamelog'
+        });
+      }
+      return res.status(201).send({
+        message: 'Gamelog saved successfully!'
       });
-    }
-    return res.status(201).send({
-      message: 'Gamelog saved successfully!'
     });
-  });
-} else {
-  return res.status(409).send({
-    message: 'Incomplete Gamelog parameter'
-  });
-}
+  } else {
+    return res.status(409).send({
+      message: 'Incomplete Gamelog parameter'
+    });
+  }
 };
