@@ -171,12 +171,6 @@ Game.prototype.stateChoosing = function(self) {
   }
   self.round++;
   self.dealAnswers();
-  // Rotate card czar
-  if (self.czar >= self.players.length - 1) {
-    self.czar = 0;
-  } else {
-    self.czar++;
-  }
   self.sendUpdate();
 
   self.choosingTimeout = setTimeout(function() {
@@ -438,11 +432,11 @@ Game.prototype.killGame = function() {
 };
 
 Game.prototype.startNextRound = (self) => {
-  if (self.state === 'czar pick card') {
-    self.stateChoosing(self);
+   if (self.state === 'czar pick card') {
+     self.stateChoosing(self);
   } else if (self.state === 'czar left game') {
     self.changeCzar(self);
   }
-};
-
+ };
+ 
 module.exports = Game;

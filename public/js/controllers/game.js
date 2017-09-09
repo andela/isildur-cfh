@@ -35,13 +35,6 @@ angular.module('mean.system')
           }
         }
       };
-
-
-
-
-
-
-
       $scope.pointerCursorStyle = () => {
         if ($scope.isCzar() &&
           $scope.game.state === 'waiting for czar to decide') {
