@@ -130,7 +130,7 @@ angular.module('mean.system')
           setTimeout(() => {
             $scope.startNextRound();
             card.removeClass('animated flipOutY');
-            $('#startmodal').modal('hide');
+            $('#start-modal').modal('hide');
           }, 500);
       };
   
@@ -183,8 +183,7 @@ angular.module('mean.system')
         $scope.showTable = true;
       }
       if ($scope.isCzar() && game.state === 'czar pick card' && game.table.length === 0) {
-        const myModal = $('#start-modal');
-        myModal.modal('show');
+        $('#start-modal').modal('show');
       }
       if (game.state === 'game dissolved') {
         $('#start-modal').modal('hide');
