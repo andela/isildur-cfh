@@ -12,6 +12,7 @@ angular.module('mean.system')
       'AvatarService',
       '$http',
       '$window',
+      'Users',
       (
         $scope,
         Global,
@@ -20,7 +21,8 @@ angular.module('mean.system')
         game,
         AvatarService,
         $http,
-        $window
+        $window,
+        Users
       ) => {
         $scope.global = Global;
 
@@ -112,6 +114,30 @@ angular.module('mean.system')
           }
           return false;
         };
+
+        // Search for a user in all users table
+        $scope.searchedUsers = () => {
+          const username = $scope.userName;
+          Users.searchedUsers(username)
+            .then((foundUsers) => {
+              $scope.foundUsers = foundUsers;
+              console.log(foundUsers, 'Found Users');
+            });
+        };
+
+        // Send invites to registered but non-friend users
+        $scope.sendInvite = (email) => {
+          Users.sendInvite(email)
+            .then((message, invitesSent) => {
+              console.log(`${message} ====== ${invitesSent}`);
+            });
+        };
+
+        // TODO: Add User to friend List Function
+
+        // TODO: Get Current User's Friends Function
+
+        // TODO: Send invites to selected Friends
 
         $scope.avatars = [];
         AvatarService.getAvatars()

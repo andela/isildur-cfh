@@ -1,5 +1,5 @@
 angular.module('mean.system')
-  .factory('Users', ['$http', '$window', 'socket', ($http, $window, socket) => {
+  .factory('Users', ['$http', '$window', ($http, $window) => {
     const invitesSent = [];
     const searchedUsers = userName => new Promise((resolve, reject) => {
       $http.get(`api/users/search?name=${userName}`)
