@@ -1,4 +1,5 @@
 /* global angular */
+/* global document */
 angular.module('mean.system')
   .controller('IndexController',
   [
@@ -76,6 +77,34 @@ angular.module('mean.system')
         $location.path('/app');
       };
 
+      // added by me
+      $scope.playWithStrangers = () => {
+        // game.joinGame();
+        // $location.path('/app');
+        if ($scope.region === undefined) {
+          alert('Please Select your Region');
+          return;
+        }
+        localStorage.setItem('region', $scope.region);
+        $scope.hideModal();
+        // $location.path('/play');
+        $window.location.href = '/play';
+        $scope.hideBackdrop();
+      };
+
+      $scope.playWithFriends = () => {
+        if ($scope.region === undefined) {
+          alert('Please Select your Region');
+          return;
+        }
+        localStorage.setItem('region', $scope.region);
+        $scope.hideModal();
+        // $location.path('/play?custom');
+        $window.location.href = '/play?custom';
+        $scope.hideBackdrop();
+      };
+      // ends
+
       $scope.showError = () => {
         if ($location.search().error) {
           return $location.search().error;
@@ -88,4 +117,14 @@ angular.module('mean.system')
         .then((data) => {
           $scope.avatars = data;
         });
+
+      $scope.hideModal = () => {
+        const regionModal = document.querySelector('.auto-close');
+        regionModal.click();
+      };
+
+      $scope.hideBackdrop = () => {
+        const backdrop = document.querySelector('.modal-backdrop.fade.in');
+        backdrop.hidden = true;
+      };
     }]);

@@ -28,6 +28,12 @@ var QuestionSchema = new Schema({
         type: String,
         default: '',
         trim: true
+    },
+    region: {
+        type: String,
+        default: '',
+        trim: true,
+        lowercase: true
     }
 });
 

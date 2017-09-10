@@ -76,12 +76,19 @@ span.auth-option {
   color: #0B4F6C;
   border: 0px;
   padding: 1.5rem;
-  font-weight: 500;
+  border-radius: 0px;
+  font-size: 1.4rem;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
 }
 
 .custom-button:hover {
   background: #0B4F6C;
   color: #FFF;
+}
+
+custom-button:active, custom-button:focus {
+  outline: none;
 }
 
 .hero-image {
@@ -127,7 +134,13 @@ span.auth-option {
   }
 }
 .home-button {
-  padding: 1.7rem 4.5rem;
+  padding: 1.2rem 4rem;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 600;
+}
+
+.home-button:focus, .home-button:active {
+  outline: none
 }
 
 .donation {
@@ -236,6 +249,10 @@ span.auth-option {
 
 .background-white {
   background: #FFF;
+}
+
+.background-blue {
+  background: #0B4F6C;
 }
 
 /* font weight classes */
@@ -529,4 +546,32 @@ span.auth-option {
 .search-members{
   height: 150px;
   overflow-y: scroll;
+}
+
+/* home modal */
+#regionModal .modal-content {
+    border-radius: 0px;
+}
+
+.custom-form input {
+  border-radius: 0px;
+}
+
+select#region {
+  width: 100%;
+  border-radius: 0px;
+  -webkit-appearance: none;
+  padding: .5rem 1rem;
+  border-color: #0b4f6c;
+  background: #FFF;
+  font-family: 'Quicksand', sans-serif;
+}
+
+select#region:focus, select#region:active {
+  outline: none;
+}
+
+#regionModal .home-button {
+  padding: 0.5rem 1.6rem;
+  font-size: 1.2rem;
 }
