@@ -1,11 +1,7 @@
 /* global angular */
 angular.module('mean.system')
   .controller('GameController',
-    ['$scope',
-      'game',
-      '$timeout',
-      '$location',
-      'MakeAWishFactsService',
+    ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService',
       ($scope, game, $timeout,
         $location,
         MakeAWishFactsService) => {
@@ -224,7 +220,8 @@ angular.module('mean.system')
           }
         });
 
-        if ($location.search().game && !(/^\d$/).test($location.search().game)) {
+        if (
+          $location.search().game && !(/^\d$/).test($location.search().game)) {
           game.joinGame('joinGame', $location.search().game);
         } else if ($location.search().custom) {
           game.joinGame('joinGame', null, true);
