@@ -11,10 +11,11 @@ import questions from '../app/controllers/questions';
 import avatars from '../app/controllers/avatars';
 // Root Controllers
 import index from '../app/controllers/index';
+// GameLog controller
+import gamelog from '../app/controllers/gameLog';
 
 
 module.exports = (app, passport, auth) => {
-
   // User Routes
   // const users = require('../app/controllers/users');
   app.get('/signin', users.signin);
@@ -106,5 +107,6 @@ module.exports = (app, passport, auth) => {
 
   // Endpoint to search and Invite Users to Game
   app.get('/api/users/search', users.search);
-//   app.post('/api/user/invite/:user_details', users.invitePlayers);
+  //  app.post('/api/user/invite/:user_details', users.invitePlayers);
+  app.post('/api/games/:id/start', gamelog.create);
 };

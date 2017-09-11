@@ -5,14 +5,15 @@ const mongoose = require('mongoose'),
   GameLog = mongoose.model('GameLog');
 
 /**
-   * create - create GameLog
-   *
-   * @param  {object} req incoming request object
-   * @param  {object} res response object from the server
-   * @return {json}     returns json reponse
-   */
+ * create - create GameLog
+ *
+ * @param  {object} req incoming request object
+ * @param  {object} res response object from the server
+ * @return {json}     returns json reponse
+ */
 exports.create = (req, res) => {
   if (req.params.id &&
+      req.body.playerId &&
       req.body.gameId &&
       req.body.winner &&
       req.body.players &&
