@@ -93,7 +93,7 @@ angular.module('mean.system')
 
         // Handle updating game.time
         if (data.round !== game.round && data.state !== 'awaiting players' &&
-        data.state !== 'game ended' && data.state !== 'game dissolved') {
+  data.state !== 'game ended' && data.state !== 'game dissolved') {
           game.time = game.timeLimits.stateChoosing - 1;
           timeSetViaUpdate = true;
         } else if (
@@ -135,8 +135,7 @@ angular.module('mean.system')
               }
             }
           }
-          if (data.state === 'game ended'
-            && data.gameWinner === game.playerIndex) {
+          if (data.state === 'game ended') {
             // get players
             const currentPlayers = [];
             for (let m = 0; m < data.players.length; m += 1) {
@@ -144,10 +143,13 @@ angular.module('mean.system')
             }
             // add to gameLog collections
             const gameId = data.gameID;
+            // define playerId
+            const playerId = game.playerIndex;
             // define the gameLog payload
             const gamePayload = {
+              playerId,
               gameId,
-              winner: data.players[game.playerIndex].username,
+              winner: data.players[game.gameWinner].username,
               players: currentPlayers,
               rounds: game.round
             };
@@ -156,7 +158,7 @@ angular.module('mean.system')
         }
 
         if (game.state !== 'waiting for players to pick' ||
-            game.players.length !== data.players.length) {
+      game.players.length !== data.players.length) {
           game.players = data.players;
         }
 
@@ -178,7 +180,7 @@ angular.module('mean.system')
           game.curQuestion = data.curQuestion;
           // Extending the underscore within the question
           game.curQuestion.text =
-            data.curQuestion.text.replace(/_/g, '<u></u>');
+      data.curQuestion.text.replace(/_/g, '<u></u>');
 
           // Set notifications only when entering state
           if (newState) {
@@ -188,7 +190,7 @@ angular.module('mean.system')
               addToNotificationQueue('The czar is contemplating...');
             }
           } else if (data.state === 'winner has been chosen' &&
-            game.curQuestion.text.indexOf('<u></u>') > -1) {
+      game.curQuestion.text.indexOf('<u></u>') > -1) {
             game.curQuestion = data.curQuestion;
           } else if (data.state === 'awaiting players') {
             joinOverrideTimeout = $timeout(() => {
@@ -196,7 +198,7 @@ angular.module('mean.system')
             }, 15000);
           } else if (
             data.state === 'game dissolved' ||
-            data.state === 'game ended') {
+      data.state === 'game ended') {
             game.players[game.playerIndex].hand = [];
             game.time = 0;
           }
