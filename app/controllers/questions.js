@@ -30,7 +30,7 @@ exports.show = function(req, res) {
  * List of Questions
  */
 exports.all = function(req, res) {
-    Question.find({official:true, numAnswers: {$lt : 3}}).select('-_id').exec(function(err, questions) {
+    Question.find({ official: true, numAnswers: { $lt: 3 } }).select('-_id').exec(function(err, questions) {
         if (err) {
             res.render('error', {
                 status: 500
@@ -45,7 +45,7 @@ exports.all = function(req, res) {
  * List of Questions (for Game class)
  */
 exports.allQuestionsForGame = function (region, cb) {
-    Question.find({official:true, numAnswers: {$lt : 3}, region }).select('-_id').exec(function(err, questions) {
+    Question.find({ official: true, numAnswers: { $lt: 3 }, region }).select('-_id').exec(function(err, questions) {
       console.log('region got ---->', region)
         if (err) {
             console.log(err);
