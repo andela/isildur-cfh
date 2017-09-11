@@ -1,5 +1,6 @@
 /* global angular */
 /* global document */
+/* global localStorage */
 angular.module('mean.system')
   .controller('IndexController',
   [

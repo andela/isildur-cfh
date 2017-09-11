@@ -221,12 +221,11 @@ angular.module('mean.system')
           }
         });
 
-        if (
-          $location.search().game && !(/^\d$/).test($location.search().game)) {
-          game.joinGame('joinGame', $location.search().game);
+        if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
+          game.joinGame('joinGame', $location.search().game, null, localStorage.getItem('region')); // add region in localstorage when joining game
         } else if ($location.search().custom) {
-          game.joinGame('joinGame', null, true);
+          game.joinGame('joinGame', null, true, localStorage.getItem('region'));
         } else {
-          game.joinGame();
+          game.joinGame(null, null, null, localStorage.getItem('region'));
         }
       }]);

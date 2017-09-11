@@ -212,12 +212,12 @@ angular.module('mean.system')
       game.startNextRound = () => {
         socket.emit('czarCardSelected');
       };
-      game.joinGame = (mode, room, createPrivate) => {
+      game.joinGame = (mode, room, createPrivate, region) => {
         mode = mode || 'joinGame';
         room = room || '';
         createPrivate = createPrivate || false;
-        const userID = window.user ? user._id : 'unauthenticated';
-        socket.emit(mode, { userID, room, createPrivate });
+        const userID = window.user ? user._id : 'unauthenticated'; // shuld be changed to userID stored in localStorage
+        socket.emit(mode, { userID, room, createPrivate, region });
       };
 
       game.startGame = () => {

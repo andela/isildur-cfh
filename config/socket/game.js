@@ -17,6 +17,8 @@ var guestNames = [
   "Dingle Dangle"
 ];
 
+let newRegion = '';
+
 function Game(gameID, io) {
   this.io = io;
   this.gameID = gameID;
@@ -34,6 +36,7 @@ function Game(gameID, io) {
   this.questions = null;
   this.answers = null;
   this.curQuestion = null;
+  this.region = ""; // region of the game instance
   this.timeLimits = {
     stateChoosing: 21,
     stateJudging: 16,
@@ -76,7 +79,8 @@ Game.prototype.payload = function() {
     winnerAutopicked: this.winnerAutopicked,
     table: this.table,
     pointLimit: this.pointLimit,
-    curQuestion: this.curQuestion
+    curQuestion: this.curQuestion,
+    region: this.region
   };
 };
 
@@ -154,6 +158,7 @@ Game.prototype.changeCzar = (self) => {
 
 Game.prototype.sendUpdate = function() {
   this.io.sockets.in(this.gameID).emit('gameUpdate', this.payload());
+  newRegion = this.region;
 };
 
 Game.prototype.stateChoosing = function(self) {
@@ -239,9 +244,17 @@ Game.prototype.stateDissolveGame = function() {
   this.sendUpdate();
 };
 
-Game.prototype.getQuestions = function(cb) {
-  questions.allQuestionsForGame(function(data){
-    cb(null,data);
+// Game.prototype.getQuestions = function(cb) {
+//   questions.allQuestionsForGame(this.region, function(data){ // add region to API call
+//     console.log('I\'m getting questions for this region ==============>', this.region);
+//     cb(null,data);
+//   });
+// };
+
+Game.prototype.getQuestions = function (cb) {
+  var self = this;
+  questions.allQuestionsForGame(newRegion, (data) => {
+    cb(null, data);
   });
 };
 
@@ -437,6 +450,11 @@ Game.prototype.startNextRound = (self) => {
   } else if (self.state === 'czar left game') {
     self.changeCzar(self);
   }
+};
+
+Game.prototype.setRegion = function (region) {
+  this.region = region;
+  return region;
 };
 
 module.exports = Game;
