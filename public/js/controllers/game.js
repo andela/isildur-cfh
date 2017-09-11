@@ -108,11 +108,11 @@ angular.module('mean.system')
           game.startGame();
         };
 
-      $scope.abandonGame = () => {
+        $scope.abandonGame = () => {
           game.leaveGame();
           $location.path('/');
         };
-      $scope.shuffleCards = () => {
+        $scope.shuffleCards = () => {
           const card = $(`#${event.target.id}`); //eslint-disable-line
           card.addClass('animated flipOutY');
           setTimeout(() => {
