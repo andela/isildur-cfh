@@ -163,8 +163,17 @@ angular.module('mean.system')
         if (newState || game.curQuestion !== data.curQuestion) {
           game.state = data.state;
         }
-
-        if (data.state === 'waiting for players to pick') {
+        if (data.state === 'czar pick card') {
+          game.czar = data.czar;
+          if (game.czar === game.playerIndex) {
+            addToNotificationQueue(
+             `You are now a Czar, 
+              click black card to pop a new question`
+           );
+          } else {
+            addToNotificationQueue('Waiting for Czar to pick card');
+          }
+        } else if (data.state === 'waiting for players to pick') {
           game.czar = data.czar;
           game.curQuestion = data.curQuestion;
           // Extending the underscore within the question
@@ -198,6 +207,9 @@ angular.module('mean.system')
         addToNotificationQueue(data.notification);
       });
 
+      game.startNextRound = () => {
+        socket.emit('czarCardSelected');
+      };
       game.joinGame = (mode, room, createPrivate) => {
         mode = mode || 'joinGame';
         room = room || '';
