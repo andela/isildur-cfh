@@ -1,0 +1,28 @@
+{
+  "name": "isildur-cfh",
+  "description": "review app",
+  "scripts": {
+  },
+  "env": {
+    "MONGOHQ_URL": {
+      "required": true
+    },
+    "PAPERTRAIL_API_TOKEN": {
+      "required": true
+    },
+    "SECRET_TOKEN": {
+      "required": true
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+    "mongolab",
+    "papertrail"
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/nodejs"
+    }
+  ]
+}
