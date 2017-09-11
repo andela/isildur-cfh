@@ -7,8 +7,4 @@ c4h_keys.txt
 reports/
 .coverrun
 dist
-.idea
-.vscode
 npm-debug.log
-bower_components/
-/public/lib/
