@@ -42,6 +42,10 @@ module.exports = function(io) {
         joinGame(socket,data);
       }
     });
+    
+    socket.on('czarCardSelected', () => {
+      allGames[socket.gameID].startNextRound(allGames[socket.gameID]);
+    });
 
     socket.on('joinNewGame', function(data) {
       exitGame(socket);
@@ -72,6 +76,9 @@ module.exports = function(io) {
     socket.on('disconnect', function(){
       console.log('Rooms on Disconnect ', io.sockets.manager.rooms);
       exitGame(socket);
+    });
+    socket.on('czarCardSelected', () => {
+      allGames[socket.gameID].startNextRound(allGames[socket.gameID]);
     });
   });
 

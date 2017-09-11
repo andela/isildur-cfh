@@ -136,7 +136,20 @@ Game.prototype.startGame = function() {
   console.log(this.gameID,this.state);
   this.shuffleCards(this.questions);
   this.shuffleCards(this.answers);
-  this.stateChoosing(this);
+  this.changeCzar(this);
+  this.sendUpdate();
+  // this.stateChoosing(this);
+};
+
+Game.prototype.changeCzar = (self) => {
+  self.state = 'czar pick card';
+  self.table = [];
+  if (self.czar >= self.players.length - 1) {
+    self.czar = 0;
+  } else {
+    self.czar += 1;
+  }
+  self.sendUpdate();
 };
 
 Game.prototype.sendUpdate = function() {
@@ -158,12 +171,6 @@ Game.prototype.stateChoosing = function(self) {
   }
   self.round++;
   self.dealAnswers();
-  // Rotate card czar
-  if (self.czar >= self.players.length - 1) {
-    self.czar = 0;
-  } else {
-    self.czar++;
-  }
   self.sendUpdate();
 
   self.choosingTimeout = setTimeout(function() {
@@ -216,7 +223,7 @@ Game.prototype.stateResults = function(self) {
     if (winner !== -1) {
       self.stateEndGame(winner);
     } else {
-      self.stateChoosing(self);
+      self.changeCzar(self);
     }
   }, self.timeLimits.stateResults*1000);
 };
@@ -424,4 +431,12 @@ Game.prototype.killGame = function() {
   clearTimeout(this.judgingTimeout);
 };
 
+Game.prototype.startNextRound = (self) => {
+   if (self.state === 'czar pick card') {
+     self.stateChoosing(self);
+  } else if (self.state === 'czar left game') {
+    self.changeCzar(self);
+  }
+ };
+ 
 module.exports = Game;
