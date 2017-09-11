@@ -101,4 +101,28 @@
         </div>
     </div>
 </div>
+<!-- Start Game modal -->
+  <div class="modal fade" id="start-modal" tabindex="-1" role="document" aria-labelledby="myModalLabel"
+  aria-hidden="true" style="overflow-y:hidden;"> 
+      <div class="modal-dialog panel"> 
+          <div class="modal-content"> 
+              <div class="modal-header popUpHeader"> 
+                <h3 class="modal-title">Invite Players</h3> 
+              </div> 
+              <div class="modal-body">
+               
+               <h4 id="shuffleText">You are the Czar - Click card to pick the next question</h4>
+                <div class="center">
+                    <div ng-click="shuffleCards()" ng-style="{'cursor':'pointer'}" style='margin: auto;'>
+                    <img src='../img/card.jpg' style='width: 100px;' class='animated flipInX' id='shufflecard1' />
+                     <img src='../img/card.jpg' style='width: 100px;' class='animated flipInX' id='shufflecard2' />
+                    <img src='../img/card.jpg' style='width: 100px;' class='animated flipInX' id='shufflecard3' />
+                    <img src='../img/card.jpg' style='width: 100px;' class='animated flipInX' id='shufflecard4' />
+                  </div>
+                </div>
+              <div class="modal-footer">Cards for Humanity</div> 
+          </div> 
+      </div> 
+  </div> 
+</div>
 
