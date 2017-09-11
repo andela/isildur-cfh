@@ -112,48 +112,23 @@ angular.module('mean.system')
           game.startGame();
         };
 
-        $scope.abandonGame = () => {
-          game.leaveGame();
-          $location.path('/');
+      $scope.abandonGame = () => {
+        game.leaveGame();
+        $location.path('/');
         };
-        $scope.shuffleCards = () => {
-          const card = $(`#${event.target.id}`);
-          card.addClass('animated flipOutY');
+      $scope.shuffleCards = () => {
+        const card = $(`#${event.target.id}`);
+        card.addClass('animated flipOutY');
           setTimeout(() => {
             $scope.startNextRound();
             card.removeClass('animated flipOutY');
             $('#start-modal').modal('hide');
           }, 500);
-      };
-  
-        $scope.startNextRound = () => {
-          if ($scope.isCzar()) {
-            game.startNextRound();
-          }
-        };
-
-        // Catches changes to round to update when no players pick card
-        // (because game.state remains the same)
-        $scope.$watch('game.round', () => {
-          $scope.hasPickedCards = false;
-          $scope.showTable = false;
-          $scope.winningCardPicked = false;
-          $scope.makeAWishFact = makeAWishFacts.pop();
-          if (!makeAWishFacts.length) {
-            makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
-          }
-          $scope.pickedCards = [];
-        });
-
-      $scope.winnerPicked = () => game.winningCard !== 1;
-
-      $scope.startGame = () => {
-        game.startGame();
-      };
-
-      $scope.abandonGame = () => {
-        game.leaveGame();
-        $location.path('/');
+      };  
+      $scope.startNextRound = () => {
+        if ($scope.isCzar()) {
+          game.startNextRound();
+        }
       };
 
       // Catches changes to round to update when no players pick card
@@ -169,12 +144,44 @@ angular.module('mean.system')
         $scope.pickedCards = [];
       });
 
-// In case player doesn't pick a card in time, show the table
-    $scope.$watch('game.state', function() {
-      if (game.state === 'waiting for czar to decide' && $scope.showTable === false) {
+    $scope.winnerPicked = () => game.winningCard !== 1;
+
+    $scope.startGame = () => {
+      game.startGame();
+    };
+
+    $scope.abandonGame = () => {
+      game.leaveGame();
+      $location.path('/');
+    };
+
+    // Catches changes to round to update when no players pick card
+    // (because game.state remains the same)
+    $scope.$watch('game.round', () => {
+      $scope.hasPickedCards = false;
+      $scope.showTable = false;
+      $scope.winningCardPicked = false;
+      $scope.makeAWishFact = makeAWishFacts.pop();
+      if (!makeAWishFacts.length) {
+        makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
+      }
+      $scope.pickedCards = [];
+    });
+
+    // In case player doesn't pick a card in time, show the table
+    $scope.$watch('game.state', function () {
+      if (
+        game.state === 'waiting for czar to decide' &&
+        $scope.showTable === false
+      ) 
+        {
         $scope.showTable = true;
       }
-      if ($scope.isCzar() && game.state === 'czar pick card' && game.table.length === 0) {
+      if (
+        $scope.isCzar() && game.state === 'czar pick card' 
+        && game.table.length === 0
+      ) 
+        {
         $('#start-modal').modal('show');
       }
       if (game.state === 'game dissolved') {
