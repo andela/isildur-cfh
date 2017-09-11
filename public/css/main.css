@@ -285,8 +285,13 @@ custom-button:active, custom-button:focus {
 .padding-h {
   padding: 0rem 2rem;
 }
+
 .padding-v {
   padding: 2rem 0;
+}
+
+.padding-v-top {
+  padding-top: 2rem;
 }
 
 .padding-h2 {
