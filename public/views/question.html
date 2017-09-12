@@ -4,19 +4,19 @@
       <div id="notifications" ng-if="game.notification" ng-animate="{enter:'animated fadeInLeft', leave:'animated fadeOut'}">{{game.notification}}</div>
       
       <div id="startGame" ng-show="game.state === 'awaiting players'">
-          <div id="finding-players">Finding Players</div>
+          <div id="finding-players"><h3 class="bold">Finding Players</h3></div>
           <div class="player-count-container" id="player-count-container">
-              <div class="player-count" id="player-count">{{game.players.length}} / 12 Players avaliable</div>
+              <div class="player-count" id="player-count"><h4>{{game.players.length}} / 12 Players avaliable<h4></div>
               <div id="loading-container">
                   <div id="loading-gif"><img ng-src="../img/loader4.gif"/></div>
               </div>
           </div>
           <div class="row start-game-row">
             <div class="pull-left">
-                <button type="button" data-toggle="modal" data-target="#start_game_modal" class="btn btn-primary">Start Game</button>
+                <button type="button" data-toggle="modal" data-target="#start_game_modal" class="btn btn-default home-button custom-button">Start Game</button>
             </div>
             <div class="pull-right">
-                <button type="button" data-toggle="modal" data-target="#invite_friend_modal" class="btn btn-danger">Invite Friend</button>
+                <button type="button" data-toggle="modal" data-target="#invite_friend_modal" class="btn btn-default home-button custom-button">Invite Friend</button>
             </div>
             
             <!-- Start Game Modal -->
@@ -25,18 +25,18 @@
             
                 <!-- Start Game Modal content-->
                 <div class="modal-content">
-                  <div class="modal-header">
+                  <div class="modal-header background-blue">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Player Requirement</h4>
+                    <h4 class="modal-title text-center bold text-white">Player Requirement</h4>
                   </div>
                   <div class="modal-body">
-                    <p ng-show="game.players.length >= game.playerMinLimit">Do you want to start game?</p>
-                    <p ng-show="game.players.length < game.playerMinLimit">Sorry! You require a minimum of three (3) players to play this game!</p>
+                    <h4 ng-show="game.players.length >= game.playerMinLimit">Do you want to start game?</h4>
+                    <h4 ng-show="game.players.length < game.playerMinLimit">Sorry! You require a minimum of three (3) players to play this game!</h4>
                     
                   </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" ng-show="game.players.length >= game.playerMinLimit" ng-click="startGame()" class="btn btn-primary" data-dismiss="modal">Start</button>
+                  <div class="modal-footer background-blue">
+                    <button type="button" class="btn btn-default home-button custom-button" data-dismiss="modal">Close</button>
+                    <button type="button" ng-show="game.players.length >= game.playerMinLimit" ng-click="startGame()" class="btn btn-primary home-button custom-button" data-dismiss="modal">Start</button>
                   </div>
                 </div>
             
@@ -48,9 +48,9 @@
             
                 <!-- Start Game Modal content-->
                 <div class="modal-content">
-                  <div class="modal-header">
+                  <div class="modal-header background-blue">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title"><b>Invite Friends</b></h4>
+                    <h4 class="modal-title text-center bold text-white">Invite Friends</h4>
                   </div>
                   <div class="modal-body">
                     <div class="form-group">
@@ -75,8 +75,8 @@
                         </table>
                     </div>
                   </div>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" data-toggle="modal" data-target="#send_friends_invite_modal">Invite Friends</button>
+                  <div class="modal-footer background-blue">
+                    <button type="button" class="btn btn-primary home-button custom-button" data-dismiss="modal" data-toggle="modal" data-target="#send_friends_invite_modal">Invite Friends</button>
                   </div>
                 </div>
             
@@ -127,21 +127,21 @@
   aria-hidden="true" style="overflow-y:hidden;"> 
       <div class="modal-dialog panel"> 
           <div class="modal-content"> 
-              <div class="modal-header popUpHeader"> 
-                <h3 class="modal-title">Invite Players</h3> 
+              <div class="modal-header popUpHeader background-blue"> 
+                <h3 class="modal-title text-center bold text-white">Choose a question</h3> 
               </div> 
               <div class="modal-body">
                
                <h4 id="shuffleText">You are the Czar - Click card to pick the next question</h4>
                 <div class="center">
-                    <div ng-click="shuffleCards()" ng-style="{'cursor':'pointer'}" style='margin: auto;'>
+                    <div ng-click="shuffleCards()" ng-style="{'cursor':'pointer'}" style='margin: auto; text-align:center'>
                     <img src='../img/card.jpg' style='width: 100px;' class='animated flipInX' id='shufflecard1' />
                      <img src='../img/card.jpg' style='width: 100px;' class='animated flipInX' id='shufflecard2' />
                     <img src='../img/card.jpg' style='width: 100px;' class='animated flipInX' id='shufflecard3' />
                     <img src='../img/card.jpg' style='width: 100px;' class='animated flipInX' id='shufflecard4' />
                   </div>
                 </div>
-              <div class="modal-footer">Cards for Humanity</div> 
+              <div class="modal-footer background-blue"><h4 class="text-center bold text-white">Cards for Humanity</h4></div> 
           </div> 
       </div> 
   </div> 
