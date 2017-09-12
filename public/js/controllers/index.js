@@ -82,7 +82,7 @@ angular.module('mean.system')
       $scope.playWithStrangers = () => {
         // game.joinGame();
         // $location.path('/app');
-        if ($scope.region === undefined) {
+        if ($scope.region === undefined || $scope.region === '') {
           alert('Please Select your Region');
           return;
         }
@@ -94,7 +94,7 @@ angular.module('mean.system')
       };
 
       $scope.playWithFriends = () => {
-        if ($scope.region === undefined) {
+        if ($scope.region === undefined || $scope.region === '') {
           alert('Please Select your Region');
           return;
         }
