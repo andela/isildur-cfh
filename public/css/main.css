@@ -580,3 +580,23 @@ select#region:focus, select#region:active {
   padding: 0.5rem 1.6rem;
   font-size: 1.2rem;
 }
+
+.card.longBlack {
+  border-radius: 0px;
+}
+
+div#player-container, #start_game_modal .modal-content, #invite_friend_modal .modal-content, #start-modal .modal-content {
+    border-radius: 0px !important;
+}
+
+#invite_friend_modal input {
+  border-radius: 0px;
+}
+
+#invite_friend_modal input:active, #invite_friend_modal input:focus {
+  outline: none;
+}
+
+table {
+  font-family: 'Quicksand', sans-serif;
+}
