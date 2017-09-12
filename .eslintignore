@@ -8,3 +8,4 @@ reports/
 .coverrun
 dist
 npm-debug.log
+public/js/directives.js
