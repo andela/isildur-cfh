@@ -229,17 +229,4 @@ angular.module('mean.system')
         } else {
           game.joinGame(null, null, null, localStorage.getItem('region'));
         }
-<<<<<<< HEAD
       }]);
-=======
-      });
-
-      if ($location.search().game && !(/^\d+$/).test($location.search().game)) {
-        game.joinGame('joinGame', $location.search().game, null, localStorage.getItem('region'));
-      } else if ($location.search().custom) {
-        game.joinGame('joinGame', null, true, localStorage.getItem('region'));
-      } else {
-        game.joinGame(null, null, null, localStorage.getItem('region'));
-      }
-    }]);
->>>>>>> fix hound b4 going
