@@ -1,4 +1,5 @@
 /* global angular */
+/* global document */
 angular.module('mean.system')
   .controller('GameController',
     ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService',

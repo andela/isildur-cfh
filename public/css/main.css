@@ -356,7 +356,6 @@ span.auth-option {
 	80% { -webkit-transform: translate(-1px, -1px) rotate(1deg); }
 	90% { -webkit-transform: translate(2px, 2px) rotate(0deg); }
 	100% { -webkit-transform: translate(1px, -2px) rotate(-1deg); }
-    font-weight: 400;
 }
 
 .timer-status-round{
@@ -401,17 +400,31 @@ span.auth-option {
 }
 
 .chat{
-  position: fixed;
-  bottom: 5px;
-  right: 5px;
+  position: absolute;
+  bottom: -5px;
+  right: -25px;
   width: 250px;
   background-color: white;
   border-radius: 5px;
 }
 
+@media (max-height: 500px) {
+  .chat {
+    position: absolute;
+    bottom: -200px;
+  }
+}
+
 .chat-message{
   height: 100px;
   overflow-y: scroll;
+}
+
+@media (max-height: 500px) {
+  .chat-message {
+    height: 50px;
+    overflow-y: scroll;
+  }
 }
 
 .chat-textarea{
@@ -432,7 +445,6 @@ span.auth-option {
 .chat-body{
   background-color: white;
   width: 100%;
-}
 }
 
 .card {
@@ -497,3 +509,24 @@ span.auth-option {
       right: -0.357em;
       display: inline-block;
       content: '.'; }
+
+.players-container{
+  height: 200px;
+  overflow-y: scroll;
+}
+
+.font-14p{
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.font-12p{
+  font-size: 12px;
+  font-weight: bold;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.search-members{
+  height: 150px;
+  overflow-y: scroll;
+}
