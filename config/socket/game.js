@@ -1,8 +1,9 @@
-var async = require('async');
-var _ = require('underscore');
-var questions = require(__dirname + '/../../app/controllers/questions.js');
-var answers = require(__dirname + '/../../app/controllers/answers.js');
-var guestNames = [
+let async = require('async');
+let _ = require('underscore');
+
+let questions = require(__dirname + '/../../app/controllers/questions.js');
+let answers = require(__dirname + '/../../app/controllers/answers.js');
+let guestNames = [
   "Disco Potato",
   "Silver Blister",
   "Insulated Mustard",
@@ -16,6 +17,8 @@ var guestNames = [
   "The Spleen",
   "Dingle Dangle"
 ];
+
+let newRegion = '';
 
 function Game(gameID, io) {
   this.io = io;
@@ -34,6 +37,7 @@ function Game(gameID, io) {
   this.questions = null;
   this.answers = null;
   this.curQuestion = null;
+  this.region = ''; // region of the game instance
   this.timeLimits = {
     stateChoosing: 21,
     stateJudging: 16,
@@ -52,7 +56,7 @@ function Game(gameID, io) {
 }
 
 Game.prototype.payload = function() {
-  var players = [];
+  let players = [];
   this.players.forEach(function(player,index) {
     players.push({
       hand: player.hand,
@@ -76,7 +80,8 @@ Game.prototype.payload = function() {
     winnerAutopicked: this.winnerAutopicked,
     table: this.table,
     pointLimit: this.pointLimit,
-    curQuestion: this.curQuestion
+    curQuestion: this.curQuestion,
+    region: this.region
   };
 };
 
@@ -93,10 +98,10 @@ Game.prototype.assignPlayerColors = function() {
 };
 
 Game.prototype.assignGuestNames = function() {
-  var self = this;
+  let self = this;
   this.players.forEach(function(player) {
     if (player.username === 'Guest') {
-      var randIndex = Math.floor(Math.random() * self.guestNames.length);
+      let randIndex = Math.floor(Math.random() * self.guestNames.length);
       player.username = self.guestNames.splice(randIndex, 1)[0];
       if (!self.guestNames.length) {
         self.guestNames = guestNames.slice();
@@ -116,7 +121,7 @@ Game.prototype.prepareGame = function() {
       timeLimits: this.timeLimits
     });
 
-  var self = this;
+  const self = this;
   async.parallel([
     this.getQuestions,
     this.getAnswers
@@ -154,6 +159,7 @@ Game.prototype.changeCzar = (self) => {
 
 Game.prototype.sendUpdate = function() {
   this.io.sockets.in(this.gameID).emit('gameUpdate', this.payload());
+  newRegion = this.region;
 };
 
 Game.prototype.stateChoosing = function(self) {
@@ -181,7 +187,7 @@ Game.prototype.stateChoosing = function(self) {
 Game.prototype.selectFirst = function() {
   if (this.table.length) {
     this.winningCard = 0;
-    var winnerIndex = this._findPlayerIndexBySocket(this.table[0].player);
+    const winnerIndex = this._findPlayerIndexBySocket(this.table[0].player);
     this.winningCardPlayer = winnerIndex;
     this.players[winnerIndex].points++;
     this.winnerAutopicked = true;
@@ -212,8 +218,8 @@ Game.prototype.stateResults = function(self) {
   self.state = "winner has been chosen";
   console.log(self.state);
   // TODO: do stuff
-  var winner = -1;
-  for (var i = 0; i < self.players.length; i++) {
+  let winner = -1;
+  for (let i = 0; i < self.players.length; i += 1) {
     if (self.players[i].points >= self.pointLimit) {
       winner = i;
     }
@@ -239,9 +245,9 @@ Game.prototype.stateDissolveGame = function() {
   this.sendUpdate();
 };
 
-Game.prototype.getQuestions = function(cb) {
-  questions.allQuestionsForGame(function(data){
-    cb(null,data);
+Game.prototype.getQuestions = (cb) => {
+  questions.allQuestionsForGame(newRegion, (data) => {
+    cb(null, data);
   });
 };
 
@@ -252,9 +258,9 @@ Game.prototype.getAnswers = function(cb) {
 };
 
 Game.prototype.shuffleCards = function(cards) {
-  var shuffleIndex = cards.length;
-  var temp;
-  var randNum;
+  let shuffleIndex = cards.length;
+  let temp;
+  let randNum;
 
   while(shuffleIndex) {
     randNum = Math.floor(Math.random() * shuffleIndex--);
@@ -268,10 +274,10 @@ Game.prototype.shuffleCards = function(cards) {
 
 Game.prototype.dealAnswers = function(maxAnswers) {
   maxAnswers = maxAnswers || 10;
-  var storeAnswers = function(err, data) {
+  const storeAnswers = function (err, data) {
     this.answers = data;
   };
-  for (var i = 0; i < this.players.length; i++) {
+  for (let i = 0; i < this.players.length; i += 1) {
     while (this.players[i].hand.length < maxAnswers) {
       this.players[i].hand.push(this.answers.pop());
       if (!this.answers.length) {
@@ -282,7 +288,7 @@ Game.prototype.dealAnswers = function(maxAnswers) {
 };
 
 Game.prototype._findPlayerIndexBySocket = function(thisPlayer) {
-  var playerIndex = -1;
+  let playerIndex = -1;
   _.each(this.players, function(player, index) {
     if (player.socket.id === thisPlayer) {
       playerIndex = index;
@@ -295,11 +301,11 @@ Game.prototype.pickCards = function(thisCardArray, thisPlayer) {
   // Only accept cards when we expect players to pick a card
   if (this.state === "waiting for players to pick") {
     // Find the player's position in the players array
-    var playerIndex = this._findPlayerIndexBySocket(thisPlayer);
+    const playerIndex = this._findPlayerIndexBySocket(thisPlayer);
     console.log('player is at index',playerIndex);
     if (playerIndex !== -1) {
       // Verify that the player hasn't previously picked a card
-      var previouslySubmitted = false;
+      let previouslySubmitted = false;
       _.each(this.table, function(pickedSet, index) {
         if (pickedSet.player === thisPlayer) {
           previouslySubmitted = true;
@@ -307,10 +313,10 @@ Game.prototype.pickCards = function(thisCardArray, thisPlayer) {
       });
       if (!previouslySubmitted) {
         // Find the indices of the cards in the player's hand (given the card ids)
-        var tableCard = [];
-        for (var i = 0; i < thisCardArray.length; i++ ) {
-          var cardIndex = null;
-          for (var j = 0; j < this.players[playerIndex].hand.length; j++) {
+        const tableCard = [];
+        for (let i = 0; i < thisCardArray.length; i += 1) {
+          let cardIndex = null;
+          for (let j = 0; j < this.players[playerIndex].hand.length; j += 1) {
             if (this.players[playerIndex].hand[j].id === thisCardArray[i]) {
               cardIndex = j;
             }
@@ -342,7 +348,7 @@ Game.prototype.pickCards = function(thisCardArray, thisPlayer) {
 };
 
 Game.prototype.getPlayer = function(thisPlayer) {
-  var playerIndex = this._findPlayerIndexBySocket(thisPlayer);
+  const playerIndex = this._findPlayerIndexBySocket(thisPlayer);
   if (playerIndex > -1) {
     return this.players[playerIndex];
   } else {
@@ -351,21 +357,21 @@ Game.prototype.getPlayer = function(thisPlayer) {
 };
 
 Game.prototype.removePlayer = function(thisPlayer) {
-  var playerIndex = this._findPlayerIndexBySocket(thisPlayer);
+  const playerIndex = this._findPlayerIndexBySocket(thisPlayer);
 
   if (playerIndex !== -1) {
     // Just used to send the remaining players a notification
-    var playerName = this.players[playerIndex].username;
+    const playerName = this.players[playerIndex].username;
 
     // If this player submitted a card, take it off the table
-    for (var i = 0; i < this.table.length; i++) {
+    for (let i = 0; i < this.table.length; i += 1) {
       if (this.table[i].player === thisPlayer) {
         this.table.splice(i,1);
       }
     }
 
     // Remove player from this.players
-    this.players.splice(playerIndex,1);
+    this.players.splice(playerIndex, 1);
 
     if (this.state === "awaiting players") {
       this.assignPlayerColors();
@@ -398,9 +404,9 @@ Game.prototype.removePlayer = function(thisPlayer) {
 
 Game.prototype.pickWinning = function(thisCard, thisPlayer, autopicked) {
   autopicked = autopicked || false;
-  var playerIndex = this._findPlayerIndexBySocket(thisPlayer);
+  const playerIndex = this._findPlayerIndexBySocket(thisPlayer);
   if ((playerIndex === this.czar || autopicked) && this.state === "waiting for czar to decide") {
-    var cardIndex = -1;
+    let cardIndex = -1;
     _.each(this.table, function(winningSet, index) {
       if (winningSet.card[0].id === thisCard) {
         cardIndex = index;
@@ -408,7 +414,8 @@ Game.prototype.pickWinning = function(thisCard, thisPlayer, autopicked) {
     });
     if (cardIndex !== -1) {
       this.winningCard = cardIndex;
-      var winnerIndex = this._findPlayerIndexBySocket(this.table[cardIndex].player);
+      const winnerIndex = this._findPlayerIndexBySocket(
+        this.table[cardIndex].player);
       this.sendNotification(this.players[winnerIndex].username+' has won the round!');
       this.winningCardPlayer = winnerIndex;
       this.players[winnerIndex].points++;
@@ -437,6 +444,11 @@ Game.prototype.startNextRound = (self) => {
   } else if (self.state === 'czar left game') {
     self.changeCzar(self);
   }
+};
+
+Game.prototype.setRegion = function (region) {
+  this.region = region;
+  return region;
 };
 
 module.exports = Game;
