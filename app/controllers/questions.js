@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 const mongoose = require('mongoose'),
-  async = require('async'),
+  // async = require('async'),
   Question = mongoose.model('Question');
   // _ = require('underscore');
 
@@ -54,7 +54,7 @@ exports.allQuestionsForGame = (region, cb) => {
     region
   }).select('-_id').exec((err, questions) => {
     if (err) {
-      console.log(err);
+      console.log(err);//eslint-disable-line
     } else {
       cb(questions);
     }
