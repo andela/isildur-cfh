@@ -33,4 +33,4 @@ const NotificationsSchema = new Schema({
 // }
 // };
 
-mongoose.model('Question', NotificationsSchema);
+mongoose.model('Notifications', NotificationsSchema);

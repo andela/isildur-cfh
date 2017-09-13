@@ -12,7 +12,6 @@ angular.module('mean.system')
       'AvatarService',
       '$http',
       '$window',
-      'Users',
       (
         $scope,
         Global,
@@ -21,8 +20,7 @@ angular.module('mean.system')
         game,
         AvatarService,
         $http,
-        $window,
-        Users
+        $window
       ) => {
         $scope.global = Global;
 
@@ -116,22 +114,22 @@ angular.module('mean.system')
         };
 
         // Search for a user in all users table
-        $scope.searchedUsers = () => {
-          const username = $scope.userName;
-          Users.searchedUsers(username)
-            .then((foundUsers) => {
-              $scope.foundUsers = foundUsers;
-              console.log(foundUsers, 'Found Users');
-            });
-        };
+        // $scope.searchedUsers = () => {
+        //   const username = $scope.userName;
+        //   Users.searchedUsers(username)
+        //     .then((foundUsers) => {
+        //       $scope.foundUsers = foundUsers;
+        //       console.log(foundUsers, 'Found Users');
+        //     });
+        // };
 
         // Send invites to registered but non-friend users
-        $scope.sendInvite = (email) => {
-          Users.sendInvite(email)
-            .then((message, invitesSent) => {
-              console.log(`${message} ====== ${invitesSent}`);
-            });
-        };
+        // $scope.sendInvite = (email) => {
+        //   Users.sendInvite(email)
+        //     .then((message, invitesSent) => {
+        //       console.log(`${message} ====== ${invitesSent}`);
+        //     });
+        // };
 
         // TODO: Add User to friend List Function
 

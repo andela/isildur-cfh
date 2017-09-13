@@ -1,15 +1,15 @@
 /**
  * Module dependencies.
  */
-var mongoose = require('mongoose'),
-  config = require('../../config/config'),
+const mongoose = require('mongoose'),
+  // config = require('../../config/config'),
   Schema = mongoose.Schema;
 
 
 /**
 * Friends Schema
 */
-var FriendsSchema = new Schema({
+const FriendsSchema = new Schema({
   user: {
     type: String,
     default: '',
@@ -31,4 +31,4 @@ var FriendsSchema = new Schema({
 // }
 // };
 
-mongoose.model('Question', FriendsSchema);
+mongoose.model('Friends', FriendsSchema);
