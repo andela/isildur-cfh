@@ -19,6 +19,7 @@ const guestNames = [
 ];
 
 let newRegion = '';
+let customThis;
 
 function Game(gameID, io) {
   this.io = io;
@@ -43,6 +44,7 @@ function Game(gameID, io) {
     stateJudging: 16,
     stateResults: 6
   };
+  customThis = this;
   // setTimeout ID that triggers the czar judging state
   // Used to automatically run czar judging if players don't pick before time limit
   // Gets cleared if players finish picking before time limit.
@@ -446,8 +448,9 @@ Game.prototype.startNextRound = (self) => {
   }
 };
 
-Game.prototype.setRegion = function (region) {
-  this.region = region;
+Game.prototype.setRegion = (region) => {
+  // console.log(this);
+  customThis.region = region;
   return region;
 };
 
