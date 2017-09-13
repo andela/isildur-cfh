@@ -278,7 +278,7 @@ Game.prototype.dealAnswers = function(maxAnswers) {
   let storeAnswers = function(err, data) {
     this.answers = data;
   };
-  for (let i = 0; i < this.players.length; i++) {
+  for (let i = 0; i < this.players.length; i += 1) {
     while (this.players[i].hand.length < maxAnswers) {
       this.players[i].hand.push(this.answers.pop());
       if (!this.answers.length) {
@@ -302,7 +302,7 @@ Game.prototype.pickCards = function(thisCardArray, thisPlayer) {
   // Only accept cards when we expect players to pick a card
   if (this.state === "waiting for players to pick") {
     // Find the player's position in the players array
-    let playerIndex = this._findPlayerIndexBySocket(thisPlayer);
+    const playerIndex = this._findPlayerIndexBySocket(thisPlayer);
     console.log('player is at index',playerIndex);
     if (playerIndex !== -1) {
       // Verify that the player hasn't previously picked a card
@@ -314,10 +314,10 @@ Game.prototype.pickCards = function(thisCardArray, thisPlayer) {
       });
       if (!previouslySubmitted) {
         // Find the indices of the cards in the player's hand (given the card ids)
-        let tableCard = [];
-        for (let i = 0; i < thisCardArray.length; i++ ) {
+        const tableCard = [];
+        for (let i = 0; i < thisCardArray.length; i += 1) {
           let cardIndex = null;
-          for (let j = 0; j < this.players[playerIndex].hand.length; j++) {
+          for (let j = 0; j < this.players[playerIndex].hand.length; j += 1) {
             if (this.players[playerIndex].hand[j].id === thisCardArray[i]) {
               cardIndex = j;
             }
@@ -349,7 +349,7 @@ Game.prototype.pickCards = function(thisCardArray, thisPlayer) {
 };
 
 Game.prototype.getPlayer = function(thisPlayer) {
-  let playerIndex = this._findPlayerIndexBySocket(thisPlayer);
+  const playerIndex = this._findPlayerIndexBySocket(thisPlayer);
   if (playerIndex > -1) {
     return this.players[playerIndex];
   } else {
@@ -358,11 +358,11 @@ Game.prototype.getPlayer = function(thisPlayer) {
 };
 
 Game.prototype.removePlayer = function(thisPlayer) {
-  let playerIndex = this._findPlayerIndexBySocket(thisPlayer);
+  const playerIndex = this._findPlayerIndexBySocket(thisPlayer);
 
   if (playerIndex !== -1) {
     // Just used to send the remaining players a notification
-    let playerName = this.players[playerIndex].username;
+    const playerName = this.players[playerIndex].username;
 
     // If this player submitted a card, take it off the table
     for (let i = 0; i < this.table.length; i += 1) {
@@ -447,7 +447,7 @@ Game.prototype.startNextRound = (self) => {
   }
 };
 
-Game.prototype.setRegion = function (region) {
+Game.prototype.setRegion = (region) => {
   this.region = region;
   return region;
 };
