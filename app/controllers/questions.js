@@ -49,10 +49,10 @@ exports.allQuestionsForGame = (region, cb) => {
       numAnswers: { $lt: 3 },
       region
     }).select('-_id').exec((err, questions) => {
-      if (err) {
-          console.log(err);
-      } else {
-          cb(questions);
-      }
-  });
+        if (err) {
+            console.log(err);
+        } else {
+            cb(questions);
+        }
+    });
 };

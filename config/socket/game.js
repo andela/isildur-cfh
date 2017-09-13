@@ -1,5 +1,5 @@
-let async = require('async');
-let _ = require('underscore');
+const async = require('async');
+const _ = require('underscore');
 
 const questions = require(__dirname + '/../../app/controllers/questions.js');
 const answers = require(__dirname + '/../../app/controllers/answers.js');
