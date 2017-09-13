@@ -1,5 +1,6 @@
 let async = require('async');
 let _ = require('underscore');
+
 let questions = require(__dirname + '/../../app/controllers/questions.js');
 let answers = require(__dirname + '/../../app/controllers/answers.js');
 let guestNames = [
@@ -364,14 +365,14 @@ Game.prototype.removePlayer = function(thisPlayer) {
     let playerName = this.players[playerIndex].username;
 
     // If this player submitted a card, take it off the table
-    for (let i = 0; i < this.table.length; i++) {
+    for (let i = 0; i < this.table.length; i += 1) {
       if (this.table[i].player === thisPlayer) {
         this.table.splice(i,1);
       }
     }
 
     // Remove player from this.players
-    this.players.splice(playerIndex,1);
+    this.players.splice(playerIndex, 1);
 
     if (this.state === "awaiting players") {
       this.assignPlayerColors();
@@ -404,7 +405,7 @@ Game.prototype.removePlayer = function(thisPlayer) {
 
 Game.prototype.pickWinning = function(thisCard, thisPlayer, autopicked) {
   autopicked = autopicked || false;
-  let playerIndex = this._findPlayerIndexBySocket(thisPlayer);
+  const playerIndex = this._findPlayerIndexBySocket(thisPlayer);
   if ((playerIndex === this.czar || autopicked) && this.state === "waiting for czar to decide") {
     let cardIndex = -1;
     _.each(this.table, function(winningSet, index) {
@@ -414,7 +415,8 @@ Game.prototype.pickWinning = function(thisCard, thisPlayer, autopicked) {
     });
     if (cardIndex !== -1) {
       this.winningCard = cardIndex;
-      let winnerIndex = this._findPlayerIndexBySocket(this.table[cardIndex].player);
+      const winnerIndex = this._findPlayerIndexBySocket(
+        this.table[cardIndex].player);
       this.sendNotification(this.players[winnerIndex].username+' has won the round!');
       this.winningCardPlayer = winnerIndex;
       this.players[winnerIndex].points++;
