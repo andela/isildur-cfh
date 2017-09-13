@@ -84,17 +84,19 @@ gulp.task('public', () => gulp.src([
   .pipe(gulp.dest('dist')));
 
 gulp.task('coverage', (cb) => {
-  gulp.src(['dist/app/**/*.js', 'dist/config/**/*.js'])
+  gulp.src(['app/**/*.js', 'config/**/*.js'])
+    .pipe(plugins.babel())
     .pipe(plugins.istanbul())
     .pipe(plugins.istanbul.hookRequire())
     .on('finish', () => {
       gulp.src(
         [
-          ('./dist/test/**/*.js')
+          ('./test/**/*.js')
 
         ]
       )
         .pipe(plugins.babel())
+        .pipe(plugins.injectModules())
         .pipe(plugins.jasmine())
         .pipe(plugins.istanbul.writeReports())
         .pipe(plugins.istanbul.enforceThresholds({ thresholds: { global: 20 } }))
