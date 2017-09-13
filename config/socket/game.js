@@ -244,13 +244,6 @@ Game.prototype.stateDissolveGame = function() {
   this.sendUpdate();
 };
 
-// Game.prototype.getQuestions = function(cb) {
-//   questions.allQuestionsForGame(this.region, function(data){ // add region to API call
-//     console.log('I\'m getting questions for this region ==============>', this.region);
-//     cb(null,data);
-//   });
-// };
-
 Game.prototype.getQuestions = function (cb) {
   var self = this;
   questions.allQuestionsForGame(newRegion, (data) => {

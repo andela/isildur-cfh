@@ -169,7 +169,7 @@ module.exports = function(io) {
       game.players.push(player);
       allGames[gameID] = game;
       gamesNeedingPlayers.push(game);
-      game.setRegion(player.region); // set player's region into the game about to be started
+      game.setRegion(player.region);
       socket.join(game.gameID);
       socket.gameID = game.gameID;
       console.log(socket.id,'has joined newly created game',game.gameID);
@@ -177,7 +177,7 @@ module.exports = function(io) {
       game.assignGuestNames();
       game.sendUpdate();
     } else {
-      game = gamesNeedingPlayers[0]; // do if after line
+      game = gamesNeedingPlayers[0];
       if (game.region !== player.region) {
         if (gamesNeedingPlayers.length > 1) {
           game = gamesNeedingPlayers[1];
