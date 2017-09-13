@@ -84,14 +84,13 @@ gulp.task('public', () => gulp.src([
   .pipe(gulp.dest('dist')));
 
 gulp.task('coverage', (cb) => {
-  gulp.src(['app/**/*.js', 'config/**/*.js'])
-    .pipe(plugins.babel())
+  gulp.src(['dist/app/**/*.js', 'dist/config/**/*.js'])
     .pipe(plugins.istanbul())
     .pipe(plugins.istanbul.hookRequire())
     .on('finish', () => {
       gulp.src(
         [
-          ('./test/**/*.js')
+          ('./dist/test/**/*.js')
 
         ]
       )
