@@ -276,8 +276,8 @@ Game.prototype.shuffleCards = function(cards) {
 
 Game.prototype.dealAnswers = function(maxAnswers) {
   maxAnswers = maxAnswers || 10;
-  const storeAnswers = function (err, data) {
-    this.answers = data;
+  const storeAnswers = (err, data) => {
+    customThis.answers = data;
   };
   for (let i = 0; i < this.players.length; i += 1) {
     while (this.players[i].hand.length < maxAnswers) {

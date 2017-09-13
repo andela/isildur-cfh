@@ -116,7 +116,7 @@ module.exports = function(io) {
     }
   };
 
-  var getGame = function(player,socket,requestedGameId,createPrivate) {
+  var getGame = (player,socket,requestedGameId,createPrivate) => {
     requestedGameId = requestedGameId || '';
     createPrivate = createPrivate || false;
     console.log(socket.id,'is requesting room',requestedGameId);
@@ -159,7 +159,7 @@ module.exports = function(io) {
 
   };
 
-  const fireGame = function (player, socket, newGame = false) {
+  const fireGame = (player, socket, newGame = false) => {
     var game;
     if (gamesNeedingPlayers.length <= 0 || newGame) {
       gameID += 1;

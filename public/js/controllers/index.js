@@ -83,7 +83,7 @@ angular.module('mean.system')
         // game.joinGame();
         // $location.path('/app');
         if ($scope.region === undefined || $scope.region === '') {
-          alert('Please Select your Region');
+          alert('Please Select your Region');//eslint-disable-line
           return;
         }
         localStorage.setItem('region', $scope.region);
@@ -95,7 +95,7 @@ angular.module('mean.system')
 
       $scope.playWithFriends = () => {
         if ($scope.region === undefined || $scope.region === '') {
-          alert('Please Select your Region');
+          alert('Please Select your Region');//eslint-disable-line
           return;
         }
         localStorage.setItem('region', $scope.region);
