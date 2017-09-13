@@ -116,7 +116,7 @@ module.exports = function(io) {
     }
   };
 
-  var getGame = (player,socket,requestedGameId,createPrivate) => {
+  const getGame = (player, socket, requestedGameId, createPrivate) => {
     requestedGameId = requestedGameId || '';
     createPrivate = createPrivate || false;
     console.log(socket.id,'is requesting room',requestedGameId);
