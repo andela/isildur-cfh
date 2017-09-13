@@ -37,7 +37,7 @@ function Game(gameID, io) {
   this.questions = null;
   this.answers = null;
   this.curQuestion = null;
-  this.region = ""; // region of the game instance
+  this.region = ''; // region of the game instance
   this.timeLimits = {
     stateChoosing: 21,
     stateJudging: 16,
@@ -121,7 +121,7 @@ Game.prototype.prepareGame = function() {
       timeLimits: this.timeLimits
     });
 
-  let self = this;
+  const self = this;
   async.parallel([
     this.getQuestions,
     this.getAnswers
@@ -187,7 +187,7 @@ Game.prototype.stateChoosing = function(self) {
 Game.prototype.selectFirst = function() {
   if (this.table.length) {
     this.winningCard = 0;
-    let winnerIndex = this._findPlayerIndexBySocket(this.table[0].player);
+    const winnerIndex = this._findPlayerIndexBySocket(this.table[0].player);
     this.winningCardPlayer = winnerIndex;
     this.players[winnerIndex].points++;
     this.winnerAutopicked = true;
@@ -219,7 +219,7 @@ Game.prototype.stateResults = function(self) {
   console.log(self.state);
   // TODO: do stuff
   let winner = -1;
-  for (let i = 0; i < self.players.length; i++) {
+  for (let i = 0; i < self.players.length; i += 1) {
     if (self.players[i].points >= self.pointLimit) {
       winner = i;
     }
@@ -245,8 +245,7 @@ Game.prototype.stateDissolveGame = function() {
   this.sendUpdate();
 };
 
-Game.prototype.getQuestions = function (cb) {
-  let self = this;
+Game.prototype.getQuestions = (cb) => {
   questions.allQuestionsForGame(newRegion, (data) => {
     cb(null, data);
   });
@@ -275,7 +274,7 @@ Game.prototype.shuffleCards = function(cards) {
 
 Game.prototype.dealAnswers = function(maxAnswers) {
   maxAnswers = maxAnswers || 10;
-  let storeAnswers = function(err, data) {
+  const storeAnswers = function (err, data) {
     this.answers = data;
   };
   for (let i = 0; i < this.players.length; i += 1) {
@@ -447,7 +446,7 @@ Game.prototype.startNextRound = (self) => {
   }
 };
 
-Game.prototype.setRegion = (region) => {
+Game.prototype.setRegion = function (region) {
   this.region = region;
   return region;
 };
