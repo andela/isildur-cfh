@@ -95,7 +95,6 @@ gulp.task('coverage', (cb) => {
         ]
       )
         .pipe(plugins.babel())
-        .pipe(plugins.injectModules())
         .pipe(plugins.jasmine())
         .pipe(plugins.istanbul.writeReports())
         .pipe(plugins.istanbul.enforceThresholds({ thresholds: { global: 20 } }))
