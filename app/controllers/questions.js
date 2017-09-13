@@ -13,7 +13,7 @@ const mongoose = require('mongoose'),
 exports.question = (req, res, next, id) => {
   Question.load(id, (err, question) => {
     if (err) return next(err);
-    if (!question) return next(new Error('Failed to load question ' + id));
+    if (!question) return next(new Error(`Failed to load question ' + ${id}`));
     req.question = question;
     next();
   });
