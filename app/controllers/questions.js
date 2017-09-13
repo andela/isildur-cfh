@@ -10,7 +10,7 @@ const mongoose = require('mongoose'),
 /**
  * Find question by id
  */
-exports.question = (req, res, next, id) => {
+exports.question = (req, res, next, id) => {//eslint-disable-line
   Question.load(id, (err, question) => {
     if (err) return next(err);
     if (!question) return next(new Error(`Failed to load question ' + ${id}`));
