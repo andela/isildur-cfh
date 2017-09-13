@@ -25,6 +25,16 @@ The app is completely functional across all devices - from iPhone to full-sized 
 
 ![alt-text](http://www.tylermcginnis.com/images/cfh3.png "Desktop with Cards")
 
+Alternatives For Donation
+-------------------------
+- Present Users with a more interactive gaming session, with improved features like:
+    - Having cards that are particular to region.
+    - Having the Czar lead the game by picking the card that starts the game.
+    - Having Users invite their friends via Email to join the game.
+    - Having a chat box with emojis that allows Users interact with each other while playing the game.
+- Persuade users emotions with empathizing images and quotes.
+- Make it easier for Users to donate, with easy links to donation sites.
+
 Our Tech Stack
 --------------
 Cards for Humanity uses AngularJS and Sass on the front-end, with Node.js/Express.js, MongoDB and Socket.io on the back-end. It's currently deployed to Amazon EC2. 
