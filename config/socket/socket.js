@@ -82,7 +82,7 @@ module.exports = function(io) {
     });
   });
 
-  const joinGame = function (socket, data) {
+  const joinGame = (socket, data) => {
     var player = new Player(socket);
     data = data || {};
     player.userID = data.userID || 'unauthenticated';
