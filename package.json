@@ -14,6 +14,7 @@
   },
   "scripts": {
     "start": "gulp",
+    "test": "gulp coveralls",
     "test:karma": "karma start karma.conf.js"
   },
   "dependencies": {
@@ -34,10 +35,12 @@
     "gulp-bower": "0.0.13",
     "gulp-concat": "^2.6.1",
     "gulp-coverage": "^0.3.38",
+    "gulp-coveralls": "^0.1.4",
     "gulp-exit": "0.0.2",
     "gulp-inject-modules": "^1.0.0",
     "gulp-istanbul": "^1.1.2",
     "gulp-jasmine": "^2.4.2",
+    "gulp-jasmine-node": "^1.0.7",
     "gulp-jshint": "^2.0.4",
     "gulp-livereload": "^3.8.1",
     "gulp-load-plugins": "^1.5.0",

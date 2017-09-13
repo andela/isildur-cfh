@@ -39,6 +39,7 @@ gulp.task('sass', () => gulp.src('./public/**/*.scss')
   .pipe(plugins.sass().on('error', plugins.sass.logError))
   .pipe(gulp.dest('./css'))
   .pipe(plugins.livereload()));
+
 gulp.task('jasmine', () => {
   gulp.src('./test/**/*.js')
     .pipe(plugins.jasmine());
@@ -81,28 +82,32 @@ gulp.task('public', () => gulp.src([
   base: './'
 })
   .pipe(gulp.dest('dist')));
+
 gulp.task('coverage', (cb) => {
   gulp.src(['app/**/*.js', 'config/**/*.js'])
+    .pipe(plugins.babel())
     .pipe(plugins.istanbul())
     .pipe(plugins.istanbul.hookRequire())
     .on('finish', () => {
       gulp.src(
         [
-          '/test/user/model.js',
-          'test/game/game.js'
-        ],
-        { read: false })
-        .pipe(plugins.mocha({
-          timeout: 20000
-        }))
+          ('./test/**/*.js')
+
+        ]
+      )
+        .pipe(plugins.babel())
+        .pipe(plugins.injectModules())
+        .pipe(plugins.jasmine())
         .pipe(plugins.istanbul.writeReports())
-        .pipe(
-          plugins.istanbul.enforceThresholds(
-            { thresholds: { global: 50 } }
-          ))
+        .pipe(plugins.istanbul.enforceThresholds({ thresholds: { global: 20 } }))
         .on('end', cb);
     });
 });
+
+gulp.task('coveralls', ['coverage'], () => gulp.src('coverage/lcov.info')
+  .pipe(plugins.coveralls())
+  .pipe(plugins.exit()));
+
 gulp.task('bower', () => {
   plugins.bower({ directory: './bower_components' })
     .pipe(gulp.dest('./public/lib'));
