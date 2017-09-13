@@ -585,7 +585,7 @@ select#region:focus, select#region:active {
   border-radius: 0px;
 }
 
-div#player-container, #start_game_modal .modal-content, #invite_friend_modal .modal-content {
+div#player-container, #start_game_modal .modal-content, #invite_friend_modal .modal-content, #start-modal .modal-content {
     border-radius: 0px !important;
 }
 
