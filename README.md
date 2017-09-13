@@ -1,5 +1,5 @@
 ![hound status](https://img.shields.io/badge/Protected%20by-Hound-green.svg)
-[![Build Status](https://travis-ci.org/andela/isildur-cfh.svg?branch=staging)](https://travis-ci.org/andela/isildur-cfh)
+[![Build Status](https://travis-ci.org/andela/isildur-cfh.svg?branch=staging)](https://travis-ci.org/andela/isildur-cfh) [![Coverage Status](https://coveralls.io/repos/github/andela/isildur-cfh/badge.svg?branch=chore%2F150398704%2Fintegrate-coveralls-service)](https://coveralls.io/github/andela/isildur-cfh?branch=chore%2F150398704%2Fintegrate-coveralls-service)
 
 Cards for Humanity - [http://cfh.io](http://cfh.io)
 ===========
