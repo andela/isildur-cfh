@@ -3,8 +3,8 @@
  */
 const mongoose = require('mongoose'),
   async = require('async'),
-  Question = mongoose.model('Question'),
-  _ = require('underscore');
+  Question = mongoose.model('Question');
+  // _ = require('underscore');
 
 
 /**
