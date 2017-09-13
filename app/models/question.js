@@ -43,7 +43,7 @@ var QuestionSchema = new Schema({
 QuestionSchema.statics = {
   load: function(id, cb) {
     this.findOne({
-      id: id
+      id
     }).select('-_id').exec(cb);
   }
 };
