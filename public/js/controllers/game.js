@@ -1,5 +1,6 @@
 /* global angular */
 /* global document */
+/* global localStorage */
 angular.module('mean.system')
   .controller('GameController',
     ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService',
@@ -199,7 +200,8 @@ angular.module('mean.system')
             // reset the URL so they don't think they're in the requested room.
               $location.search({});
             } else if ($scope.isCustomGame() && !$location.search().game) {
-            // Once the game ID is set, update the URL if this is a game with friends,
+            // Once the game ID is set, update the URL
+            // if this is a game with friends,
             // where the link is meant to be shared.
               $location.search({ game: game.gameID });
               if (!$scope.modalShown) {
@@ -221,12 +223,16 @@ angular.module('mean.system')
           }
         });
 
-        if (
-          $location.search().game && !(/^\d$/).test($location.search().game)) {
-          game.joinGame('joinGame', $location.search().game);
+        if ($location.search().game && !(/^\d+$/).test(
+          $location.search().game)) {
+          game.joinGame(
+            'joinGame',
+            $location.search().game,
+            null,
+            localStorage.getItem('region')); // add region in localstorage
         } else if ($location.search().custom) {
-          game.joinGame('joinGame', null, true);
+          game.joinGame('joinGame', null, true, localStorage.getItem('region'));
         } else {
-          game.joinGame();
+          game.joinGame(null, null, null, localStorage.getItem('region'));
         }
       }]);
