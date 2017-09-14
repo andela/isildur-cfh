@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 const should = require('should'),
-  app = require('../../server'),
+  app = require('../../server'), // eslint-disable-line no-unused-vars
   mongoose = require('mongoose'),
   User = mongoose.model('User');
 
