@@ -113,23 +113,9 @@ angular.module('mean.system')
           return false;
         };
 
-        // Search for a user in all users table
-        // $scope.searchedUsers = () => {
-        //   const username = $scope.userName;
-        //   Users.searchedUsers(username)
-        //     .then((foundUsers) => {
-        //       $scope.foundUsers = foundUsers;
-        //       console.log(foundUsers, 'Found Users');
-        //     });
-        // };
+        // TODO: Search for a user in all users table
 
-        // Send invites to registered but non-friend users
-        // $scope.sendInvite = (email) => {
-        //   Users.sendInvite(email)
-        //     .then((message, invitesSent) => {
-        //       console.log(`${message} ====== ${invitesSent}`);
-        //     });
-        // };
+        // TODO: Send invites to registered but non-friend users
 
         // TODO: Add User to friend List Function
 

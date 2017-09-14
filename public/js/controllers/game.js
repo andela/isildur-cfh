@@ -6,16 +6,20 @@ angular.module('mean.system')
     ['$scope',
       'game',
       '$timeout',
+      '$http',
       '$location',
       'MakeAWishFactsService',
       ($scope, game, $timeout,
-        $location,
+        $http, $location,
         MakeAWishFactsService) => {
         $scope.hasPickedCards = false;
         $scope.winningCardPicked = false;
         $scope.showTable = false;
         $scope.modalShown = false;
         $scope.game = game;
+        $scope.invitedUsers = [];
+        $scope.messages = '';
+        $scope.sendInviteButton = true;
         $scope.pickedCards = [];
         let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
         $scope.makeAWishFact = makeAWishFacts.pop();
@@ -113,6 +117,83 @@ angular.module('mean.system')
         $scope.startGame = () => {
           game.startGame();
         };
+
+        // Search Users and Send Invite
+        const invitesSent = [];
+        /**
+         * 
+         * @param {*} email
+         * @return {*} promise
+         * send Invite method api call 
+         */
+        const sendInvite = email => new Promise((resolve, reject) => {
+          const userEmail = email;
+          const gameUrl = encodeURIComponent(window.location.href);
+          const postData = {
+            userEmail,
+            gameUrl
+          };
+          $http.post('/api/users/sendInvitation', postData)
+            .success((response) => {
+              if (invitesSent.indexOf(response) <= -1) {
+                invitesSent.push(response);
+              }
+              resolve({
+                message: 'Invitation Links has been sent via Email',
+                invitesSent
+              });
+            })
+            .error((error) => {
+              reject({ message: 'Oops, Could not send Email Invitations', error });
+            });
+        });
+
+        $scope.sendInvites = (email) => {
+          sendInvite(email)
+            .then((response) => {
+              console.log(response);
+              // $scope.messages = response.message;
+              if (invitesSent.length >= 11) {
+                $scope.message = 'Heyya! Maximum number of players invited';
+                $scope.sendInviteButton = false;
+              }
+            })
+            .catch((error) => {
+              $scope.messages = error;
+            });
+        };
+
+
+        /**
+         * 
+         * @param {*} userName
+         * @return {*} promise
+         * Search User Method api call
+         */
+        const searchUsers = userName => new Promise((resolve, reject) => {
+          $http.get(`api/users/search?name=${userName}`)
+            .success((response) => {
+              const gameUsers = response;
+              resolve(gameUsers);
+            })
+            .error((error) => {
+              reject(error);
+            });
+        });
+
+        $scope.searchedUsers = () => {
+          const username = $scope.userName;
+          if ($scope.userName === undefined) {
+            $scope.message = 'Please enter a name';
+          } else {
+            searchUsers(username)
+              .then((foundUsers) => {
+                $scope.foundUsers = foundUsers;
+              });
+          }
+        };
+
+        // End of Search Users and Send Invite
 
         $scope.abandonGame = () => {
           game.leaveGame();
