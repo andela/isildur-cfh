@@ -101,4 +101,4 @@ gulp.task('bower', () => {
   plugins.bower({ directory: './bower_components' })
     .pipe(gulp.dest('./public/lib'));
 });
-gulp.task('default', ['transpile', 'watch']);
+gulp.task('default', ['bower', 'transpile', 'watch']);
