@@ -1,7 +1,7 @@
 /**
  * Module dependencies.
  */
-let should = require('should'),
+const should = require('should'),
   app = require('../../server'),
   mongoose = require('mongoose'),
   User = mongoose.model('User');
