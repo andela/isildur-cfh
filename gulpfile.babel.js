@@ -99,12 +99,8 @@ gulp.task('coverage', (cb) => {
         .pipe(plugins.injectModules())
         .pipe(plugins.jasmine())
         .pipe(plugins.istanbul.writeReports())
-<<<<<<< HEAD
         .pipe(plugins.istanbul.enforceThresholds({
           thresholds: { global: 20 } }))
-=======
-        .pipe(plugins.istanbul.enforceThresholds({ thresholds: { global: 20 } }))
->>>>>>> e052f667eaf1f30d6c87036766995b72afe74d6a
         .on('end', cb);
     });
 });
@@ -119,8 +115,4 @@ gulp.task('bower', () => {
 });
 
 
-<<<<<<< HEAD
 gulp.task('default', ['bower', 'transpile', 'serve', 'watch']);
-=======
-gulp.task('default', ['transpile', 'serve', 'watch']);
->>>>>>> e052f667eaf1f30d6c87036766995b72afe74d6a
