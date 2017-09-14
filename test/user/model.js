@@ -30,13 +30,14 @@ describe('<Unit Test>', () => {
           done();
         }));
 
-      it('should be able to show an error when try to save witout name', (done) => {
-        user.name = '';
-        return user.save((err) => {
-          should.exist(err);
-          done();
+      it('should be able to show an error when try to save witout name',
+        (done) => {
+          user.name = '';
+          return user.save((err) => {
+            should.exist(err);
+            done();
+          });
         });
-      });
     });
 
     afterEach((done) => {
