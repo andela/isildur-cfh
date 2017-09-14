@@ -99,7 +99,8 @@ gulp.task('coverage', (cb) => {
         .pipe(plugins.injectModules())
         .pipe(plugins.jasmine())
         .pipe(plugins.istanbul.writeReports())
-        .pipe(plugins.istanbul.enforceThresholds({ thresholds: { global: 20 } }))
+        .pipe(plugins.istanbul.enforceThresholds({
+          thresholds: { global: 20 } }))
         .on('end', cb);
     });
 });

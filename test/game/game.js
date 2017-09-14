@@ -15,7 +15,7 @@ const cfhPlayer3 = { name: 'Dana' };
 describe('Game Server', () => {
   it('Should accept requests to joinGame', (done) => {
     const client1 = io.connect(socketURL, options);
-    const disconnect = function () {
+    const disconnect = () => {
       client1.disconnect();
       done();
     };
@@ -33,7 +33,8 @@ describe('Game Server', () => {
       done();
     };
     client1.on('connect', () => {
-      client1.emit('joinGame', { userID: 'unauthenticated', room: '', createPrivate: false });
+      client1.emit('joinGame', {
+        userID: 'unauthenticated', room: '', createPrivate: false });
       client1.on('gameUpdate', (data) => {
         data.gameID.should.match(/\d+/);
       });
@@ -54,52 +55,57 @@ describe('Game Server', () => {
         userID: 'unauthenticated', room: '', createPrivate: false });
       client2 = io.connect(socketURL, options);
       client2.on('connect', () => {
-        client2.emit('joinGame', { userID: 'unauthenticated', room: '', createPrivate: false });
+        client2.emit('joinGame', {
+          userID: 'unauthenticated', room: '', createPrivate: false });
         client1.on('notification', (data) => {
-          data.notification.should.match(/ has joined the game\!/);
+          data.notification.should.match(/ has joined the game!/);
         });
       });
       setTimeout(disconnect, 200);
     });
   });
 
-  it('Should start game when startGame event is sent with 3 players', (done) => {
-    let client2, client3;
-    const client1 = io.connect(socketURL, options);
-    const disconnect = () => {
-      client1.disconnect();
-      client2.disconnect();
-      client3.disconnect();
-      done();
-    };
-    const expectStartGame = () => {
-      client1.emit('startGame');
-      client1.on('gameUpdate', (data) => {
-        data.state.should.equal('czar pick card');
-      });
-      client2.on('gameUpdate', (data) => {
-        data.state.should.equal('czar pick card');
-      });
-      client3.on('gameUpdate', (data) => {
-        data.state.should.equal('czar pick card');
-      });
-      setTimeout(disconnect, 200);
-    };
-    client1.on('connect', () => {
-      client1.emit('joinGame', { userID: 'unauthenticated', room: '', createPrivate: false });
-      client2 = io.connect(socketURL, options);
-      client2.on('connect', () => {
-        client2.emit('joinGame', {
-          userID: 'unauthenticated', room: '', createPrivate: false });
-        client3 = io.connect(socketURL, options);
-        client3.on('connect', () => {
-          client3.emit('joinGame', {
+  it('Should start game when startGame event is sent with 3 players',
+    (done) => {
+      let client2, client3;
+      const client1 = io.connect(socketURL, options);
+      const disconnect = () => {
+        client1.disconnect();
+        client2.disconnect();
+        client3.disconnect();
+        done();
+      };
+      const expectStartGame = () => {
+        client1.emit('startGame');
+        client1.on('gameUpdate', (data) => {
+          data.state.should.equal('czar pick card');
+        });
+        client2.on('gameUpdate', (data) => {
+          data.state.should.equal('czar pick card');
+        });
+        client3.on('gameUpdate', (data) => {
+          data.state.should.equal('czar pick card');
+        });
+        setTimeout(disconnect, 200);
+      };
+      client1.on('connect', () => {
+        client1.emit('joinGame', {
+          userID: 'unauthenticated',
+          room: '',
+          createPrivate: false });
+        client2 = io.connect(socketURL, options);
+        client2.on('connect', () => {
+          client2.emit('joinGame', {
             userID: 'unauthenticated', room: '', createPrivate: false });
-          setTimeout(expectStartGame, 100);
+          client3 = io.connect(socketURL, options);
+          client3.on('connect', () => {
+            client3.emit('joinGame', {
+              userID: 'unauthenticated', room: '', createPrivate: false });
+            setTimeout(expectStartGame, 100);
+          });
         });
       });
     });
-  });
 
   it('Should automatically start game when 6 players are in a game', (done) => {
     let client2, client3, client4, client5, client6;
