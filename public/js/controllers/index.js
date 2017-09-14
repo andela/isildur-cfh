@@ -42,6 +42,9 @@ angular.module('mean.system')
           $http.post('/api/auth/signup', newUser)
             .then((response) => {
               $window.localStorage.setItem('token', response.data.token);
+              $window.localStorage.setItem('name', response.data.name);
+              $window.localStorage.setItem('email', response.data.email);
+              $window.localStorage.setItem('id', response.data.id);
               $location.path('/#!/');
               $window.location.reload();
             }, (err) => {
@@ -63,6 +66,9 @@ angular.module('mean.system')
           $http.post('/api/auth/login', user)
             .then((response) => {
               $window.localStorage.setItem('token', response.data.token);
+              $window.localStorage.setItem('name', response.data.name);
+              $window.localStorage.setItem('email', response.data.email);
+              $window.localStorage.setItem('id', response.data.id);
               $location.path('/#!/');
               $window.location.reload();
             }, (err) => {
@@ -71,6 +77,14 @@ angular.module('mean.system')
         } else {
           $location.search('error=invalid');
         }
+      };
+
+      $scope.signout = () => {
+        $window.localStorage.removeItem('token');
+        $window.localStorage.removeItem('name');
+        $window.localStorage.removeItem('email');
+        $window.localStorage.removeItem('id');
+        $window.location.reload();
       };
 
       $scope.playAsGuest = () => {

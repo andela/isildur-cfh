@@ -3,10 +3,19 @@
 /* global localStorage */
 angular.module('mean.system')
   .controller('GameController',
-    ['$scope', 'game', '$timeout', '$location', 'MakeAWishFactsService',
+    [
+      '$scope',
+      'game',
+      '$timeout',
+      '$location',
+      'MakeAWishFactsService',
+      '$firebaseArray',
+      '$window',
       ($scope, game, $timeout,
         $location,
-        MakeAWishFactsService) => {
+        MakeAWishFactsService,
+        $firebaseArray,
+        $window) => {
         $scope.hasPickedCards = false;
         $scope.winningCardPicked = false;
         $scope.showTable = false;
@@ -15,6 +24,39 @@ angular.module('mean.system')
         $scope.pickedCards = [];
         let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
         $scope.makeAWishFact = makeAWishFacts.pop();
+
+        $scope.$watch('game.gameID', () => {
+          if ($scope.game.gameID !== null) {
+            // firebase reference
+            const messagesRef = new Firebase(`https://isildur-cfh.firebaseio.com/message/${$scope.game.gameID}`);// eslint-disable-line
+
+            // get messages as an array
+            $scope.messagesArray = $firebaseArray(messagesRef);
+
+            // notifications
+            $scope.messagesArray.$watch((event) => {
+              const newMessage = $scope.messagesArray.$getRecord(event.key);
+              if (newMessage !== null) {
+                if (newMessage.author !==
+                  game.players[game.playerIndex].username) {
+                  $scope.notificationCount = 1;
+                }
+              }
+            });
+          }
+        });
+
+        // send message
+        $scope.sendMessage = () => {
+          if ($scope.message.trim().length > 0) {
+            $scope.messagesArray.$add({
+              gameId: $scope.game.gameID,
+              messageContent: $scope.message.trim(),
+              author: $scope.game.players[game.playerIndex].username
+            });
+          }
+          $scope.message = '';
+        };
 
         $scope.pickCard = (card) => {
           if (!$scope.hasPickedCards) {
