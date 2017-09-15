@@ -351,7 +351,7 @@ custom-button:active, custom-button:focus {
   cursor: pointer;
 }
 
-.home-card:hover {
+.home-card:hover, .answer-card:hover {
   animation-name: shake;
 	animation-duration: 0.8s;
 	transform-origin:50% 50%;
@@ -493,9 +493,9 @@ custom-button:active, custom-button:focus {
   background-color: #fff;
   border-radius: 8px;
   color: #252525;
-  font-family: Arial;
+  font-family: 'Quicksand', sans-serif;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 900;
   vertical-align: top; }
   @media (max-width: 520px) {
     .card {
@@ -646,9 +646,48 @@ div#time.time, #main-container #app-container #gameplay-container #upper-gamepla
   font-weight: 100;
 }
 
+#main-container #app-container #gameplay-container #cards-container, #main-container #app-container #gameplay-container #czar-blank-container, #main-container #app-container #gameplay-container #game-end-container, .answer-card {
+    border-radius: 0px;
+}
+
+.text-danger.game-end-headline, .text-primary.game-end-headline {
+  position: relative;
+  top: -19rem;
+  text-align: center;
+  font-weight: 700;
+  font-family: Quicksand;
+}
+
+.text-danger.game-end-headline h5, .text-primary.game-end-headline h5 {
+  font-size: 3rem;
+}
+
 /* mobile styles for game page */
 @media (max-width: 768px) {
   #main-container #app-container #social-bar-container #player-container {
-    width: 25%;
+    width: 15%;
+  }
+  .text-danger.game-end-headline, .text-primary.game-end-headline {
+    top: -14rem;
+  }
+
+  .text-danger.game-end-headline h5, .text-primary.game-end-headline h5 {
+    font-size: 1.4rem;
+  }
+
+  #main-container #app-container #gameplay-container #upper-gameplay-container #question-container-outer #question-container-inner {
+      left: -0.7rem;
+      position: relative;
+  }
+  div#avatari_ > img {
+      display: none;
+  }
+  #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner {
+    left: -21px;
+    height: 100%;
+    width: 100%;
+  }
+  div#cards {
+    border-radius: 0px;
   }
 }

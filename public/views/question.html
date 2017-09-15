@@ -148,11 +148,11 @@
 </div>
 
         <div ng-show="game.state === 'game ended' && game.gameWinner === game.playerIndex">
-          <div class="text-primary game-end-headline">Congratulations! You won the game, {{game.players[game.playerIndex].username | upperFirstLetter}}!</div>We hope you feel special. If you'd like to share that special feeling with the world, consider donating to charity. Or just horde it all for youself.
+          <div class="text-primary game-end-headline"><h5>Congratulations! You won the game, {{game.players[game.playerIndex].username | upperFirstLetter}}!</h5><h5>We hope you feel special. If you'd like to share that special feeling with the world, consider donating to charity. Or just horde it all for youself.</h5></div>
         </div>
         <div ng-show="game.state === 'game ended' && game.gameWinner !== game.playerIndex">
-          <div class="text-danger game-end-headline">Aw, shucks! {{game.players[game.gameWinner].username | upperFirstLetter }} won the game!</div>
-          That makes you a loser, unfortunately.
+          <div class="text-danger game-end-headline"><h5>Aw, shucks! {{game.players[game.gameWinner].username | upperFirstLetter }} won the game!
+          That makes you a loser, unfortunately.</h5></div>
         </div>
       </div>
   </div>
