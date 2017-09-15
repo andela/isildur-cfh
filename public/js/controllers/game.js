@@ -46,11 +46,11 @@ angular.module('mean.system')
       });
 
       // send message
-      $scope.sendMessage = () => {
-        if ($scope.message.trim().length > 0) {
+      $scope.sendMessage = (message) => {
+        if (message.trim().length > 0) {
           $scope.messagesArray.$add({
             gameId: $scope.game.gameID,
-            messageContent: $scope.message.trim(),
+            messageContent: message.trim(),
             author: $scope.game.players[game.playerIndex].username
           });
         }
