@@ -9,7 +9,7 @@
   });
 </script>
 <script></script>
-<div landing id="main-bod">
+<div landing id="main-bod"  ng-controller="IndexController">
   <!-- Fixed Logo & Menu Bar Start -->
   <nav class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
@@ -31,7 +31,7 @@
             <li style="margin-right: 4rem;"><a href="#!/signin">SIGN IN</a></li>
           </span>
           <span class="auth-option" ng-hide="showOptions">
-            <li style="margin-right: 4rem;"><a href="/signout">SIGN OUT</a></li>
+            <li style="margin-right: 4rem;"><a ng-click="signout()">SIGN OUT</a></li>
           </span>
         </ul>
       </div>
@@ -42,7 +42,7 @@
 <!-- Landing Start -->
   <div>
     <!-- Region select Modal -->
-    <div id="regionModal" ng-controller="IndexController" class="modal fade regionModal" role="dialog">
+    <div id="regionModal" class="modal fade regionModal" role="dialog">
       <div class="modal-dialog">
 
         <!-- Modal content-->

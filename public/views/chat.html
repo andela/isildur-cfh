@@ -2,20 +2,13 @@
   <div class="chat-header">Chat Box</div>
   <div clas="chat-body">
      <div class="chat-message">
-       <ul>
-         <li><b>Kene:</b> Hi</li>
-         <li><b>Funsho:</b> Hello</li>
-         <li><b>McDavid:</b> How re u all doing</li>
-         <li><b>Funsho:</b> We re fine</li>
-         <li><b>Kene:</b> Hi</li>
-         <li><b>Funsho:</b> Hello</li>
-         <li><b>McDavid:</b> How re u all doing</li>
-         <li><b>Funsho:</b> We re fine</li>
+       <ul ng-repeat="message in messagesArray">
+         <li><b>{{message.author}}:</b> {{message.messageContent}}</li>
        </ul>
      </div>
      <div class="chat-textarea">
-       <form class="form-group">
-         <input class="form-control" placeholder="Type your message here!" type="text" name="chat-textarea" id="chat-text-area" />
+       <form ng-submit="sendMessage()" class="form-group">
+         <input ng-model="message" class="form-control" placeholder="Type your message here!" type="text" name="chat-textarea" id="chat-text-area" autocomplete="off" />
        </form>
      </div>
   </div>

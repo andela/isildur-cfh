@@ -130,17 +130,12 @@ exports.create = (req, res) => {
           id: user._id
         }, secret);
         // login user
-        req.logIn(user, (err) => {
-          if (err) {
-            return res.status(400).send({
-              success: false,
-              message: 'error occured on logging in'
-            });
-          }
-          return res.status(201).send({
-            success: true,
-            token
-          });
+        return res.status(200).send({
+          success: true,
+          id: user._id,
+          name: user.name,
+          email: user.email,
+          token
         });
       });
     });
@@ -197,18 +192,19 @@ exports.login = (req, res) => {
       }, secret);
 
       // login user
-      req.login(user, (err) => {
-        if (err) {
-          return res.status(400).send({
-            success: false,
-            message: 'error occured on logging in'
-          });
-        }
-        return res.status(201).send({
-          success: true,
-          token
-        });
+      return res.status(200).send({
+        success: true,
+        id: user._id,
+        name: user.name,
+        email: user.email,
+        token
       });
+    });
+  } else {
+    return res.status(400).send({
+      success: false,
+      error: 'invalid',
+      message: 'Invalid Credentials'
     });
   }
 };

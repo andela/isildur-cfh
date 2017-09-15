@@ -162,7 +162,10 @@ module.exports = function(io) {
   const fireGame = (player, socket, newGame = false) => {
     var game;
     if (gamesNeedingPlayers.length <= 0 || newGame) {
-      gameID += 1;
+      gameID = '';
+      for (let i = 0; i < 6; i += 1) {
+        gameID += chars[Math.floor(Math.random() * chars.length)];
+      }
       var gameIDStr = gameID.toString();
       game = new Game(gameIDStr, io);
       allPlayers[socket.id] = true;
