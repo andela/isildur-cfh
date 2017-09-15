@@ -323,16 +323,24 @@ module.exports.search = (req, res) => {
 //     return res.json(users);
 //   });
 // };
+
 // Get all user in the datatabase
-exports.allUsers = (req, res) => {
-  if (req.user) {
-    // get all the users from mongoDB except current user
-    User.find({ $ne: { email: req.user.email } })
-      .select('name email').then((allUsers) => {
-        return res.status(200).json(allUsers);
-      });
-  }
-};
+// module.exports.allUsers = (req, res, next) => {
+//   if (req.user) {
+//     // get all the users from mongoDB except current user
+//     User.find({ $ne: { email: req.user.email } })
+//       .select('name email')
+//       // .exec((err, allUsers) => {
+//       //   if (err) return res.json({ err });
+//       //   if (!allUsers) return next(new Error('Failed to load Users'));
+//       //   return res.json(allUsers);
+//       // });
+//       .then(allUsers => res.status(200).json(allUsers))
+//       .catch((error) => {
+//         res.status(400).json({ message: 'An Error Occured', error });
+//       });
+//   }
+// };
 
 // send invites as email to users who are not friends
 module.exports.sendInviteAsEmail = (req, res) => {

@@ -1,5 +1,6 @@
 import async from 'async';
 // const async = require('async');
+import mongoose from 'mongoose';
 
 // User Controllers
 import users from '../app/controllers/users';
@@ -14,6 +15,7 @@ import index from '../app/controllers/index';
 // GameLog controller
 import gamelog from '../app/controllers/gameLog';
 
+const User = mongoose.model('User');
 
 module.exports = (app, passport, auth) => {
   // User Routes
@@ -112,6 +114,16 @@ module.exports = (app, passport, auth) => {
 
   // Send Invites to users in the game to show on their notifications table
   app.post('/api/users/sendInvitation', users.sendInviteAsEmail);
+
+  // Get all Users Endpoint to get all users fro mthe db
+  app.get('/api/users/getUsers', (req, res) => {
+    User.find({ $ne: { email: req.user.email } })
+      .select('name email')
+      .then(allUsers => res.status(200).json(allUsers))
+      .catch((error) => {
+        res.status(400).json({ message: 'An Error Occured', error });
+      });
+  });
 
   // Send Invites to users in the game to show on their notifications table
   // app.post('/api/user/invite/:userDetails', users.invitePlayers);

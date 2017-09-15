@@ -54,7 +54,7 @@
                   </div>
                   <div class="modal-body">
                     <div class="form-group">
-                        <input placeholder="Search friend" ng-keyup="searchedUsers()" ng-model="userName" type="text" class="form-control" id="userName">
+                        <input placeholder="Search Users" ng-keyup="searchedUsers()" ng-model="userName" type="text" class="form-control" id="userName">
                     </div>
                     <div class="search-members row">
                         <table class="table">
@@ -76,7 +76,11 @@
                     </div>
                   </div>
                   <div class="modal-footer background-blue">
-                    <button type="button" class="btn btn-primary home-button custom-button" data-dismiss="modal" data-toggle="modal" data-target="#send_friends_invite_modal">Invite Friends</button>
+                    <button type="button" class="btn btn-primary home-button custom-button"
+                      data-dismiss="modal"
+                      data-toggle="modal"
+                      ng-click="getAllUsers()"
+                      data-target="#send_friends_invite_modal">Invite Friends</button>
                   </div>
                 </div>
             
@@ -93,15 +97,18 @@
                     <h4 class="modal-title"><b>Send Invites to Friends</b></h4>
                   </div>
                   <div class="modal-body">
+                    <div class="form-group">
+                        <input
+                          placeholder="Search Friend"
+                          ng-model="friendName"
+                          type="text"
+                          class="form-control"
+                          id="friendName"
+                          autoFocus>
+                    </div>
                     <div class="search-members">
-                      <div class="checkbox">
-                        <label><input type="checkbox" value="">Kene</label>
-                      </div>
-                      <div class="checkbox">
-                        <label><input type="checkbox" value="">Jatto</label>
-                      </div>
-                      <div class="checkbox">
-                        <label><input type="checkbox" value="">Funsho</label>
+                      <div ng-repeat="user in allUsers | filter:friendName " class="checkbox">
+                        <label><input type="checkbox" ng-value="user.name">{{ user.name }}</label>
                       </div>
                     </div>
                   </div>

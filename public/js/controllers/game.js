@@ -17,10 +17,13 @@ angular.module('mean.system')
         $scope.showTable = false;
         $scope.modalShown = false;
         $scope.game = game;
+        $scope.selectedUsers = [];
         $scope.invitedUsers = [];
         $scope.messages = '';
         $scope.sendInviteButton = true;
         $scope.pickedCards = [];
+        // $scope.invitesSent = [];
+        $scope.invitedFriends = [];
         let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
         $scope.makeAWishFact = makeAWishFacts.pop();
 
@@ -144,7 +147,8 @@ angular.module('mean.system')
               });
             })
             .error((error) => {
-              reject({ message: 'Oops, Could not send Email Invitations', error });
+              reject({ message: 'Oops, Could not send Email Invitations',
+                error });
             });
         });
 
@@ -193,7 +197,31 @@ angular.module('mean.system')
           }
         };
 
-        // End of Search Users and Send Invite
+        // ==========End of Search Users and Send Invite=========
+        const getUsers = () => new Promise((resolve, reject) => {
+          $http.get('api/users/getUsers')
+            .success((response) => {
+              console.log(response);
+              const allUsers = response;
+              resolve(allUsers);
+            })
+            .error((error) => {
+              reject(error);
+            });
+        });
+
+        $scope.getAllUsers = () => {
+          getUsers()
+            .then((allUsers) => {
+              $scope.allUsers = allUsers;
+            });
+        };
+
+        // Add user as friend and Get FriendsList
+        // $scope.addUserAsFriend = (user) => {
+
+        // };
+        // ==========End of add user as friend===============
 
         $scope.abandonGame = () => {
           game.leaveGame();
