@@ -85,6 +85,7 @@ span.auth-option {
 .custom-button:hover {
   background: #0B4F6C;
   color: #FFF;
+  border: 1px solid #FFF;
 }
 
 custom-button:active, custom-button:focus {
@@ -300,6 +301,18 @@ custom-button:active, custom-button:focus {
 
 .padding-v2 {
   padding: 4rem 0;
+}
+
+.padding-none {
+  padding: 0;
+}
+
+.padding-none-r {
+  padding-right: 0;
+}
+
+.padding-none-l {
+  padding-left: 0;
 }
 
 .margin {
@@ -599,4 +612,43 @@ div#player-container, #start_game_modal .modal-content, #invite_friend_modal .mo
 
 table {
   font-family: 'Quicksand', sans-serif;
+}
+
+/* override default styles */
+div#timer-container {
+  background: white;
+  border-radius: 0px;
+}
+
+.timer-status-round {
+  border-radius: 0px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 200;
+}
+
+div#time.time, #main-container #app-container #gameplay-container #upper-gameplay-container #menu-timeremaining-container #timer-container #inner-timer-container #time {
+  color: #0B4F6C;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 100;
+}
+
+#main-container #app-container #social-bar-container #player-container {
+  padding: 1rem .1rem;
+}
+
+#main-container #app-container #social-bar-container #player-container #above-czar-container #avatar_ img {
+  width: 5%;
+}
+
+#main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-name h4, .font-12p {
+  color: #0B4F6C;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 100;
+}
+
+/* mobile styles for game page */
+@media (max-width: 768px) {
+  #main-container #app-container #social-bar-container #player-container {
+    width: 25%;
+  }
 }
