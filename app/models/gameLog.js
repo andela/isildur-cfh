@@ -13,7 +13,7 @@ const GameLog = new Schema({
     type: Number
   },
   playerId: {
-    type: Number
+    type: String
   },
   gameId: {
     type: Number

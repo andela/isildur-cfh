@@ -211,6 +211,25 @@ exports.login = (req, res) => {
 
 
 /**
+ * Login a user
+ * @param {object} req The user's information
+ * @param {object} res The server's response
+ * @returns {object} The server's response
+ */
+exports.retrieveDonation = (req, res) => {
+  const email = jwt.decode(req.headers.token).email;
+  User.find({ email }).select('-_id').exec((err, user) => {
+    if (err) {
+      res.render('error', {
+        status: 500
+      });
+    } else {
+      res.json(user[0].donations);
+    }
+  });
+};
+
+/**
  * Assign avatar to user
  */
 exports.avatars = function (req, res) {

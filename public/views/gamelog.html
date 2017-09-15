@@ -1,0 +1,21 @@
+<table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <td><b>S/N</b></td>
+        <td><b>Winner</b></td>
+        <td><b>Rounds</b></td>
+        <td><b>Players</b></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="game in gameLog">
+        <td>{{gameLog.indexOf(game)+1}}</td>
+        <td>{{game.winner}}</td>
+        <td>{{game.rounds}}</td>
+        <td>{{game.players.toString()}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
+    

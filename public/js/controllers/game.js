@@ -3,23 +3,18 @@
 /* global localStorage */
 /* global introJs */
 angular.module('mean.system')
-  .controller('GameController',
-  [
-    '$scope',
-    'game',
-    '$timeout',
-    '$location',
-    'MakeAWishFactsService',
-    '$firebaseArray',
-    '$window',
-    ($scope, game, $timeout,
+.controller('GameController',
+  ['$scope', 'game', 'dashboard', '$timeout', '$location', 'MakeAWishFactsService',
+    ($scope, game, dashboard, $timeout,
       $location,
-      MakeAWishFactsService,
-      $firebaseArray) => {
+      MakeAWishFactsService) => {
       $scope.hasPickedCards = false;
       $scope.winningCardPicked = false;
       $scope.showTable = false;
       $scope.modalShown = false;
+      $scope.gameLog = dashboard.getGameLog();
+      $scope.leaderGameLog = dashboard.leaderGameLog();
+      $scope.userDonations = dashboard.userDonations();
       $scope.game = game;
       $scope.pickedCards = [];
       let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
