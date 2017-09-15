@@ -31,7 +31,7 @@ describe('Game Server', () => {
       client1.emit('joinGame', {
         userID: 'unauthenticated', room: '', createPrivate: false });
       client1.on('gameUpdate', (data) => {
-        data.gameID.should.match(/\d+/);
+        data.gameID.should.match(/\w+/);
       });
       setTimeout(disconnect, 200);
     });
