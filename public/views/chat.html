@@ -8,8 +8,25 @@
      </div>
      <div class="chat-textarea">
        <form ng-submit="sendMessage()" class="form-group">
-         <input ng-model="message" class="form-control" placeholder="Type your message here!" type="text" name="chat-textarea" id="chat-text-area" autocomplete="off" />
+         <input id="emojionearea1" ng-model="message" class="form-control" placeholder="Type your message here!" type="text" name="chat-textarea" id="chat-text-area" autocomplete="off" />
        </form>
      </div>
   </div>
 </div>
+
+<script>
+  $(document).ready(function () {
+    $("#emojionearea1").emojioneArea({
+      pickerPosition: "top",
+      tonesStyle: "bullet",
+      events: {
+        keyup: function (editor, event) {
+          if (event.which == 13) {
+            angular.element('#app-container').scope().sendMessage(this.getText());
+            this.setText('');
+          }
+        }
+    	}
+    });
+  })
+</script>

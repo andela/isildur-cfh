@@ -37,7 +37,7 @@ gulp.task('serve', ['public'], () => {
 });
 gulp.task('sass', () => gulp.src('./public/**/*.scss')
   .pipe(plugins.sass().on('error', plugins.sass.logError))
-  .pipe(gulp.dest('./css'))
+  .pipe(gulp.dest('./dist/css'))
   .pipe(plugins.livereload()));
 
 gulp.task('jasmine', () => {
