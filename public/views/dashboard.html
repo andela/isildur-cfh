@@ -1,9 +1,9 @@
 </script>
-<div id="" ng-controller="GameController" >
+<div id="">
 <!-- Brand and toggle get grouped for better mobile display -->
 
 <!-- Fixed Logo & Menu Bar Start -->
-<div class="row">
+<div class="row" ng-controller="IndexController">
     <nav class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
           <div class="navbar-header">
@@ -17,11 +17,10 @@
           <div class="collapse navbar-collapse" id="mobileToggle">
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="#!/">HOME</a></li>
-              <span class="auth-option" ng-hide="showOptions">
-                <li><a href="#!/dashboard">DASHBOARD</a></li>
-                <li style="margin-right: 4rem;"><a href="/signout">SIGN OUT</a></li>
-                
-              </span>
+                <span class="auth-option" ng-hide="showOptions">
+                  <li><a href="#!/dashboard">DASHBOARD</a></li>
+                  <li style="margin-right: 4rem;"><a ng-click="signout()">SIGN OUT</a></li>
+                </span>
             </ul>
           </div>
         </div>
@@ -30,7 +29,7 @@
 
   <!-- Fixed Logo & Menu Bar End -->
   <!-- Landing Start -->
-  <div class="row">
+  <div class="row" ng-controller="GameController">
       <!-- hero image -->
       <div class="container">
         <div class="hero-overlay-dashboard"></div> 

@@ -7,10 +7,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr ng-repeat="(key, value) in  leaderGameLog track by $index">
+      <tr ng-repeat="leader in  leaderGameLog | orderBy: '-noOfWins'">
         <td>{{$index+1}}</td>
-        <td>{{key}}</td>
-        <td>{{value}}</td>
+        <td>{{leader.username}}</td>
+        <td>{{leader.noOfWins}}</td>
       </tr>
     </tbody>
   </table>

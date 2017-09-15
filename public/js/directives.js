@@ -84,12 +84,12 @@ angular.module('mean.directives', [])
 }))
 .directive('leaderboard', () => ({
   restrict: 'EA',
-  templateUrl: '/views/leaderBoard.html',
+  templateUrl: '/views/leaderboard.html',
   link: (scope, elem, attr) => {}
 }))
 .directive('gamelog', () => ({
   restrict: 'EA',
-  templateUrl: '/views/gameLog.html',
+  templateUrl: '/views/gamelog.html',
   link: (scope, elem, attr) => {}
 }))
 .directive('landing', () => ({

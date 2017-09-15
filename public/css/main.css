@@ -740,6 +740,7 @@ li.chat-bubble.ng-binding {
   overflow: hidden;
 }
 
+
 .chat {
   height: 3rem;
   -webkit-transition: height 5s;

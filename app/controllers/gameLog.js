@@ -58,30 +58,21 @@ exports.retrieveGamelog = (req, res) => {
 };
 
 
-const leaderboard = (object) => {
+const leaderboard = (gameLog) => {
   const rank = {};
-  object.map((item) => {
-    if (item.winner in rank) {
-      rank[item.winner] += 1;
+  const leaders = [];
+  gameLog.forEach((element) => {
+    const playersCount = rank[element.winner];
+    if (playersCount) {
+      rank[element.winner] += 1;
     } else {
-      rank[item.winner] = 1;
+      rank[element.winner] = 1;
     }
-    return null;
   });
-  const keys = Object.keys(rank);
-  const values = Object.keys(rank).map(val =>
-    rank[val]
-  );
-  const len = keys.length;
-  let i = 0;
-  const obj = {};
-  values.sort((a, b) => b - a);
-  for (i = 0; i < len; i += 1) {
-    const k = keys[i];
-    const v = rank[k];
-    obj[k] = v;
-  }
-  return obj;
+  Object.keys(rank).forEach((rankElement) => {
+    leaders.push({ username: rankElement, noOfWins: rank[rankElement] });
+  });
+  return leaders;
 };
 
 

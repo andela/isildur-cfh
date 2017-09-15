@@ -1,15 +1,14 @@
 /**
  * Module dependencies.
  */
-import jwt from 'jsonwebtoken';
 
-let express = require('express'),
+const express = require('express'),
   mongoStore = require('connect-mongo')(express),
   flash = require('connect-flash'),
   helpers = require('view-helpers'),
   config = require('./config');
 
-module.exports = function (app, passport, mongoose) {
+module.exports = (app, passport, mongoose) => {
   app.set('showStackError', true);
 
   // Should be placed before express.static
@@ -22,7 +21,7 @@ module.exports = function (app, passport, mongoose) {
 
   // Setting the fav icon and static folder
   app.use(express.favicon());
-  app.use(express.static(`${config.root  }/public`));
+  app.use(express.static(`${config.root}/public`));
 
   // Don't use logger for test env
   if (process.env.NODE_ENV !== 'test') {
@@ -30,7 +29,7 @@ module.exports = function (app, passport, mongoose) {
   }
 
   // Set views path, template engine and default layout
-  app.set('views', `${config.root  }/app/views`);
+  app.set('views', `${config.root}/app/views`);
   app.set('view engine', 'jade');
 
   // Enable jsonp
