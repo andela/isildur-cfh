@@ -12,3 +12,4 @@ dist
 npm-debug.log
 bower_components/
 /public/lib/
+coverage/
