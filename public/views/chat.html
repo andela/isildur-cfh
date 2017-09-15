@@ -23,7 +23,6 @@
         keyup: function (editor, event) {
           if (event.which == 13) {
             angular.element('#app-container').scope().sendMessage(this.getText());
-            // $("#messages").animate({ scrollTop: $('#messages').prop("scrollHeight")}, 1000);
             this.setText('');
           }
         }
