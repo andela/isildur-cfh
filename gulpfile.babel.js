@@ -115,4 +115,4 @@ gulp.task('bower', () => {
 });
 
 
-gulp.task('default', ['bower', 'transpile', 'serve']);
+gulp.task('default', ['bower', 'transpile', 'serve', 'watch']);
