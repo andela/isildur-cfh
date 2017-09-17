@@ -1,14 +1,14 @@
-<div class="chat">
-  <div class="chat-header">Chat Box</div>
+<div class="chat no-select">
+  <div class="chat-header no-select" ng-click="retractChat()">Chat Box</div>
   <div clas="chat-body">
      <div class="chat-message">
-       <ul ng-repeat="message in messagesArray">
-         <li><b>{{message.author}}:</b> {{message.messageContent}}</li>
+       <ul class="chat-ul" ng-repeat="message in messagesArray">
+         <li class="chat-bubble"><b>{{message.author}}:</b> {{message.messageContent}}</li>
        </ul>
      </div>
      <div class="chat-textarea">
        <form ng-submit="sendMessage()" class="form-group">
-         <input id="emojionearea1" ng-model="message" class="form-control" placeholder="Type your message here!" type="text" name="chat-textarea" id="chat-text-area" autocomplete="off" />
+         <input id="emojionearea1" ng-model="message"  ng-click="scrollTop()" class="form-control" placeholder="Type your message here!" type="text" name="chat-textarea" id="chat-text-area" autocomplete="off" />
        </form>
      </div>
   </div>

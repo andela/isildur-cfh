@@ -85,6 +85,7 @@ span.auth-option {
 .custom-button:hover {
   background: #0B4F6C;
   color: #FFF;
+  border: 1px solid #FFF;
 }
 
 custom-button:active, custom-button:focus {
@@ -302,6 +303,18 @@ custom-button:active, custom-button:focus {
   padding: 4rem 0;
 }
 
+.padding-none {
+  padding: 0;
+}
+
+.padding-none-r {
+  padding-right: 0;
+}
+
+.padding-none-l {
+  padding-left: 0;
+}
+
 .margin {
   margin: 2rem;
 }
@@ -338,7 +351,7 @@ custom-button:active, custom-button:focus {
   cursor: pointer;
 }
 
-.home-card:hover {
+.home-card:hover, .answer-card:hover {
   animation-name: shake;
 	animation-duration: 0.8s;
 	transform-origin:50% 50%;
@@ -421,13 +434,13 @@ custom-button:active, custom-button:focus {
   background-image:url('../img/hero.jpg');
 }
 
-.chat{
+.chat {
   position: absolute;
-  bottom: -5px;
-  right: -25px;
+  bottom: 0;
+  right: 0;
   width: 250px;
   background-color: white;
-  border-radius: 5px;
+  border-radius: 0px;
 }
 
 @media (max-height: 500px) {
@@ -454,14 +467,16 @@ custom-button:active, custom-button:focus {
   padding: 5px;
 }
 
-.chat-header{
-  background-color: #f2d234;
+.chat-header {
+  background-color: #0B4F6C;
+  font-family: 'Quicksand', sans-serif;
   font-size: 15px;
   text-align: center;
   color: white;
   font-weight: bold;
-  border-radius: 5px;
+  border-radius: 0px;
   padding: 5px;
+  cursor: pointer;
 }
 
 .chat-body{
@@ -480,9 +495,9 @@ custom-button:active, custom-button:focus {
   background-color: #fff;
   border-radius: 8px;
   color: #252525;
-  font-family: Arial;
+  font-family: 'Quicksand', sans-serif;
   font-size: 20px;
-  font-weight: bold;
+  font-weight: 900;
   vertical-align: top; }
   @media (max-width: 520px) {
     .card {
@@ -599,4 +614,145 @@ div#player-container, #start_game_modal .modal-content, #invite_friend_modal .mo
 
 table {
   font-family: 'Quicksand', sans-serif;
+}
+
+/* override default styles */
+div#timer-container {
+  background: white;
+  border-radius: 0px;
+}
+
+.timer-status-round {
+  border-radius: 0px;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 200;
+}
+
+div#time.time, #main-container #app-container #gameplay-container #upper-gameplay-container #menu-timeremaining-container #timer-container #inner-timer-container #time {
+  color: #0B4F6C;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 100;
+}
+
+#main-container #app-container #social-bar-container #player-container {
+  padding: 1rem .1rem;
+}
+
+#main-container #app-container #social-bar-container #player-container #above-czar-container #avatar_ img {
+  width: 5%;
+}
+
+#main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner #player-name h4, .font-12p {
+  color: #0B4F6C;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 100;
+}
+
+#main-container #app-container #gameplay-container #cards-container, #main-container #app-container #gameplay-container #czar-blank-container, #main-container #app-container #gameplay-container #game-end-container, .answer-card {
+    border-radius: 0px;
+}
+
+.text-danger.game-end-headline, .text-primary.game-end-headline {
+  position: relative;
+  top: -19rem;
+  text-align: center;
+  font-weight: 700;
+  font-family: Quicksand;
+}
+
+.text-danger.game-end-headline h5, .text-primary.game-end-headline h5 {
+  font-size: 3rem;
+}
+
+button.btn.custom-button.take-tour {
+  border: 1px solid #F2D234;
+}
+
+button.btn.custom-button.take-tour:hover {
+  border-color: #0B4F6C;
+}
+
+a.btn.custom-button.btn-tweet {
+  background: #1da1f2;
+  border: 1px solid #1da1f2;
+  color: #FFF;
+}
+
+.game-abandon {
+  border: 1px solid #d04f4f;
+  background: #d04f4f;
+  color: #FFF;
+}
+
+input#emojionearea1 {
+  border-radius: 0px;
+  padding: 1rem;
+}
+
+ul.chat-ul.ng-scope {
+    padding: 0 2rem;
+}
+
+li.chat-bubble.ng-binding {
+  font-family: 'Quicksand', sans-serif;
+  background: whitesmoke;
+  padding: 1rem;
+  border-radius: 9px;
+}
+
+#main-container {
+  overflow: hidden;
+}
+
+.chat {
+  height: 3rem;
+  -webkit-transition: height 5s;
+  transition: height 5s;
+}
+
+.chat-textarea-padding {
+  margin: 5px;
+  padding: 5px;
+}
+
+.retract-chat {
+  height: unset;
+}
+
+.no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* mobile styles for game page */
+@media (max-width: 768px) {
+  #main-container #app-container #social-bar-container #player-container {
+    width: 15%;
+  }
+  .text-danger.game-end-headline, .text-primary.game-end-headline {
+    top: -14rem;
+  }
+
+  .text-danger.game-end-headline h5, .text-primary.game-end-headline h5 {
+    font-size: 1.4rem;
+  }
+
+  #main-container #app-container #gameplay-container #upper-gameplay-container #question-container-outer #question-container-inner {
+      left: -0.7rem;
+      position: relative;
+  }
+  div#avatari_ > img {
+      display: none;
+  }
+  #main-container #app-container #social-bar-container #player-container #above-czar-container #player-container-inner {
+    left: -21px;
+    height: 100%;
+    width: 100%;
+  }
+  div#cards {
+    border-radius: 0px;
+  }
 }

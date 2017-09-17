@@ -18,15 +18,16 @@
     <div class="collapse navbar-collapse" id="mobileToggle">
       <ul class="nav navbar-nav navbar-right">
         <li>
-          <span id="tweet-container">
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good" data-related="CFH_App">Tweet</a>
+          <span>
+            <a href="https://twitter.com/share" class="btn custom-button btn-tweet" data-url="http://cfh.io" data-text="Cards for Humanity: A Game for Horrible People Desperately Trying to do Good" data-related="CFH_App">Tweet</a>
             <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
           </span>
         </li>
         <li>
-          <div id = 'abandon-game-button' ng-click="abandonGame()">
-            Abandon Game
-        </div>
+          <button class="btn custom-button take-tour" ng-click="retakeTour()">Take Tour</button>
+        </li>
+        <li>
+          <button class="btn custom-button game-abandon" ng-click="abandonGame()">Abandon Game</button>
         </li>
       </ul>
     </div>
@@ -34,7 +35,7 @@
 </nav>
 </div> 
 <!-- Fixed Logo & Menu Bar End -->
-  <div class="gameplay-container" id="gameplay-container">
+  <div class="gameplay-container container-fluid" id="gameplay-container">
     <div id="upper-gameplay-container">
       <div id="menu-timeremaining-container">
         <div id="menu-container">
