@@ -434,13 +434,13 @@ custom-button:active, custom-button:focus {
   background-image:url('../img/hero.jpg');
 }
 
-.chat{
+.chat {
   position: absolute;
-  bottom: -5px;
-  right: -25px;
+  bottom: 0;
+  right: 0;
   width: 250px;
   background-color: white;
-  border-radius: 5px;
+  border-radius: 0px;
 }
 
 @media (max-height: 500px) {
@@ -467,14 +467,16 @@ custom-button:active, custom-button:focus {
   padding: 5px;
 }
 
-.chat-header{
-  background-color: #f2d234;
+.chat-header {
+  background-color: #0B4F6C;
+  font-family: 'Quicksand', sans-serif;
   font-size: 15px;
   text-align: center;
   color: white;
   font-weight: bold;
-  border-radius: 5px;
+  border-radius: 0px;
   padding: 5px;
+  cursor: pointer;
 }
 
 .chat-body{
@@ -660,6 +662,69 @@ div#time.time, #main-container #app-container #gameplay-container #upper-gamepla
 
 .text-danger.game-end-headline h5, .text-primary.game-end-headline h5 {
   font-size: 3rem;
+}
+
+button.btn.custom-button.take-tour {
+  border: 1px solid #F2D234;
+}
+
+button.btn.custom-button.take-tour:hover {
+  border-color: #0B4F6C;
+}
+
+a.btn.custom-button.btn-tweet {
+  background: #1da1f2;
+  border: 1px solid #1da1f2;
+  color: #FFF;
+}
+
+.game-abandon {
+  border: 1px solid #d04f4f;
+  background: #d04f4f;
+  color: #FFF;
+}
+
+input#emojionearea1 {
+  border-radius: 0px;
+  padding: 1rem;
+}
+
+ul.chat-ul.ng-scope {
+    padding: 0 2rem;
+}
+
+li.chat-bubble.ng-binding {
+  font-family: 'Quicksand', sans-serif;
+  background: whitesmoke;
+  padding: 1rem;
+  border-radius: 9px;
+}
+
+#main-container {
+  overflow: hidden;
+}
+
+.chat {
+  height: 3rem;
+  -webkit-transition: height 5s;
+  transition: height 5s;
+}
+
+.chat-textarea-padding {
+  margin: 5px;
+  padding: 5px;
+}
+
+.retract-chat {
+  height: unset;
+}
+
+.no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 /* mobile styles for game page */

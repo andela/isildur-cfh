@@ -294,6 +294,19 @@ angular.module('mean.system')
         $scope.pickedCards = [];
       });
 
+      $scope.retractChat = () => {
+        const chatHead = document.querySelector('.chat-header');
+        const chat = document.querySelector('.chat');
+        chatHead.addEventListener('click', () => {
+          chat.classList.toggle('retract-chat');
+        });
+      };
+
+      $scope.scrollTop = () => {
+        const chatMsg = document.querySelector('.chat-message');
+        chatMsg.scrollTop = chatMsg.scrollHeight;
+      };
+
       // In case player doesn't pick a card in time, show the table
       $scope.$watch('game.state', () => {
         if (game.state === 'waiting for czar to decide' &&
