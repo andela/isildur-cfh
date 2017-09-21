@@ -1,0 +1,61 @@
+</script>
+<div id="">
+<!-- Brand and toggle get grouped for better mobile display -->
+
+<!-- Fixed Logo & Menu Bar Start -->
+<div class="row" ng-controller="IndexController">
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mobileToggle">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span> 
+            </button>
+            <a href="/" class="navbar-brand text-white bold" onClick="scroll(0,0)">CARDS FOR HUMANITY</a>
+          </div>
+          <div class="collapse navbar-collapse" id="mobileToggle">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#!/">HOME</a></li>
+                <span class="auth-option" ng-hide="showOptions">
+                  <li><a href="#!/dashboard">DASHBOARD</a></li>
+                  <li style="margin-right: 4rem;"><a ng-click="signout()">SIGN OUT</a></li>
+                </span>
+            </ul>
+          </div>
+        </div>
+      </nav>
+</div>
+
+  <!-- Fixed Logo & Menu Bar End -->
+  <!-- Landing Start -->
+  <div class="row" ng-controller="GameController">
+      <!-- hero image -->
+      <div class="container">
+        <div class="hero-overlay-dashboard"></div> 
+        <div class="container">
+          <div class="col-md-12 hero-text-dashboard">
+              <h2 class="text-center big-font">DASHBOARD</h2>
+              <ul class="nav nav-tabs">
+                <li class="active"><a data-toggle="tab" href="#home">Game History</a></li>
+                <li><a data-toggle="tab" href="#menu1">Leader Board</a></li>
+                <li><a data-toggle="tab" href="#menu2">Donations</a></li>
+              </ul>
+            
+              <div class="tab-content">
+                <div id="home" class="tab-pane fade in active">
+                  <gameLog></gameLog>
+                </div>
+                <div id="menu1" class="tab-pane fade">
+                  <leaderBoard></leaderBoard>
+                </div>
+                <div id="menu2" class="tab-pane fade">
+                  <donations></donations>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+      <!-- hero image ends -->
+    </div>
+</div>

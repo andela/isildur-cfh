@@ -1,0 +1,17 @@
+<table class="table">
+    <thead>
+      <tr>
+        <td><b>S/N</b></td>
+        <td><b>Amount</b></td>
+        <td><b>Date</b></td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="donation in userDonations">
+          <td>{{userDonations.indexOf(donation)+1}}</td>
+          <td>{{donation.amount}}</td>
+          <td>{{donation.date}}</td>
+      </tr>
+    </tbody>
+</table>
+  

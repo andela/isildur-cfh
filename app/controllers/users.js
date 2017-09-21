@@ -1,6 +1,7 @@
 import validator from 'validator';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import mongoose from 'mongoose';
 
 const secret = process.env.SECRET_TOKEN;
 
@@ -8,7 +9,7 @@ const secret = process.env.SECRET_TOKEN;
  * Module dependencies.
  */
 // TODO: Add/Import Email Helper Method and Libraries
-import mongoose from 'mongoose';
+
 
 const avatars = require('./avatars').all();
 // import avatars from './avatars';
@@ -19,14 +20,21 @@ const User = mongoose.model('User');
 //   User = mongoose.model('User');
 
 /**
- * Auth callback
+ * Signup a new user
+ * @param {object} req The user's information
+ * @param {object} res The server's response
+ * @param {object} next The server's response
+ * @returns {object} The server's response
  */
 exports.authCallback = function (req, res, next) {
   res.redirect('/chooseavatars');
 };
 
 /**
- * Show login form
+ * Signup a new user
+ * @param {object} req The user's information
+ * @param {object} res The server's response
+ * @returns {object} The server's response
  */
 exports.signin = function (req, res) {
   if (!req.user) {
@@ -37,7 +45,10 @@ exports.signin = function (req, res) {
 };
 
 /**
- * Show sign up form
+ * Signup a new user
+ * @param {object} req The user's information
+ * @param {object} res The server's response
+ * @returns {object} The server's response
  */
 exports.signup = function (req, res) {
   if (!req.user) {
@@ -48,7 +59,10 @@ exports.signup = function (req, res) {
 };
 
 /**
- * Logout
+ * Signup a new user
+ * @param {object} req The user's information
+ * @param {object} res The server's response
+ * @returns {object} The server's response
  */
 exports.signout = function (req, res) {
   req.logout();
@@ -56,16 +70,20 @@ exports.signout = function (req, res) {
 };
 
 /**
- * Session
+ * Signup a new user
+ * @param {object} req The user's information
+ * @param {object} res The server's response
+ * @returns {object} The server's response
  */
 exports.session = function (req, res) {
   res.redirect('/');
 };
 
-/** 
- * Check avatar - Confirm if the user who logged in via passport
- * already has an avatar. If they don't have one, redirect them
- * to our Choose an Avatar page.
+/**
+ * Check Avartar
+ * @param {object} req The user's information
+ * @param {object} res The server's response
+ * @returns {object} The server's response
  */
 exports.checkAvatar = function (req, res) {
   if (req.user && req.user._id) {
@@ -211,7 +229,29 @@ exports.login = (req, res) => {
 
 
 /**
- * Assign avatar to user
+ * Login a user
+ * @param {object} req The user's information
+ * @param {object} res The server's response
+ * @returns {object} The server's response
+ */
+exports.retrieveDonation = (req, res) => {
+  const email = jwt.decode(req.headers.token).email;
+  User.find({ email }).select('-_id').exec((err, user) => {
+    if (err) {
+      res.render('error', {
+        status: 500
+      });
+    } else {
+      res.json(user[0].donations);
+    }
+  });
+};
+
+/**
+ * Avartar
+ * @param {object} req The user's information
+ * @param {object} res The server's response
+ * @returns {object} The server's response
  */
 exports.avatars = function (req, res) {
   // Update the current user's profile to include the avatar choice they've made
@@ -258,7 +298,10 @@ exports.addDonation = function (req, res) {
 };
 
 /**
- *  Show profile
+ * show a user
+ * @param {object} req The user's information
+ * @param {object} res The server's response
+ * @returns {object} The server's response
  */
 exports.show = function (req, res) {
   const user = req.profile;
@@ -268,16 +311,23 @@ exports.show = function (req, res) {
     user
   });
 };
-
 /**
- * Send User
+ * me
+ * @param {object} req The user's information
+ * @param {object} res The server's response
+ * @returns {object} The server's response
  */
 exports.me = function (req, res) {
   res.jsonp(req.user || null);
 };
 
 /**
- * Find user by id
+ * User
+ * @param {object} req The user's information
+ * @param {object} res The server's response
+ * @param {object} next The next action
+ * @param {object} id The user id
+ * @returns {object} The server's response
  */
 exports.user = (req, res, next, id) => {
   User

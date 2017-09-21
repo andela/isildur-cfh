@@ -52,7 +52,7 @@ angular.module('mean.system')
             });
         }
       };
-
+      $scope.isLogin = false;
       $scope.signin = () => {
         if (
           $scope.email &&
@@ -69,6 +69,7 @@ angular.module('mean.system')
               $window.localStorage.setItem('name', response.data.name);
               $window.localStorage.setItem('email', response.data.email);
               $window.localStorage.setItem('id', response.data.id);
+              $scope.isLogin = true;
               $location.path('/#!/');
               $window.location.reload();
             }, (err) => {
@@ -83,7 +84,9 @@ angular.module('mean.system')
         $window.localStorage.removeItem('token');
         $window.localStorage.removeItem('name');
         $window.localStorage.removeItem('email');
+        $window.localStorage.removeItem('region');
         $window.localStorage.removeItem('id');
+        $location.path('/');
         $window.location.reload();
       };
 

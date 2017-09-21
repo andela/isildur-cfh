@@ -109,6 +109,19 @@ custom-button:active, custom-button:focus {
   background-color: #0B4F6C;
 }
 
+.hero-overlay-dashboard {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  width: 100%;
+  opacity: 0.8;
+  transition: .5s ease;
+  background-color: #0B4F6C;
+}
+
 .hero-text {
   color: white;
   font-size: 20px;
@@ -118,6 +131,29 @@ custom-button:active, custom-button:focus {
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   width: 100%;
+}
+
+.hero-text-dashboard {
+  color: black;
+  background-color: white;
+  font-size: 15px;
+  top: 100px;
+  min-height: 400px;
+  height: 400px;
+  overflow-y: scroll;
+}
+
+
+
+td {
+    text-align: left;
+}
+
+.big-font{
+  font-size: 30px;
+  font-weight: bold;
+  color: #0B4F6C;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 @media (max-width: 768px) {
@@ -703,6 +739,7 @@ li.chat-bubble.ng-binding {
 #main-container {
   overflow: hidden;
 }
+
 
 .chat {
   height: 3rem;

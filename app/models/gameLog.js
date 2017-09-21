@@ -13,10 +13,10 @@ const GameLog = new Schema({
     type: Number
   },
   playerId: {
-    type: Number
+    type: String
   },
   gameId: {
-    type: Number
+    type: String
   },
   winner: {
     type: String

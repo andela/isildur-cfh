@@ -1,3 +1,4 @@
+import jwt from 'jsonwebtoken';
 /**
  * Module dependencies.
  */
@@ -34,4 +35,62 @@ exports.create = (req, res) => {
       message: 'Incomplete Gamelog parameter'
     });
   }
+};
+
+/**
+ * create - create GameLog
+ *
+ * @param  {object} req incoming request object
+ * @param  {object} res response object from the server
+ * @return {json}     returns json reponse
+ */
+exports.retrieveGamelog = (req, res) => {
+  const playerId = jwt.decode(req.headers.token).id;
+  GameLog.find({ playerId }).select('-_id').exec((err, gameLogs) => {
+    if (err) {
+      res.render('error', {
+        status: 500
+      });
+    } else {
+      res.json(gameLogs);
+    }
+  });
+};
+
+
+const leaderboard = (gameLog) => {
+  const rank = {};
+  const leaders = [];
+  gameLog.forEach((element) => {
+    const playersCount = rank[element.winner];
+    if (playersCount) {
+      rank[element.winner] += 1;
+    } else {
+      rank[element.winner] = 1;
+    }
+  });
+  Object.keys(rank).forEach((rankElement) => {
+    leaders.push({ username: rankElement, noOfWins: rank[rankElement] });
+  });
+  return leaders;
+};
+
+
+/**
+ * create - create GameLog
+ *
+ * @param  {object} req incoming request object
+ * @param  {object} res response object from the server
+ * @return {json}     returns json reponse
+ */
+exports.retrieveLeaderBoard = (req, res) => {
+  GameLog.find().select('-_id').exec((err, leaderBoard) => {
+    if (err) {
+      res.render('error', {
+        status: 500
+      });
+    } else {
+      res.json(leaderboard(leaderBoard));
+    }
+  });
 };

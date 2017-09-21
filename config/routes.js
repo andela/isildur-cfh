@@ -13,7 +13,8 @@ import avatars from '../app/controllers/avatars';
 import index from '../app/controllers/index';
 // GameLog controller
 import gamelog from '../app/controllers/gameLog';
-
+// JWT middleware
+import jwtAuth from './middlewares/verifytoken';
 
 module.exports = (app, passport, auth) => {
   // User Routes
@@ -108,5 +109,12 @@ module.exports = (app, passport, auth) => {
   // Endpoint to search and Invite Users to Game
   app.get('/api/users/search', users.search);
   //  app.post('/api/user/invite/:user_details', users.invitePlayers);
-  app.post('/api/games/:id/start', gamelog.create);
+  // start Game
+  app.post('/api/games/:id/start', jwtAuth, gamelog.create);
+  // Game history
+  app.get('/api/games/history', jwtAuth, gamelog.retrieveGamelog);
+  // Leader Board
+  app.get('/api/leaderboard', jwtAuth, gamelog.retrieveLeaderBoard);
+  // Donations
+  app.get('/api/donations', jwtAuth, users.retrieveDonation);
 };

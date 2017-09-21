@@ -34,6 +34,9 @@ angular.module('mean', [
         .when('/gametour', {
           templateUrl: '/views/gameTour.html'
         })
+        .when('/dashboard', {
+          templateUrl: '/views/dashboard.html'
+        })
         .otherwise({
           redirectTo: '/'
         });

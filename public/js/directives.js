@@ -77,6 +77,21 @@ angular.module('mean.directives', [])
   templateUrl: '/views/chat.html',
   link: (scope, elem, attr) => {}
 }))
+.directive('donations', () => ({
+  restrict: 'EA',
+  templateUrl: '/views/donations.html',
+  link: (scope, elem, attr) => {}
+}))
+.directive('leaderboard', () => ({
+  restrict: 'EA',
+  templateUrl: '/views/leaderboard.html',
+  link: (scope, elem, attr) => {}
+}))
+.directive('gamelog', () => ({
+  restrict: 'EA',
+  templateUrl: '/views/gamelog.html',
+  link: (scope, elem, attr) => {}
+}))
 .directive('landing', () => ({
   restrict: 'EA',
   link: (scope, elem, attr) => {

@@ -3,16 +3,16 @@
 /* global localStorage */
 /* global introJs */
 angular.module('mean.system')
-  .controller('GameController',
+.controller('GameController',
   [
     '$scope',
     'game',
+    'dashboard',
     '$timeout',
     '$location',
     'MakeAWishFactsService',
     '$firebaseArray',
-    '$window',
-    ($scope, game, $timeout,
+    ($scope, game, dashboard, $timeout,
       $location,
       MakeAWishFactsService,
       $firebaseArray) => {
@@ -20,6 +20,9 @@ angular.module('mean.system')
       $scope.winningCardPicked = false;
       $scope.showTable = false;
       $scope.modalShown = false;
+      $scope.gameLog = dashboard.getGameLog();
+      $scope.leaderGameLog = dashboard.leaderGameLog();
+      $scope.userDonations = dashboard.userDonations();
       $scope.game = game;
       $scope.pickedCards = [];
       let makeAWishFacts = MakeAWishFactsService.getMakeAWishFacts();
@@ -46,91 +49,91 @@ angular.module('mean.system')
         }
       });
 
-        $scope.gameTour = introJs();
+      $scope.gameTour = introJs();
 
-        $scope.gameTour.setOptions({
-          steps: [{
-            intro: `Hey there! Welcome to the Cards for Humanity game,
-        I'm sure you're as excited as I am. Let me show you around.`
-          },
-          {
-            element: '#question-container-outer',
-            intro: `Game needs a minimum of 3 players and a maxium of
-            12 players to start.
-            Wait for the minimum number of players and start the game.`
-          },
-          {
-            element: '#inner-info',
-            intro: 'Here are the rules of the game.',
-          },
-          {
-            element: '.pull-right button',
-            intro: 'Click here to invite your friends',
-          },
-          {
-            element: '.pull-left button',
-            intro: 'When you\'re all set, click here to start the game.',
-          },
-          {
-            element: '#inner-timer-container',
-            intro: `You have just 20 seconds to submit an awesome answer.
-        Your time will appear here.`
-          },
-          {
-            element: '#player-container',
-            intro: 'Players in the current game are shown here',
-          },
-          {
-            element: '.game-abandon',
-            intro: `I don't know why you'd wanna,
-        but you can click this button to quit the game`
-          },
-          {
-            element: '.take-tour',
-            intro: `In case you wanna,
-            you can click this button to retake my tour`
-          },
-          {
-            element: '#inner-info',
-            intro: 'The submitted answers will show here',
-            position: 'top'
-          },
-          {
-            element: '.chat',
-            intro: 'Chat while the game is on here',
-            position: 'top'
-          },
-          {
-            element: '.pull-left button',
-            intro: 'When everyone is ready, click here to start the game',
-            position: 'top'
-          }
-          ]
-        });
+      $scope.gameTour.setOptions({
+        steps: [{
+          intro: `Hey there! Welcome to the Cards for Humanity game,
+      I'm sure you're as excited as I am. Let me show you around.`
+        },
+        {
+          element: '#question-container-outer',
+          intro: `Game needs a minimum of 3 players and a maxium of
+          12 players to start.
+          Wait for the minimum number of players and start the game.`
+        },
+        {
+          element: '#inner-info',
+          intro: 'Here are the rules of the game.',
+        },
+        {
+          element: '.pull-right button',
+          intro: 'Click here to invite your friends',
+        },
+        {
+          element: '.pull-left button',
+          intro: 'When you\'re all set, click here to start the game.',
+        },
+        {
+          element: '#inner-timer-container',
+          intro: `You have just 20 seconds to submit an awesome answer.
+      Your time will appear here.`
+        },
+        {
+          element: '#player-container',
+          intro: 'Players in the current game are shown here',
+        },
+        {
+          element: '.game-abandon',
+          intro: `I don't know why you'd wanna,
+      but you can click this button to quit the game`
+        },
+        {
+          element: '.take-tour',
+          intro: `In case you wanna,
+          you can click this button to retake my tour`
+        },
+        {
+          element: '#inner-info',
+          intro: 'The submitted answers will show here',
+          position: 'top'
+        },
+        {
+          element: '.chat',
+          intro: 'Chat while the game is on here',
+          position: 'top'
+        },
+        {
+          element: '.pull-left button',
+          intro: 'When everyone is ready, click here to start the game',
+          position: 'top'
+        }
+        ]
+      });
 
 
-        $scope.takeTour = () => {
-          if (!localStorage.takenTour) {
-            const timeout = setTimeout(() => {
-              $scope.gameTour.start();
-              clearTimeout(timeout);
-            }, 500);
-            localStorage.setItem('takenTour', true);
-          }
-        };
+      $scope.takeTour = () => {
+        if (!localStorage.takenTour) {
+          const timeout = setTimeout(() => {
+            $scope.gameTour.start();
+            clearTimeout(timeout);
+          }, 500);
+          localStorage.setItem('takenTour', true);
+        }
+      };
 
-        $scope.retakeTour = () => {
-          localStorage.removeItem('takenTour');
-          $scope.takeTour();
-        };
+      $scope.retakeTour = () => {
+        localStorage.removeItem('takenTour');
+        $scope.takeTour();
+      };
 
-        $scope.pointerCursorStyle = () => {
-          if ($scope.isCzar() &&
-          $scope.game.state === 'waiting for czar to decide') {
-            return { cursor: 'pointer' };
-          }
-          return {};
-        };
+      $scope.pointerCursorStyle = () => {
+        if ($scope.isCzar() &&
+        $scope.game.state === 'waiting for czar to decide') {
+          return { cursor: 'pointer' };
+        }
+        return {};
+      };
 
       // send message
       $scope.sendMessage = (message) => {
@@ -188,7 +191,6 @@ angular.module('mean.system')
         }
         return false;
       };
-
       $scope.firstAnswer = ($index) => {
         if ($index % 2 === 0 && game.curQuestion.numAnswers > 1) {
           return true;
@@ -199,6 +201,43 @@ angular.module('mean.system')
       $scope.secondAnswer = ($index) => {
         if ($index % 2 === 1 && game.curQuestion.numAnswers > 1) {
           return true;
+        }
+        return false;
+      };
+      $scope.pickCard = (card) => {
+        if (!$scope.hasPickedCards) {
+          if ($scope.pickedCards.indexOf(card.id) < 0) {
+            $scope.pickedCards.push(card.id);
+            if (game.curQuestion.numAnswers === 1) {
+              $scope.sendPickedCards();
+              $scope.hasPickedCards = true;
+            } else if (game.curQuestion.numAnswers === 2 &&
+            $scope.pickedCards.length === 2) {
+            // delay and send
+              $scope.hasPickedCards = true;
+              $timeout($scope.sendPickedCards, 300);
+            }
+          } else {
+            $scope.pickedCards.pop();
+          }
+        }
+      };
+      $scope.pointerCursorStyle = () => {
+        if ($scope.isCzar() &&
+        $scope.game.state === 'waiting for czar to decide') {
+          return { cursor: 'pointer' };
+        }
+        return {};
+      };
+
+      $scope.sendPickedCards = () => {
+        game.pickCards($scope.pickedCards);
+        $scope.showTable = true;
+      };
+
+      $scope.cardIsFirstSelected = (card) => {
+        if (game.curQuestion.numAnswers > 1) {
+          return card === $scope.pickedCards[0];
         }
         return false;
       };

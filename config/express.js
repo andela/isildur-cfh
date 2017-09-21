@@ -1,40 +1,41 @@
 /**
  * Module dependencies.
  */
-var express = require('express'),
-    mongoStore = require('connect-mongo')(express),
-    flash = require('connect-flash'),
-    helpers = require('view-helpers'),
-    config = require('./config');
 
-module.exports = function(app, passport, mongoose) {
-    app.set('showStackError', true);
+const express = require('express'),
+  mongoStore = require('connect-mongo')(express),
+  flash = require('connect-flash'),
+  helpers = require('view-helpers'),
+  config = require('./config');
 
-    //Should be placed before express.static
-    app.use(express.compress({
-        filter: function(req, res) {
+module.exports = (app, passport, mongoose) => {
+  app.set('showStackError', true);
+
+  // Should be placed before express.static
+  app.use(express.compress({
+    filter(req, res) {
             return (/json|text|javascript|css/).test(res.getHeader('Content-Type'));
         },
-        level: 9
-    }));
+    level: 9
+  }));
 
-    //Setting the fav icon and static folder
-    app.use(express.favicon());
-    app.use(express.static(config.root + '/public'));
+  // Setting the fav icon and static folder
+  app.use(express.favicon());
+  app.use(express.static(`${config.root}/public`));
 
-    //Don't use logger for test env
-    if (process.env.NODE_ENV !== 'test') {
-        app.use(express.logger('dev'));
-    }
+  // Don't use logger for test env
+  if (process.env.NODE_ENV !== 'test') {
+    app.use(express.logger('dev'));
+  }
 
-    //Set views path, template engine and default layout
-    app.set('views', config.root + '/app/views');
-    app.set('view engine', 'jade');
+  // Set views path, template engine and default layout
+  app.set('views', `${config.root}/app/views`);
+  app.set('view engine', 'jade');
 
-    //Enable jsonp
-    app.enable("jsonp callback");
+  // Enable jsonp
+  app.enable('jsonp callback');
 
-    app.configure(function() {
+  app.configure(() => {
         //cookieParser should be above session
         app.use(express.cookieParser());
 
