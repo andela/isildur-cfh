@@ -54,7 +54,7 @@
                   </div>
                   <div class="modal-body">
                     <div class="form-group">
-                        <input placeholder="Search friend" type="email" class="form-control" id="email">
+                      <input placeholder="Search friend" ng-keyup="searchedUsers()" ng-model="userName" type="text" class="form-control" id="userName">
                     </div>
                     <div class="search-members row">
                         <table class="table">
@@ -66,10 +66,10 @@
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
-                              <td>Kene</td>
+                            <tr ng-repeat="user in foundUsers">
+                              <td>{{ user.name }}</td>
                               <td><button class="btn btn-default">Add</button></td>
-                              <td><button class="btn btn-default">Invite</button></td>
+                              <td><button class="btn btn-default" ng-click="sendInvites(user.email)">Invite</button></td>
                             </tr>
                           </tbody>
                         </table>

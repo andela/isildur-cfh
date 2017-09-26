@@ -2,6 +2,7 @@ import validator from 'validator';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import mongoose from 'mongoose';
+import sendEmailInvite from './../utils/sendEmail';
 
 const secret = process.env.SECRET_TOKEN;
 
@@ -342,18 +343,75 @@ exports.user = (req, res, next, id) => {
     });
 };
 
-// Get all user in the dtatabase
+// Search all Users registered in app
 module.exports.search = (req, res) => {
-  // get all the users from mongoDB
-  User.find({}, (err, users) => {
-    if (err) {
-      return res.json({ err });
-    }
-    return res.json(users);
-  });
+  const searchQuery = req.query.name;
+  User.find({ name: { $regex: `.*${searchQuery}.*` } })
+    .select('name email')
+    .then((allUsers) => {
+      res.status(200)
+        .json(allUsers);
+    }).catch((error) => {
+      res.status(500)
+        .json({ message: 'An error Occured', error });
+    });
 };
 
-// send an invitation email to user
+
+// module.exports.allUsers = (req, res) => {
+//   // get all the users from mongoDB
+//   User.find({}, (err, users) => {
+//     if (err) {
+//       return res.json({ err });
+//     }
+//     return res.json(users);
+//   });
+// };
+
+// Get all user in the datatabase
+// module.exports.allUsers = (req, res, next) => {
+//   if (req.user) {
+//     // get all the users from mongoDB except current user
+//     User.find({ $ne: { email: req.user.email } })
+//       .select('name email')
+//       // .exec((err, allUsers) => {
+//       //   if (err) return res.json({ err });
+//       //   if (!allUsers) return next(new Error('Failed to load Users'));
+//       //   return res.json(allUsers);
+//       // });
+//       .then(allUsers => res.status(200).json(allUsers))
+//       .catch((error) => {
+//         res.status(400).json({ message: 'An Error Occured', error });
+//       });
+//   }
+// };
+
+// send invites as email to users who are not friends
+module.exports.sendInviteAsEmail = (req, res) => {
+  if (req.user) {
+    const url = decodeURIComponent(req.body.gameUrl);
+    const guestUser = req.body.userEmail;
+
+    if (guestUser !== null && url !== null) {
+      sendEmailInvite(guestUser, url);
+      res.status(200)
+        .json(guestUser);
+    } else {
+      res.status(400)
+        .send('Bad Request !');
+    }
+  } else {
+    res.status(401)
+      .send('Hey Kindly Login first!');
+  }
+};
+
+// send invitation to user as in-app notification
 // module.exports.invitePlayers = (req, res) => {
 //   console.log('===> inviting User');
 // };
+
+// add user as friend
+
+// sendInvites to friends in-app
+
