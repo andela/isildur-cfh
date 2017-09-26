@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer';
 /**
- * This Module uses nodemailer transporter to send 
+ * This Module uses nodemailer transporter to send
  * emails to users based on proirity
  */
 const transporter = nodemailer.createTransport({
