@@ -1,3 +1,4 @@
+/* eslint-disable */
 angular.module('mean.system')
   .factory('Users', ['$http', '$window', ($http, $window) => {
     const invitesSent = [];

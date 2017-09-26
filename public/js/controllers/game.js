@@ -1,3 +1,4 @@
+/* eslint-disable */
 /* global angular */
 /* global document */
 /* global localStorage */
