@@ -68,8 +68,8 @@
                           <tbody>
                             <tr ng-repeat="user in foundUsers">
                               <td>{{ user.name }}</td>
-                              <td><button class="btn btn-default">Add</button></td>
-                              <td><button class="btn btn-default" ng-click="sendInvites(user.email)">Invite</button></td>
+                              <td><button class="btn btn-default invite-btn">Add</button></td>
+                              <td><button class="btn btn-default invite-btn" ng-click="sendInvites(user.email)">Invite</button></td>
                             </tr>
                           </tbody>
                         </table>

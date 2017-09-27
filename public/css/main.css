@@ -736,10 +736,6 @@ li.chat-bubble.ng-binding {
   border-radius: 9px;
 }
 
-#main-container {
-  overflow: hidden;
-}
-
 
 .chat {
   height: 3rem;
@@ -762,6 +758,27 @@ li.chat-bubble.ng-binding {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+div#app-container.app-page {
+  overflow: hidden;
+}
+
+.invite-btn {
+  border-radius: 0px;
+  background: #0B4F6C;
+  border-color: #0B4F6C;
+  color: #FFF;
+}
+
+.invite-btn:hover {
+  background: #F2D234;
+  border-color: #F2D234;
+  color: #0B4F6C;
+}
+
+.invite-btn:active, .invite-btn:focus {
+  outline: none;
 }
 
 /* mobile styles for game page */
